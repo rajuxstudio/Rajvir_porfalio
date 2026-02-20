@@ -76,7 +76,7 @@ const RLogo = () => (
 
 // Header component
 const Header = () => (
-  <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 sm:px-10 h-16 bg-background/80 backdrop-blur-md border-b border-border">
+  <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 sm:px-10 py-3 bg-transparent backdrop-blur-md">
     <RLogo />
     <nav className="flex items-center gap-6 text-sm font-medium text-muted-foreground">
       <a href="#about" className="hover:text-foreground transition-colors">About</a>

@@ -281,6 +281,32 @@ export default function HeroSection() {
         </div>
 
       </section>
+
+      {/* Industry ticker strip */}
+      <div
+        className="w-full overflow-hidden border-y flex items-center"
+        style={{
+          height: "48px",
+          borderColor: "hsl(var(--border))",
+          background: "hsl(var(--background))"
+        }}
+      >
+        <div className="flex items-center animate-marquee whitespace-nowrap">
+          {[...Array(3)].flatMap(() =>
+            ["Agriculture", "Government & Civic Services", "Education", "Healthcare (mHealth)", "FinTech", "mCommerce", "Retail", "Real Estate"].map((word, i) => (
+              <span key={word + i} className="flex items-center gap-4">
+                <span
+                  className="text-xs font-semibold tracking-[0.18em] uppercase px-8"
+                  style={{ color: "hsl(var(--muted-foreground))" }}
+                >
+                  {word}
+                </span>
+                <span style={{ color: "hsl(var(--border))", fontSize: "10px" }}>✦</span>
+              </span>
+            ))
+          )}
+        </div>
+      </div>
     </>);
 
 }

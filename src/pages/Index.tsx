@@ -1,12 +1,16 @@
 import HeroSection from "@/components/HeroSection";
 import LogoCarouselSection from "@/components/LogoCarouselSection";
+import QuickActionPanel from "@/components/QuickActionPanel";
 
 const Index = () => {
   return (
-    <main>
-      <HeroSection />
-      <LogoCarouselSection />
-    </main>
+    <>
+      <QuickActionPanel />
+      <main>
+        <HeroSection />
+        <LogoCarouselSection />
+      </main>
+    </>
   );
 };
 

@@ -249,9 +249,9 @@ export default function HeroSection() {
             className="absolute bottom-0 left-1/2 -translate-x-1/2 z-[10] object-contain select-none"
             style={{
               height: "auto",
-              maxHeight: "calc(100vh - 300px)",
+              maxHeight: "calc(100vh - 280px)",
               width: "auto",
-              maxWidth: "min(420px, 55vw)",
+              maxWidth: "min(420px, 82vw)",
               filter: "drop-shadow(0 16px 48px hsl(220 30% 15% / 0.10))",
             }}
             draggable={false}

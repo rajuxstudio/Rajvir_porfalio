@@ -181,7 +181,7 @@ export default function HeroSection() {
                   >
                     <div
                       className="orbit-icon-counter flex items-center justify-center rounded-full shadow-sm w-12 h-12"
-                      style={{ background: "hsl(var(--card))", border: "6px solid hsl(var(--border))" }}
+                      style={{ background: "hsl(var(--card))" }}
                     >
                       <Icon style={{ color }} className="w-5 h-5" strokeWidth={1.8} />
                     </div>
@@ -216,7 +216,6 @@ export default function HeroSection() {
                       className="orbit-label-counter flex items-center justify-center rounded-full shadow-sm w-7 h-7 text-[10px] font-semibold"
                       style={{
                         background: "hsl(var(--foreground))",
-                        border: "4px solid hsl(var(--border))",
                         color: "hsl(var(--background))",
                       }}
                     >
@@ -230,13 +229,13 @@ export default function HeroSection() {
 
           {/* Name behind photo */}
           <span
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 select-none pointer-events-none font-black uppercase z-[5]"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none font-black uppercase z-[5]"
             style={{
-              fontFamily: "'Warbler Text', serif",
+              fontFamily: "'Nevera', 'Warbler Text', serif",
               fontSize: nameFontSize,
               letterSpacing: "0.06em",
               lineHeight: 1,
-              color: "hsl(var(--border))",
+              color: "white",
               whiteSpace: "nowrap",
             }}
           >
@@ -260,11 +259,11 @@ export default function HeroSection() {
 
           {/* Name outline in front */}
           <span
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 select-none pointer-events-none font-black uppercase z-[15]"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none font-black uppercase z-[15]"
             style={{
-              fontFamily: "'Warbler Text', serif",
+              fontFamily: "'Nevera', 'Warbler Text', serif",
               fontSize: nameFontSize,
-              WebkitTextStroke: "1.5px hsl(var(--border))",
+              WebkitTextStroke: "1.5px white",
               color: "transparent",
               letterSpacing: "0.06em",
               lineHeight: 1,

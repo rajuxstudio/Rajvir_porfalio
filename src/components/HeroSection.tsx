@@ -229,7 +229,7 @@ export default function HeroSection() {
 
           {/* Name behind photo */}
           <span
-            className="absolute bottom-[24px] left-1/2 -translate-x-1/2 select-none pointer-events-none font-black uppercase z-[5]"
+            className="absolute bottom-[48px] left-1/2 -translate-x-1/2 select-none pointer-events-none font-black uppercase z-[5]"
             style={{
               fontFamily: "'Nevera', 'Warbler Text', serif",
               fontSize: nameFontSize,
@@ -242,14 +242,14 @@ export default function HeroSection() {
             RAJVIR
           </span>
 
-          {/* Portrait — responsive width, fills visual area height */}
+          {/* Portrait — pinned to bottom of visual area */}
           <img
             src={heroPhoto}
             alt="Rajvir – UX/UI Designer & Developer"
-            className="relative z-[10] object-contain select-none mt-auto"
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 z-[10] object-contain select-none"
             style={{
-              height: "100%",
-              maxHeight: "calc(100vh - 340px)",
+              height: "auto",
+              maxHeight: "calc(100vh - 300px)",
               width: "auto",
               maxWidth: "min(420px, 55vw)",
               filter: "drop-shadow(0 16px 48px hsl(220 30% 15% / 0.10))",
@@ -259,7 +259,7 @@ export default function HeroSection() {
 
           {/* Name outline in front */}
           <span
-            className="absolute bottom-[24px] left-1/2 -translate-x-1/2 select-none pointer-events-none font-black uppercase z-[15]"
+            className="absolute bottom-[48px] left-1/2 -translate-x-1/2 select-none pointer-events-none font-black uppercase z-[15]"
             style={{
               fontFamily: "'Nevera', 'Warbler Text', serif",
               fontSize: nameFontSize,
@@ -277,20 +277,6 @@ export default function HeroSection() {
           <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-background to-transparent z-[12]" />
         </div>
 
-        {/* Open to Work badge */}
-        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20">
-          <div className="flex items-center gap-2 bg-card border border-border rounded-full px-5 py-2.5 shadow-sm text-sm font-medium text-foreground">
-            <span
-              className="w-2.5 h-2.5 rounded-full"
-              style={{
-                background: "hsl(var(--hero-badge-green))",
-                boxShadow: "0 0 0 3px hsl(142 71% 45% / 0.2)",
-              }}
-            />
-            <span>🏢</span>
-            Open to Work
-          </div>
-        </div>
       </section>
     </>
   );

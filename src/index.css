@@ -142,3 +142,13 @@
 .animate-marquee {
   animation: marquee 30s linear infinite;
 }
+
+/* Logo carousel marquee */
+@keyframes logo-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-33.333%); }
+}
+
+.animate-logo-marquee {
+  animation: logo-marquee 24s linear infinite;
+}

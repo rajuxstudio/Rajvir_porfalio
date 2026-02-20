@@ -229,7 +229,7 @@ export default function HeroSection() {
 
           {/* Name behind photo */}
           <span
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none font-black uppercase z-[5]"
+            className="absolute bottom-[24px] left-1/2 -translate-x-1/2 select-none pointer-events-none font-black uppercase z-[5]"
             style={{
               fontFamily: "'Nevera', 'Warbler Text', serif",
               fontSize: nameFontSize,
@@ -259,7 +259,7 @@ export default function HeroSection() {
 
           {/* Name outline in front */}
           <span
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none font-black uppercase z-[15]"
+            className="absolute bottom-[24px] left-1/2 -translate-x-1/2 select-none pointer-events-none font-black uppercase z-[15]"
             style={{
               fontFamily: "'Nevera', 'Warbler Text', serif",
               fontSize: nameFontSize,

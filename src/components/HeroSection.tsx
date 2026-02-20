@@ -67,25 +67,11 @@ const TypingWord = () => {
   );
 };
 
-// R Logo SVG with Globe in circle
+import rLogo from "@/assets/r-logo.png";
+
+// R Logo image
 const RLogo = () => (
-  <svg width="38" height="46" viewBox="0 0 38 46" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Rajvir logo">
-    {/* Tall rounded rectangle — stem of R */}
-    <rect x="0" y="0" width="14" height="46" rx="7" fill="currentColor" />
-    {/* Circle — bump of R */}
-    <circle cx="25" cy="13" r="13" fill="currentColor" />
-    {/* Globe icon lines inside circle (white) */}
-    {/* Outer ring */}
-    <circle cx="25" cy="13" r="8" stroke="hsl(var(--background))" strokeWidth="1.3" fill="none" />
-    {/* Vertical center line */}
-    <line x1="25" y1="5" x2="25" y2="21" stroke="hsl(var(--background))" strokeWidth="1.3" />
-    {/* Horizontal center line */}
-    <line x1="17" y1="13" x2="33" y2="13" stroke="hsl(var(--background))" strokeWidth="1.3" />
-    {/* Top ellipse curve */}
-    <path d="M18.5 8.5 Q25 11 31.5 8.5" stroke="hsl(var(--background))" strokeWidth="1.1" fill="none" />
-    {/* Bottom ellipse curve */}
-    <path d="M18.5 17.5 Q25 15 31.5 17.5" stroke="hsl(var(--background))" strokeWidth="1.1" fill="none" />
-  </svg>
+  <img src={rLogo} alt="Rajvir logo" className="h-10 w-auto" />
 );
 
 // Header component

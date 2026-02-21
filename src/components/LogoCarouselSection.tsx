@@ -55,7 +55,7 @@ export default function LogoCarouselSection() {
                 alt={logo.alt}
                 className="h-full w-auto object-contain"
                 style={{
-                  filter: "brightness(0)",
+                  filter: "var(--logo-filter, brightness(0))",
                   opacity: 0.75,
                   maxWidth: "160px"
                 }}

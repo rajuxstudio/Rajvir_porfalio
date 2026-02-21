@@ -240,7 +240,7 @@ export default function HeroSection() {
               fontSize: nameFontSize,
               letterSpacing: "0.06em",
               lineHeight: 1,
-              color: "white",
+              color: "hsl(var(--foreground))",
               whiteSpace: "nowrap"
             }}>
 
@@ -268,7 +268,7 @@ export default function HeroSection() {
             style={{
               fontFamily: "'Nevera', 'Warbler Text', serif",
               fontSize: nameFontSize,
-              WebkitTextStroke: "1.5px white",
+              WebkitTextStroke: "1.5px hsl(var(--foreground))",
               color: "transparent",
               letterSpacing: "0.06em",
               lineHeight: 1,

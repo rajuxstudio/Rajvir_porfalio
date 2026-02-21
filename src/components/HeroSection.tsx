@@ -11,6 +11,7 @@ import {
   Cpu,
   PenTool } from
 "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 // Colored icons for outer orbit
 const orbitIcons = [
@@ -83,6 +84,7 @@ const Header = () =>
       <a href="#about" className="hover:text-foreground transition-colors">About</a>
       <a href="#work" className="hover:text-foreground transition-colors">Work</a>
       <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
+      <ThemeToggle />
     </nav>
   </header>;
 

@@ -85,10 +85,21 @@ export default function ProjectsCarousel() {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [dragRotation, setDragRotation] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const isMobile = windowWidth < 768;
+  const isTablet = windowWidth >= 768 && windowWidth < 1024;
 
   const itemCount = projects.length;
   const anglePerItem = 360 / itemCount;
-  const radius = 480;
+  const radius = isMobile ? 220 : isTablet ? 340 : 480;
+  const cardWidth = isMobile ? 180 : isTablet ? 220 : 280;
 
   const nextSlide = useCallback(() => {
     setRotation((prev) => prev - anglePerItem);
@@ -133,7 +144,7 @@ export default function ProjectsCarousel() {
   const displayProject = hoveredIndex !== null ? projects[hoveredIndex] : projects[activeIndex];
 
   return (
-    <section className="relative w-full flex flex-col overflow-hidden" style={{ minHeight: "100vh", background: "hsl(var(--background))" }}>
+    <section className="relative w-full flex flex-col overflow-hidden" style={{ minHeight: isMobile ? "auto" : "100vh", background: "hsl(var(--background))" }}>
       {/* Ambient glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
@@ -143,11 +154,11 @@ export default function ProjectsCarousel() {
       </div>
 
       {/* Stats row */}
-      <div className="relative z-10 w-full py-8 md:py-10">
-        <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div className="relative z-10 w-full py-4 md:py-10">
+        <div className="max-w-5xl mx-auto px-4 md:px-6 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
           {stats.map((s) => (
             <div key={s.label} className="flex flex-col items-center gap-1">
-              <span className="text-4xl md:text-5xl font-extrabold" style={{ color: "hsl(var(--accent))" }}>
+              <span className="text-2xl md:text-5xl font-extrabold" style={{ color: "hsl(var(--accent))" }}>
                 {s.value}
               </span>
               <span className="text-sm font-medium text-muted-foreground">
@@ -162,7 +173,7 @@ export default function ProjectsCarousel() {
       <div className="flex-1 flex items-center justify-center">
         <div
           className="relative mx-auto select-none w-full"
-          style={{ height: "calc(100vh - (100vh / 1.618))", perspective: "1400px", width: "calc(100vw / 1.618)", margin: "0 auto" }}
+          style={{ height: isMobile ? "280px" : "calc(100vh - (100vh / 1.618))", perspective: isMobile ? "800px" : "1400px", width: isMobile ? "100%" : "calc(100vw / 1.618)", margin: "0 auto" }}
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => {
             handleDragEnd();
@@ -180,8 +191,8 @@ export default function ProjectsCarousel() {
             <div
               className="relative"
               style={{
-                width: 280,
-                height: "calc(100vh - (100vh / 1.618))",
+                width: cardWidth,
+                height: isMobile ? "280px" : "calc(100vh - (100vh / 1.618))",
                 transformStyle: "preserve-3d",
                 transform: `rotateX(-8deg) rotateY(${rotation}deg)`,
                 transition: isDragging ? "none" : "transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)",
@@ -316,13 +327,13 @@ export default function ProjectsCarousel() {
       </div>
 
       {/* Project info panel — bottom portion */}
-      <div className="px-6 md:px-16 pb-12 pt-4 max-w-3xl mx-auto w-full">
+      <div className="px-4 md:px-16 pb-8 md:pb-12 pt-4 max-w-3xl mx-auto w-full">
         <div
           className="transition-all duration-400 ease-out"
           key={displayProject.id}
           style={{ animation: "fadeInUp 0.35s ease-out" }}
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-1">
+          <h2 className="text-xl md:text-3xl font-bold text-foreground mb-1">
             {displayProject.title}
           </h2>
           <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-2">

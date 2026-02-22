@@ -144,26 +144,12 @@ export default function ProjectsCarousel() {
   const displayProject = hoveredIndex !== null ? projects[hoveredIndex] : projects[activeIndex];
 
   return (
-    <section className="relative w-full flex flex-col overflow-hidden" style={{ minHeight: "100vh", background: "hsl(260 40% 6%)" }}>
-      {/* Dark ambient background */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(260 40% 6%) 0%, hsl(270 50% 4%) 40%, hsl(280 40% 8%) 70%, hsl(260 40% 5%) 100%)" }}>
-        {/* Horizontal wave glow - bottom */}
+    <section className="relative w-full flex flex-col overflow-hidden" style={{ minHeight: "100vh", background: "hsl(var(--background))" }}>
+      {/* Ambient glow */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
-          className="absolute bottom-0 left-0 right-0 h-[45%] opacity-30"
-          style={{ background: "radial-gradient(ellipse 120% 60% at 50% 100%, hsl(var(--accent) / 0.5), hsl(280 80% 50% / 0.2) 40%, transparent 70%)" }}
-        />
-        {/* Central hill glow */}
-        <div
-          className="absolute bottom-[15%] left-1/2 -translate-x-1/2 w-[70%] h-[35%] opacity-20"
-          style={{ background: "radial-gradient(ellipse at 50% 80%, hsl(var(--accent) / 0.6), transparent 70%)", filter: "blur(40px)" }}
-        />
-        {/* Subtle vertical lines */}
-        <div className="absolute inset-0 opacity-[0.04]"
-          style={{ backgroundImage: "repeating-linear-gradient(90deg, hsl(var(--accent)), hsl(var(--accent)) 1px, transparent 1px, transparent 80px)", backgroundSize: "80px 100%" }}
-        />
-        {/* Top fade */}
-        <div className="absolute top-0 left-0 right-0 h-[30%] opacity-15"
-          style={{ background: "radial-gradient(ellipse 80% 100% at 60% 0%, hsl(260 50% 20% / 0.5), transparent)" }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-20 blur-[120px]"
+          style={{ background: "hsl(var(--accent))" }}
         />
       </div>
 

@@ -85,13 +85,13 @@ export default function ContactFormDialog({ open, onClose }: ContactFormDialogPr
 
   // ── Desktop: Left Side Panel ──
   return (
-    <div className="fixed inset-0 z-[100] flex">
+    <div className="fixed inset-0 z-[100] flex justify-end">
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-fade-in" onClick={onClose} />
       <div
-        className="relative z-10 h-full w-full max-w-md animate-slide-right overflow-y-auto"
-        style={{ background: "hsl(var(--card))", borderRight: "1px solid hsl(var(--border))", boxShadow: "8px 0 30px hsl(var(--foreground) / 0.08)" }}
+        className="relative z-10 h-full animate-slide-left overflow-y-auto"
+        style={{ width: "calc(100vw / 1.618)", background: "hsl(var(--card))", borderLeft: "1px solid hsl(var(--border))", boxShadow: "-8px 0 30px hsl(var(--foreground) / 0.08)" }}
       >
-        <button onClick={onClose} className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full transition-colors" style={{ color: "hsl(var(--muted-foreground))", background: "hsl(var(--muted) / 0.5)" }} aria-label="Close">
+        <button onClick={onClose} className="absolute top-5 left-5 w-8 h-8 flex items-center justify-center rounded-full transition-colors" style={{ color: "hsl(var(--muted-foreground))", background: "hsl(var(--muted) / 0.5)" }} aria-label="Close">
           <X size={16} />
         </button>
 

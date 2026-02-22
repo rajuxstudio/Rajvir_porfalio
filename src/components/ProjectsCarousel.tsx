@@ -158,7 +158,7 @@ export default function ProjectsCarousel() {
               width: 280,
               height: 420,
               transformStyle: "preserve-3d",
-              transform: `rotateY(${rotation}deg)`,
+              transform: `rotateX(-8deg) rotateY(${rotation}deg)`,
               transition: isDragging ? "none" : "transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)",
             }}
           >

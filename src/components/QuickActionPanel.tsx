@@ -10,6 +10,7 @@ import {
   HelpCircle,
   ArrowUp,
 } from "lucide-react";
+import ContactFormDialog from "./ContactFormDialog";
 
 type ActionItem = {
   icon: React.ElementType;
@@ -33,9 +34,18 @@ const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
 export default function QuickActionPanel() {
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+  const [contactOpen, setContactOpen] = useState(false);
+
+  // Inject onClick for "Let's Chat"
+  const resolvedActions = actions.map((a) =>
+    a.label === "Let's Chat"
+      ? { ...a, href: undefined, onClick: () => setContactOpen(true) }
+      : a
+  );
 
   return (
     <>
+      <ContactFormDialog open={contactOpen} onClose={() => setContactOpen(false)} />
       {/* ── Desktop: fixed left panel ── */}
       <aside
         className="hidden md:flex fixed left-0 top-1/2 -translate-y-1/2 z-50 flex-col items-center gap-1 py-3 px-1.5"
@@ -47,7 +57,7 @@ export default function QuickActionPanel() {
           boxShadow: "4px 0 24px hsl(var(--foreground) / 0.06)",
         }}
       >
-        {actions.map(({ icon: Icon, label, href, onClick }) => {
+        {resolvedActions.map(({ icon: Icon, label, href, onClick }) => {
           const Tag = href ? "a" : "button";
           const extraProps = href
             ? { href, target: href.startsWith("http") ? "_blank" : undefined, rel: "noopener noreferrer" }
@@ -130,7 +140,7 @@ export default function QuickActionPanel() {
           boxShadow: "0 -4px 24px hsl(var(--foreground) / 0.07)",
         }}
       >
-        {actions.slice(0, 6).map(({ icon: Icon, label, href, onClick }) => {
+        {resolvedActions.slice(0, 6).map(({ icon: Icon, label, href, onClick }) => {
           const Tag = href ? "a" : "button";
           const extraProps = href
             ? { href, target: href.startsWith("http") ? "_blank" : undefined, rel: "noopener noreferrer" }

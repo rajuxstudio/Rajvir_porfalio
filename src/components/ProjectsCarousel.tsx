@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { ArrowRight, ExternalLink, Monitor, Smartphone, Tablet } from "lucide-react";
+import { ArrowRight, Monitor, Smartphone, Tablet } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import rLogo from "@/assets/r-logo.png";
@@ -15,6 +15,13 @@ interface Project {
   link: string;
   isViewAll?: boolean;
 }
+
+const stats = [
+  { value: "3+", label: "Years Experience" },
+  { value: "11", label: "Happy Clients" },
+  { value: "12", label: "Projects Completed" },
+  { value: "100+", label: "Templates Created" },
+];
 
 const googleColors = [
   "linear-gradient(135deg, #9BCF7A 0%, #F28C28 100%)",
@@ -123,11 +130,10 @@ export default function ProjectsCarousel() {
 
   const activeIndex = getActiveIndex();
   const isAnyHovered = hoveredIndex !== null;
-
   const displayProject = hoveredIndex !== null ? projects[hoveredIndex] : projects[activeIndex];
 
   return (
-    <section className="relative w-full min-h-screen flex flex-col overflow-hidden" style={{ background: "hsl(var(--background))" }}>
+    <section className="relative w-full flex flex-col overflow-hidden" style={{ minHeight: "100vh", background: "hsl(var(--background))" }}>
       {/* Ambient glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
@@ -136,11 +142,27 @@ export default function ProjectsCarousel() {
         />
       </div>
 
+      {/* Stats row */}
+      <div className="relative z-10 w-full py-8 md:py-10">
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          {stats.map((s) => (
+            <div key={s.label} className="flex flex-col items-center gap-1">
+              <span className="text-4xl md:text-5xl font-extrabold" style={{ color: "hsl(var(--accent))" }}>
+                {s.value}
+              </span>
+              <span className="text-sm font-medium text-muted-foreground">
+                {s.label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Carousel — top portion */}
-      <div className="flex-1 flex items-center justify-center pt-8">
+      <div className="flex-1 flex items-center justify-center">
         <div
           className="relative mx-auto select-none w-full"
-          style={{ height: 480, perspective: "1400px", width: "calc(100vw / 1.618)", margin: "0 auto" }}
+          style={{ height: "calc(100vh - (100vh / 1.618))", perspective: "1400px", width: "calc(100vw / 1.618)", margin: "0 auto" }}
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => {
             handleDragEnd();
@@ -159,7 +181,7 @@ export default function ProjectsCarousel() {
               className="relative"
               style={{
                 width: 280,
-                height: 420,
+                height: "calc(100vh - (100vh / 1.618))",
                 transformStyle: "preserve-3d",
                 transform: `rotateX(-8deg) rotateY(${rotation}deg)`,
                 transition: isDragging ? "none" : "transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)",
@@ -217,6 +239,7 @@ export default function ProjectsCarousel() {
                         transition: "transform 0.4s ease, box-shadow 0.4s ease",
                       }}
                     >
+                      {/* Glass overlays */}
                       <div
                         className="absolute inset-0 pointer-events-none z-10 rounded-3xl"
                         style={{
@@ -232,13 +255,34 @@ export default function ProjectsCarousel() {
                         <div className="absolute bottom-10 -left-6 w-24 h-24 rounded-full opacity-15" style={{ background: "rgba(255,255,255,0.2)" }} />
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full opacity-10" style={{ background: "rgba(255,255,255,0.4)" }} />
                       </div>
-                      {project.isViewAll && (
+
+                      {/* Center logo */}
+                      {project.isViewAll ? (
                         <div className="absolute inset-0 flex items-center justify-center z-10">
                           <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
                             <ArrowRight size={30} className="text-white" />
                           </div>
                         </div>
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center z-10">
+                          <img src={rLogo} alt="Logo" className="w-16 h-16 object-contain opacity-40 drop-shadow-lg" />
+                        </div>
                       )}
+
+                      {/* Platform icons top-right */}
+                      {project.applications && project.applications.length > 0 && (
+                        <div className="absolute top-3 right-3 z-10 flex gap-1.5">
+                          {project.applications.map((app) => (
+                            <span key={app} className="w-6 h-6 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                              {app === "web" && <Monitor size={12} className="text-white" />}
+                              {app === "mobile" && <Smartphone size={12} className="text-white" />}
+                              {app === "tablet" && <Tablet size={12} className="text-white" />}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Card bottom info */}
                       <div className="absolute bottom-0 left-0 right-0 p-4 z-10"
                         style={{ background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)" }}
                       >
@@ -257,7 +301,7 @@ export default function ProjectsCarousel() {
       </div>
 
       {/* Dot indicators */}
-      <div className="flex justify-center gap-2">
+      <div className="flex justify-center gap-2 py-4">
         {projects.map((_, i) => (
           <button
             key={i}
@@ -272,38 +316,19 @@ export default function ProjectsCarousel() {
       </div>
 
       {/* Project info panel — bottom portion */}
-      <div className="px-6 md:px-16 pb-12 pt-8 max-w-3xl mx-auto w-full">
+      <div className="px-6 md:px-16 pb-12 pt-4 max-w-3xl mx-auto w-full">
         <div
           className="transition-all duration-400 ease-out"
           key={displayProject.id}
           style={{ animation: "fadeInUp 0.35s ease-out" }}
         >
-          <div className="flex items-center gap-3 mb-3">
-            <span
-              className="w-3 h-3 rounded-full shrink-0"
-              style={{ background: displayProject.color }}
-            />
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-              {displayProject.title}
-            </h2>
-          </div>
-          <div className="flex flex-wrap gap-2 mb-3">
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground bg-muted px-3 py-1 rounded-full">
-              {displayProject.category}
-            </span>
-            {displayProject.industryDomain && (
-              <span className="text-xs font-medium text-muted-foreground bg-muted px-3 py-1 rounded-full">
-                {displayProject.industryDomain}
-              </span>
-            )}
-            {displayProject.applications?.map((app) => (
-              <span key={app} className="text-muted-foreground">
-                {app === "web" && <Monitor size={16} />}
-                {app === "mobile" && <Smartphone size={16} />}
-                {app === "tablet" && <Tablet size={16} />}
-              </span>
-            ))}
-          </div>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-1">
+            {displayProject.title}
+          </h2>
+          <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+            {displayProject.category}
+            {displayProject.industryDomain && ` · ${displayProject.industryDomain}`}
+          </p>
           <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
             {displayProject.description}
           </p>

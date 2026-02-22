@@ -144,7 +144,7 @@ export default function ProjectsCarousel() {
   const displayProject = hoveredIndex !== null ? projects[hoveredIndex] : projects[activeIndex];
 
   return (
-    <section className="relative w-full flex flex-col overflow-hidden" style={{ minHeight: isMobile ? "auto" : "100vh", background: "hsl(var(--background))" }}>
+    <section className="relative w-full flex flex-col overflow-hidden" style={{ minHeight: "100vh", background: "hsl(var(--background))" }}>
       {/* Ambient glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div

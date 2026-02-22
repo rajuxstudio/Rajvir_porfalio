@@ -202,16 +202,35 @@ export default function ProjectsCarousel() {
                       background: "hsl(var(--card))",
                       border: "1px solid hsl(var(--border))",
                       boxShadow: isActive
-                        ? "0 20px 60px -10px hsl(var(--foreground) / 0.15)"
-                        : "0 8px 30px -8px hsl(var(--foreground) / 0.08)",
+                        ? `0 25px 50px -12px hsl(var(--foreground) / 0.25),
+                           0 12px 24px -8px hsl(var(--foreground) / 0.1),
+                           inset 0 1px 0 hsl(var(--background) / 0.4),
+                           inset 0 -1px 0 hsl(var(--foreground) / 0.05)`
+                        : `0 10px 30px -8px hsl(var(--foreground) / 0.12),
+                           0 4px 12px -4px hsl(var(--foreground) / 0.06),
+                           inset 0 1px 0 hsl(var(--background) / 0.3),
+                           inset 0 -1px 0 hsl(var(--foreground) / 0.03)`,
+                      transform: isHovered ? "translateY(-4px)" : "translateY(0)",
+                      transition: "transform 0.3s ease, box-shadow 0.3s ease",
                     }}
                   >
-                    {/* Glass reflection */}
+                    {/* Glass reflection shine */}
                     <div
                       className="absolute inset-0 pointer-events-none z-10"
                       style={{
-                        background: "linear-gradient(135deg, hsl(var(--background) / 0.1) 0%, transparent 50%)",
+                        background: `linear-gradient(
+                          135deg,
+                          hsl(var(--background) / 0.15) 0%,
+                          transparent 40%,
+                          transparent 60%,
+                          hsl(var(--background) / 0.05) 100%
+                        )`,
                       }}
+                    />
+                    {/* Top edge highlight */}
+                    <div
+                      className="absolute top-0 left-0 right-0 h-[1px] pointer-events-none z-10"
+                      style={{ background: "linear-gradient(90deg, transparent, hsl(var(--background) / 0.5), transparent)" }}
                     />
 
                     {/* Color header */}

@@ -346,60 +346,6 @@ export default function ProjectsCarousel() {
         </div>
       </div>
 
-      {/* Minimalistic terrain background */}
-      <div className="absolute bottom-0 left-0 right-0 h-[200px] md:h-[280px] pointer-events-none overflow-hidden z-0">
-        <svg
-          viewBox="0 0 1440 280"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="absolute bottom-0 w-full h-full"
-          preserveAspectRatio="none"
-        >
-          {/* Subtle wave lines */}
-          {Array.from({ length: 6 }).map((_, i) => {
-            const y = 280 - i * 40;
-            const opacity = 0.04 + i * 0.02;
-            return (
-              <path
-                key={`wave-${i}`}
-                d={`M0 ${y} Q360 ${y - 15 - i * 2} 720 ${y} T1440 ${y}`}
-                stroke={`url(#terrainGrad${i % 2})`}
-                strokeWidth={0.8}
-                fill="none"
-                opacity={opacity}
-              />
-            );
-          })}
-
-          {/* Sparse dots */}
-          {Array.from({ length: 15 }).map((_, i) => {
-            const cx = (i * 97) % 1440;
-            const cy = 140 + (i * 31) % 120;
-            return (
-              <circle
-                key={`dot-${i}`}
-                cx={cx}
-                cy={cy}
-                r={0.8}
-                fill="hsl(var(--accent))"
-                opacity={0.08 + (i % 4) * 0.03}
-              />
-            );
-          })}
-
-          <defs>
-            <linearGradient id="terrainGrad0" x1="0" y1="0" x2="1440" y2="0">
-              <stop offset="0%" stopColor="hsl(var(--accent))" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="hsl(var(--accent))" stopOpacity="0.05" />
-            </linearGradient>
-            <linearGradient id="terrainGrad1" x1="0" y1="0" x2="1440" y2="0">
-              <stop offset="0%" stopColor="hsl(var(--accent))" stopOpacity="0.05" />
-              <stop offset="100%" stopColor="hsl(var(--accent))" stopOpacity="0.3" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-
       <style>{`
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(10px); }

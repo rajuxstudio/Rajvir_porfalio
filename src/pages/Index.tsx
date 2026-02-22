@@ -1,5 +1,7 @@
 import HeroSection from "@/components/HeroSection";
 import LogoCarouselSection from "@/components/LogoCarouselSection";
+import StatsSection from "@/components/StatsSection";
+import ProjectsSection from "@/components/ProjectsSection";
 import QuickActionPanel from "@/components/QuickActionPanel";
 
 const Index = () => {
@@ -9,6 +11,8 @@ const Index = () => {
       <main>
         <HeroSection />
         <LogoCarouselSection />
+        <StatsSection />
+        <ProjectsSection />
       </main>
     </>
   );

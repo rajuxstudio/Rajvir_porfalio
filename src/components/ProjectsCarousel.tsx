@@ -140,7 +140,7 @@ export default function ProjectsCarousel() {
       <div className="flex-1 flex items-center justify-center pt-8">
         <div
           className="relative mx-auto select-none w-full"
-          style={{ height: 480, perspective: "1400px" }}
+          style={{ height: 480, perspective: "1400px", width: "calc(100vw / 1.618)", margin: "0 auto" }}
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => {
             handleDragEnd();
@@ -185,6 +185,7 @@ export default function ProjectsCarousel() {
                       transform: `rotateY(${angle}deg) translateZ(${radius}px) scale(${scale})`,
                       opacity,
                       filter: shouldBlur ? "blur(3px)" : "none",
+                      pointerEvents: isBackSide ? "none" : "auto",
                       transition: "opacity 0.4s, filter 0.4s, transform 0.6s cubic-bezier(0.25,1,0.5,1)",
                     }}
                     onClick={() => {

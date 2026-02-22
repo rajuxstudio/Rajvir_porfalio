@@ -346,81 +346,55 @@ export default function ProjectsCarousel() {
         </div>
       </div>
 
-      {/* Futuristic terrain background */}
-      <div className="absolute bottom-0 left-0 right-0 h-[280px] md:h-[350px] pointer-events-none overflow-hidden z-0">
+      {/* Minimalistic terrain background */}
+      <div className="absolute bottom-0 left-0 right-0 h-[200px] md:h-[280px] pointer-events-none overflow-hidden z-0">
         <svg
-          viewBox="0 0 1440 350"
+          viewBox="0 0 1440 280"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="absolute bottom-0 w-full h-full"
           preserveAspectRatio="none"
         >
-          {/* Wave lines with gradient strokes */}
-          {Array.from({ length: 12 }).map((_, i) => {
-            const y = 350 - i * 28;
-            const opacity = 0.08 + i * 0.04;
+          {/* Subtle wave lines */}
+          {Array.from({ length: 6 }).map((_, i) => {
+            const y = 280 - i * 40;
+            const opacity = 0.04 + i * 0.02;
             return (
               <path
                 key={`wave-${i}`}
-                d={`M0 ${y} Q180 ${y - 20 - i * 3} 360 ${y} T720 ${y} T1080 ${y} T1440 ${y}`}
-                stroke={`url(#terrainGrad${i % 3})`}
-                strokeWidth={1}
+                d={`M0 ${y} Q360 ${y - 15 - i * 2} 720 ${y} T1440 ${y}`}
+                stroke={`url(#terrainGrad${i % 2})`}
+                strokeWidth={0.8}
                 fill="none"
                 opacity={opacity}
               />
             );
           })}
 
-          {/* Vertical light trails */}
-          {Array.from({ length: 20 }).map((_, i) => {
-            const x = 72 * i + 36;
-            return (
-              <line
-                key={`vline-${i}`}
-                x1={x}
-                y1={350}
-                x2={x}
-                y2={350 - 60 - Math.random() * 120}
-                stroke="url(#vertGlow)"
-                strokeWidth={0.5}
-                opacity={0.12 + (i % 3) * 0.05}
-              />
-            );
-          })}
-
-          {/* Dotted pattern */}
-          {Array.from({ length: 40 }).map((_, i) => {
-            const cx = (i * 37) % 1440;
-            const cy = 200 + (i * 23) % 140;
+          {/* Sparse dots */}
+          {Array.from({ length: 15 }).map((_, i) => {
+            const cx = (i * 97) % 1440;
+            const cy = 140 + (i * 31) % 120;
             return (
               <circle
                 key={`dot-${i}`}
                 cx={cx}
                 cy={cy}
-                r={1}
+                r={0.8}
                 fill="hsl(var(--accent))"
-                opacity={0.15 + (i % 5) * 0.06}
+                opacity={0.08 + (i % 4) * 0.03}
               />
             );
           })}
 
           <defs>
             <linearGradient id="terrainGrad0" x1="0" y1="0" x2="1440" y2="0">
-              <stop offset="0%" stopColor="hsl(280 80% 60%)" />
-              <stop offset="50%" stopColor="hsl(330 80% 60%)" />
-              <stop offset="100%" stopColor="hsl(150 80% 50%)" />
+              <stop offset="0%" stopColor="hsl(var(--accent))" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="hsl(var(--accent))" stopOpacity="0.05" />
             </linearGradient>
             <linearGradient id="terrainGrad1" x1="0" y1="0" x2="1440" y2="0">
-              <stop offset="0%" stopColor="hsl(150 80% 50%)" />
-              <stop offset="100%" stopColor="hsl(280 80% 60%)" />
-            </linearGradient>
-            <linearGradient id="terrainGrad2" x1="0" y1="0" x2="1440" y2="0">
-              <stop offset="0%" stopColor="hsl(330 80% 60%)" />
-              <stop offset="100%" stopColor="hsl(150 80% 50%)" />
-            </linearGradient>
-            <linearGradient id="vertGlow" x1="0" y1="1" x2="0" y2="0">
-              <stop offset="0%" stopColor="hsl(280 80% 60%)" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="hsl(150 80% 50%)" stopOpacity="0" />
+              <stop offset="0%" stopColor="hsl(var(--accent))" stopOpacity="0.05" />
+              <stop offset="100%" stopColor="hsl(var(--accent))" stopOpacity="0.3" />
             </linearGradient>
           </defs>
         </svg>

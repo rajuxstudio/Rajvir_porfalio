@@ -81,7 +81,7 @@ export default function ProjectsCarousel() {
 
   const itemCount = projects.length;
   const anglePerItem = 360 / itemCount;
-  const radius = 380;
+  const radius = 480;
 
   const nextSlide = useCallback(() => {
     setRotation((prev) => prev - anglePerItem);
@@ -137,7 +137,7 @@ export default function ProjectsCarousel() {
       {/* Carousel */}
       <div
         className="relative mx-auto select-none"
-        style={{ height: 460, perspective: "1200px" }}
+        style={{ height: 540, perspective: "1400px" }}
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => {
           handleDragEnd();
@@ -155,8 +155,8 @@ export default function ProjectsCarousel() {
           <div
             className="relative"
             style={{
-              width: 260,
-              height: 360,
+              width: 280,
+              height: 420,
               transformStyle: "preserve-3d",
               transform: `rotateY(${rotation}deg)`,
               transition: isDragging ? "none" : "transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)",

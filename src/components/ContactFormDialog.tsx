@@ -59,19 +59,22 @@ export default function ContactFormDialog({ open, onClose }: ContactFormDialogPr
     return (
       <div className="fixed inset-0 z-[100] flex flex-col justify-end">
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in" onClick={onClose} />
-        <div
-          className="relative z-10 w-full rounded-t-2xl p-6 pb-8 animate-slide-up max-h-[90vh] overflow-y-auto"
+      {/* Close button above the sheet */}
+      <div className="relative z-10 flex justify-center mb-3">
+        <button onClick={onClose} className="w-10 h-10 flex items-center justify-center rounded-full backdrop-blur-md" style={{ background: "hsl(var(--card) / 0.8)", color: "hsl(var(--muted-foreground))", border: "1px solid hsl(var(--border))" }} aria-label="Close">
+          <X size={18} />
+        </button>
+      </div>
+      <div
+          className="relative z-10 w-full rounded-t-2xl p-6 pb-8 animate-slide-up max-h-[85vh] overflow-y-auto"
           style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderBottom: "none" }}
         >
           {/* Drag handle */}
           <div className="flex justify-center mb-4">
             <div className="w-10 h-1 rounded-full" style={{ background: "hsl(var(--border))" }} />
           </div>
-          <div className="flex items-center justify-between mb-4">
+          <div className="mb-4">
             <h2 className="text-xl font-bold" style={{ color: "hsl(var(--accent))" }}>Let's Chat</h2>
-            <button onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-full" style={{ color: "hsl(var(--muted-foreground))", background: "hsl(var(--muted) / 0.5)" }} aria-label="Close">
-              <X size={16} />
-            </button>
           </div>
           <div className="flex gap-4 text-xs mb-5" style={{ color: "hsl(var(--foreground))" }}>
             <span className="flex items-center gap-1.5"><Phone size={12} style={{ color: "hsl(var(--muted-foreground))" }} /> +91 80058 83696</span>
@@ -87,13 +90,19 @@ export default function ContactFormDialog({ open, onClose }: ContactFormDialogPr
   return (
     <div className="fixed inset-0 z-[100] flex justify-end">
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-fade-in" onClick={onClose} />
+      {/* Close button on the left border */}
+      <button
+        onClick={onClose}
+        className="absolute z-20 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full transition-colors"
+        style={{ right: "calc(100vw - 100vw / 1.618 + 12px)", color: "hsl(var(--muted-foreground))", background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", boxShadow: "0 2px 12px hsl(var(--foreground) / 0.1)" }}
+        aria-label="Close"
+      >
+        <X size={16} />
+      </button>
       <div
         className="relative z-10 h-full animate-slide-left overflow-y-auto"
-        style={{ width: "calc(100vw / 1.618)", background: "hsl(var(--card))", borderLeft: "1px solid hsl(var(--border))", boxShadow: "-8px 0 30px hsl(var(--foreground) / 0.08)" }}
+        style={{ width: "calc(100vw - 100vw / 1.618)", background: "hsl(var(--card))", borderLeft: "1px solid hsl(var(--border))", boxShadow: "-8px 0 30px hsl(var(--foreground) / 0.08)" }}
       >
-        <button onClick={onClose} className="absolute top-5 left-5 w-8 h-8 flex items-center justify-center rounded-full transition-colors" style={{ color: "hsl(var(--muted-foreground))", background: "hsl(var(--muted) / 0.5)" }} aria-label="Close">
-          <X size={16} />
-        </button>
 
         <div className="p-8 pt-10 flex flex-col gap-8 h-full">
           {/* Header */}

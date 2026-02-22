@@ -195,124 +195,99 @@ export default function ProjectsCarousel() {
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
-                  {/* Card */}
+                  {/* Card — full gradient fill like reference */}
                   <div
-                    className="w-full h-full rounded-2xl overflow-hidden relative flex flex-col"
+                    className="w-full h-full rounded-3xl overflow-hidden relative"
                     style={{
-                      background: "hsl(var(--card))",
-                      border: "1px solid hsl(var(--border))",
+                      background: project.color,
+                      border: "1px solid hsl(var(--foreground) / 0.08)",
                       boxShadow: isActive
-                        ? `0 25px 50px -12px hsl(var(--foreground) / 0.25),
-                           0 12px 24px -8px hsl(var(--foreground) / 0.1),
-                           inset 0 1px 0 hsl(var(--background) / 0.4),
-                           inset 0 -1px 0 hsl(var(--foreground) / 0.05)`
-                        : `0 10px 30px -8px hsl(var(--foreground) / 0.12),
-                           0 4px 12px -4px hsl(var(--foreground) / 0.06),
-                           inset 0 1px 0 hsl(var(--background) / 0.3),
-                           inset 0 -1px 0 hsl(var(--foreground) / 0.03)`,
-                      transform: isHovered ? "translateY(-4px)" : "translateY(0)",
-                      transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                        ? `0 30px 60px -15px hsl(var(--foreground) / 0.35),
+                           0 15px 30px -10px hsl(var(--foreground) / 0.15),
+                           inset 0 1px 0 rgba(255,255,255,0.25),
+                           inset 0 -1px 0 rgba(0,0,0,0.1)`
+                        : `0 12px 35px -10px hsl(var(--foreground) / 0.15),
+                           0 5px 15px -5px hsl(var(--foreground) / 0.08),
+                           inset 0 1px 0 rgba(255,255,255,0.2),
+                           inset 0 -1px 0 rgba(0,0,0,0.05)`,
+                      transform: isHovered ? "translateY(-6px) scale(1.02)" : "translateY(0) scale(1)",
+                      transition: "transform 0.4s ease, box-shadow 0.4s ease",
                     }}
                   >
                     {/* Glass reflection shine */}
                     <div
-                      className="absolute inset-0 pointer-events-none z-10"
+                      className="absolute inset-0 pointer-events-none z-10 rounded-3xl"
                       style={{
                         background: `linear-gradient(
-                          135deg,
-                          hsl(var(--background) / 0.15) 0%,
-                          transparent 40%,
-                          transparent 60%,
-                          hsl(var(--background) / 0.05) 100%
+                          145deg,
+                          rgba(255,255,255,0.25) 0%,
+                          rgba(255,255,255,0.08) 30%,
+                          transparent 50%,
+                          transparent 70%,
+                          rgba(255,255,255,0.04) 100%
                         )`,
                       }}
                     />
                     {/* Top edge highlight */}
                     <div
-                      className="absolute top-0 left-0 right-0 h-[1px] pointer-events-none z-10"
-                      style={{ background: "linear-gradient(90deg, transparent, hsl(var(--background) / 0.5), transparent)" }}
+                      className="absolute top-0 left-2 right-2 h-[1px] pointer-events-none z-10"
+                      style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)" }}
                     />
 
-                    {/* Color header */}
-                    {project.isViewAll ? (
-                      <div
-                        className="h-[140px] flex items-center justify-center relative"
-                        style={{ background: project.color }}
-                      >
-                        <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
-                          <ArrowRight size={28} className="text-white" />
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="h-[140px] relative overflow-hidden" style={{ background: project.color }}>
-                        {/* Decorative circles */}
-                        <div className="absolute inset-0 opacity-10">
-                          <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full border-2 border-white" />
-                          <div className="absolute bottom-2 left-4 w-10 h-10 rounded-full border border-white" />
-                          <div className="absolute top-6 left-1/2 w-6 h-6 rounded-full bg-white/30" />
-                        </div>
+                    {/* Decorative abstract shapes */}
+                    <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
+                      <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full opacity-20" style={{ background: "rgba(255,255,255,0.3)" }} />
+                      <div className="absolute bottom-10 -left-6 w-24 h-24 rounded-full opacity-15" style={{ background: "rgba(255,255,255,0.2)" }} />
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full opacity-10" style={{ background: "rgba(255,255,255,0.4)" }} />
+                    </div>
 
-                        {/* Category + Platform badges */}
-                        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-white/90 bg-black/20 px-2 py-0.5 rounded-full backdrop-blur-sm">
-                            {project.category}
-                          </span>
-                          <div className="flex gap-1">
-                            {project.applications?.includes("web") && (
-                              <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
-                                <Monitor size={10} className="text-white" />
-                              </span>
-                            )}
-                            {project.applications?.includes("mobile") && (
-                              <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
-                                <Smartphone size={10} className="text-white" />
-                              </span>
-                            )}
-                            {project.applications?.includes("tablet") && (
-                              <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
-                                <Tablet size={10} className="text-white" />
-                              </span>
-                            )}
-                          </div>
+                    {/* View All arrow icon */}
+                    {project.isViewAll && (
+                      <div className="absolute inset-0 flex items-center justify-center z-10">
+                        <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
+                          <ArrowRight size={30} className="text-white" />
                         </div>
                       </div>
                     )}
 
-                    {/* Content — fades on hover */}
-                    <div
-                      className="flex-1 p-4 flex flex-col gap-1.5 transition-opacity duration-300"
-                      style={{ opacity: isHovered ? 0 : 1 }}
+                    {/* Bottom label — always visible */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4 z-10"
+                      style={{
+                        background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)",
+                      }}
                     >
-                      <h3 className="text-sm font-bold leading-tight" style={{ color: "hsl(var(--foreground))" }}>
+                      <h3 className="text-sm font-bold text-white leading-tight drop-shadow-md">
                         {project.title}
                       </h3>
                       {project.industryDomain && (
-                        <span className="text-[10px] font-medium" style={{ color: "hsl(var(--accent))" }}>
+                        <span className="text-[10px] font-medium text-white/70">
                           {project.industryDomain}
                         </span>
                       )}
-                      <p className="text-[11px] leading-relaxed line-clamp-4" style={{ color: "hsl(var(--muted-foreground))" }}>
-                        {project.description}
-                      </p>
                     </div>
 
                     {/* Hover overlay */}
                     <div
-                      className="absolute inset-0 flex flex-col items-center justify-center gap-2 rounded-2xl transition-opacity duration-300 z-20"
+                      className="absolute inset-0 flex flex-col items-center justify-center gap-3 rounded-3xl transition-all duration-300 z-20"
                       style={{
                         opacity: isHovered ? 1 : 0,
                         pointerEvents: isHovered ? "auto" : "none",
-                        background: "hsl(var(--card) / 0.92)",
+                        background: "rgba(0,0,0,0.55)",
                         backdropFilter: "blur(8px)",
                       }}
                     >
-                      <span className="text-sm font-bold" style={{ color: "hsl(var(--foreground))" }}>
+                      <span className="text-base font-bold text-white">
                         {project.title}
                       </span>
-                      <span className="text-xs font-medium" style={{ color: "hsl(var(--accent))" }}>
-                        {project.isViewAll ? "Explore All" : "View Project"}
-                      </span>
-                      <ExternalLink size={18} style={{ color: "hsl(var(--muted-foreground))" }} />
+                      {project.category && (
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-white/70 bg-white/10 px-3 py-1 rounded-full">
+                          {project.category}
+                        </span>
+                      )}
+                      <p className="text-[11px] text-white/80 text-center px-5 leading-relaxed line-clamp-3">
+                        {project.description}
+                      </p>
+                      <ExternalLink size={18} className="text-white/60" />
                     </div>
                   </div>
                 </div>

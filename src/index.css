@@ -52,6 +52,7 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
     --logo-filter: brightness(0);
+    --rajvir-text: 0 0% 100%;
   }
 
   .dark {
@@ -94,6 +95,7 @@
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
     --logo-filter: brightness(0) invert(1);
+    --rajvir-text: 210 40% 95% / 0.7;
   }
 }
 

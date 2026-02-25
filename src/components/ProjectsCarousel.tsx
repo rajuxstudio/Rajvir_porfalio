@@ -152,6 +152,19 @@ export default function ProjectsCarousel() {
 
   return (
     <section className="relative w-full flex flex-col overflow-hidden" style={{ minHeight: "100vh", background: "hsl(var(--background))" }}>
+      {/* Section background mockup on hover */}
+      {displayProject.mockup && (
+        <>
+          <img
+            key={displayProject.id}
+            src={displayProject.mockup}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-500"
+            style={{ opacity: 0.15 }}
+          />
+          <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: "linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / 0.7) 40%, hsl(var(--background) / 0.5) 100%)" }} />
+        </>
+      )}
       {/* Ambient glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
@@ -257,34 +270,22 @@ export default function ProjectsCarousel() {
                         transition: "transform 0.4s ease, box-shadow 0.4s ease",
                       }}
                     >
-                      {/* Mockup image as persistent background */}
-                      {project.mockup && (
-                        <img
-                          src={project.mockup}
-                          alt={`${project.title} mockup`}
-                          className="absolute inset-0 w-full h-full object-cover z-[5] rounded-3xl"
-                        />
-                      )}
-                      {/* Darkening overlay for readability */}
-                      {project.mockup && (
-                        <div
-                          className="absolute inset-0 z-[6] rounded-3xl pointer-events-none"
-                          style={{
-                            background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.15) 100%)",
-                          }}
-                        />
-                      )}
                       {/* Glass overlays */}
                       <div
                         className="absolute inset-0 pointer-events-none z-10 rounded-3xl"
                         style={{
-                          background: `linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 30%, transparent 50%, transparent 70%, rgba(255,255,255,0.02) 100%)`,
+                          background: `linear-gradient(145deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.08) 30%, transparent 50%, transparent 70%, rgba(255,255,255,0.04) 100%)`,
                         }}
                       />
                       <div
                         className="absolute top-0 left-2 right-2 h-[1px] pointer-events-none z-10"
-                        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)" }}
+                        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)" }}
                       />
+                      <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
+                        <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full opacity-20" style={{ background: "rgba(255,255,255,0.3)" }} />
+                        <div className="absolute bottom-10 -left-6 w-24 h-24 rounded-full opacity-15" style={{ background: "rgba(255,255,255,0.2)" }} />
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full opacity-10" style={{ background: "rgba(255,255,255,0.4)" }} />
+                      </div>
 
                       {/* Center logo */}
                       {project.isViewAll ? (
@@ -293,11 +294,11 @@ export default function ProjectsCarousel() {
                             <ArrowRight size={30} className="text-white" />
                           </div>
                         </div>
-                      ) : !project.mockup ? (
+                      ) : (
                         <div className="absolute inset-0 flex items-center justify-center z-10">
                           <img src={rLogo} alt="Logo" className="w-16 h-16 object-contain opacity-40 drop-shadow-lg" />
                         </div>
-                      ) : null}
+                      )}
 
                       {/* Platform icons top-right */}
                       {project.applications && project.applications.length > 0 && (

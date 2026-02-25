@@ -298,8 +298,10 @@ export default function ProjectsCarousel() {
                         style={{ background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)" }}
                       >
                         <h3 className="text-sm font-bold text-white leading-tight drop-shadow-md">{project.title}</h3>
-                        {project.industryDomain && (
-                          <span className="text-[10px] font-medium text-white/70">{project.industryDomain}</span>
+                        {!project.isViewAll && (
+                          <span className="text-[10px] font-medium text-white/70">
+                            {project.category}{project.industryDomain && ` · ${project.industryDomain}`}
+                          </span>
                         )}
                       </div>
                     </div>
@@ -333,14 +335,7 @@ export default function ProjectsCarousel() {
           key={displayProject.id}
           style={{ animation: "fadeInUp 0.35s ease-out" }}
         >
-          <h2 className="text-xl md:text-3xl font-bold text-foreground mb-1">
-            {displayProject.title}
-          </h2>
-          <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-2">
-            {displayProject.category}
-            {displayProject.industryDomain && ` · ${displayProject.industryDomain}`}
-          </p>
-          <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+          <p className="text-sm md:text-base text-muted-foreground leading-relaxed text-center">
             {displayProject.description}
           </p>
         </div>

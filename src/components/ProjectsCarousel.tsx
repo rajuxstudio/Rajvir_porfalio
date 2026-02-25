@@ -14,6 +14,7 @@ interface Project {
   color: string;
   link: string;
   isViewAll?: boolean;
+  mockup?: string;
 }
 
 const stats = [
@@ -38,36 +39,42 @@ const projects: Project[] = [
     industryDomain: "Public Utilities / Government", applications: ["web", "mobile", "tablet"],
     description: "Help agencies manage billing, track records, and streamline user data efficiently.",
     color: googleColors[2], link: "#",
+    mockup: "/placeholder.svg",
   },
   {
     id: 2, title: "CloudGavel", category: "SaaS",
     industryDomain: "Law Enforcement / Justice", applications: ["web", "mobile"],
     description: "An innovative eWarrant solution that streamlines the warrant approval process.",
     color: googleColors[1], link: "#",
+    mockup: "/placeholder.svg",
   },
   {
     id: 3, title: "Echelon Constructors", category: "ERP",
     industryDomain: "Construction", applications: ["web"],
     description: "Construction Project Management Software for planning, scheduling, and resource management.",
     color: googleColors[0], link: "#",
+    mockup: "/placeholder.svg",
   },
   {
     id: 4, title: "Captable", category: "Fintech",
     industryDomain: "Finance / Investment", applications: ["web"],
     description: "Manage equity, track cap tables, and streamline investment workflows.",
     color: googleColors[4], link: "#",
+    mockup: "/placeholder.svg",
   },
   {
     id: 5, title: "Bumper Mandi", category: "AgriTech",
     industryDomain: "Agriculture", applications: ["mobile", "web"],
     description: "A digital mandi app that helps farmers sell grain securely and transparently.",
     color: googleColors[3], link: "#",
+    mockup: "/placeholder.svg",
   },
   {
     id: 6, title: "React Portfolio", category: "Web Development",
     industryDomain: "Personal / Creative", applications: ["web"],
     description: "A modern, responsive portfolio website using React with smooth navigation and clean UI.",
     color: googleColors[5], link: "#",
+    mockup: "/placeholder.svg",
   },
   {
     id: 7, title: "View All Projects", category: "Projects",
@@ -250,18 +257,39 @@ export default function ProjectsCarousel() {
                         transition: "transform 0.4s ease, box-shadow 0.4s ease",
                       }}
                     >
+                      {/* Mockup image on hover */}
+                      {project.mockup && (
+                        <img
+                          src={project.mockup}
+                          alt={`${project.title} mockup`}
+                          className="absolute inset-0 w-full h-full object-cover z-[5] rounded-3xl transition-opacity duration-400"
+                          style={{ opacity: isHovered ? 1 : 0 }}
+                        />
+                      )}
+                      {/* Darkening overlay on hover for readability */}
+                      {project.mockup && (
+                        <div
+                          className="absolute inset-0 z-[6] rounded-3xl transition-opacity duration-400 pointer-events-none"
+                          style={{
+                            background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.05) 100%)",
+                            opacity: isHovered ? 1 : 0,
+                          }}
+                        />
+                      )}
                       {/* Glass overlays */}
                       <div
                         className="absolute inset-0 pointer-events-none z-10 rounded-3xl"
                         style={{
                           background: `linear-gradient(145deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.08) 30%, transparent 50%, transparent 70%, rgba(255,255,255,0.04) 100%)`,
+                          opacity: isHovered && project.mockup ? 0.3 : 1,
+                          transition: "opacity 0.4s",
                         }}
                       />
                       <div
                         className="absolute top-0 left-2 right-2 h-[1px] pointer-events-none z-10"
                         style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)" }}
                       />
-                      <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
+                      <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl" style={{ opacity: isHovered && project.mockup ? 0 : 1, transition: "opacity 0.4s" }}>
                         <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full opacity-20" style={{ background: "rgba(255,255,255,0.3)" }} />
                         <div className="absolute bottom-10 -left-6 w-24 h-24 rounded-full opacity-15" style={{ background: "rgba(255,255,255,0.2)" }} />
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full opacity-10" style={{ background: "rgba(255,255,255,0.4)" }} />
@@ -275,7 +303,7 @@ export default function ProjectsCarousel() {
                           </div>
                         </div>
                       ) : (
-                        <div className="absolute inset-0 flex items-center justify-center z-10">
+                        <div className="absolute inset-0 flex items-center justify-center z-10 transition-opacity duration-400" style={{ opacity: isHovered && project.mockup ? 0 : 1 }}>
                           <img src={rLogo} alt="Logo" className="w-16 h-16 object-contain opacity-40 drop-shadow-lg" />
                         </div>
                       )}

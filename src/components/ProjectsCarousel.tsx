@@ -253,26 +253,24 @@ export default function ProjectsCarousel() {
                              0 5px 15px -5px hsl(var(--foreground) / 0.08),
                              inset 0 1px 0 rgba(255,255,255,0.2),
                              inset 0 -1px 0 rgba(0,0,0,0.05)`,
-                        transform: isHovered ? "translateY(-6px) scale(1.02)" : "translateY(0) scale(1)",
+                        transform: isHovered && !isMobile ? "translateY(-6px) scale(1.02)" : "translateY(0) scale(1)",
                         transition: "transform 0.4s ease, box-shadow 0.4s ease",
                       }}
                     >
-                      {/* Mockup image on hover */}
+                      {/* Mockup image as persistent background */}
                       {project.mockup && (
                         <img
                           src={project.mockup}
                           alt={`${project.title} mockup`}
-                          className="absolute inset-0 w-full h-full object-cover z-[5] rounded-3xl transition-opacity duration-400"
-                          style={{ opacity: isHovered ? 1 : 0 }}
+                          className="absolute inset-0 w-full h-full object-cover z-[5] rounded-3xl"
                         />
                       )}
-                      {/* Darkening overlay on hover for readability */}
+                      {/* Darkening overlay for readability */}
                       {project.mockup && (
                         <div
-                          className="absolute inset-0 z-[6] rounded-3xl transition-opacity duration-400 pointer-events-none"
+                          className="absolute inset-0 z-[6] rounded-3xl pointer-events-none"
                           style={{
-                            background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.05) 100%)",
-                            opacity: isHovered ? 1 : 0,
+                            background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.15) 100%)",
                           }}
                         />
                       )}
@@ -280,20 +278,13 @@ export default function ProjectsCarousel() {
                       <div
                         className="absolute inset-0 pointer-events-none z-10 rounded-3xl"
                         style={{
-                          background: `linear-gradient(145deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.08) 30%, transparent 50%, transparent 70%, rgba(255,255,255,0.04) 100%)`,
-                          opacity: isHovered && project.mockup ? 0.3 : 1,
-                          transition: "opacity 0.4s",
+                          background: `linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 30%, transparent 50%, transparent 70%, rgba(255,255,255,0.02) 100%)`,
                         }}
                       />
                       <div
                         className="absolute top-0 left-2 right-2 h-[1px] pointer-events-none z-10"
-                        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)" }}
+                        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)" }}
                       />
-                      <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl" style={{ opacity: isHovered && project.mockup ? 0 : 1, transition: "opacity 0.4s" }}>
-                        <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full opacity-20" style={{ background: "rgba(255,255,255,0.3)" }} />
-                        <div className="absolute bottom-10 -left-6 w-24 h-24 rounded-full opacity-15" style={{ background: "rgba(255,255,255,0.2)" }} />
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full opacity-10" style={{ background: "rgba(255,255,255,0.4)" }} />
-                      </div>
 
                       {/* Center logo */}
                       {project.isViewAll ? (
@@ -302,11 +293,11 @@ export default function ProjectsCarousel() {
                             <ArrowRight size={30} className="text-white" />
                           </div>
                         </div>
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center z-10 transition-opacity duration-400" style={{ opacity: isHovered && project.mockup ? 0 : 1 }}>
+                      ) : !project.mockup ? (
+                        <div className="absolute inset-0 flex items-center justify-center z-10">
                           <img src={rLogo} alt="Logo" className="w-16 h-16 object-contain opacity-40 drop-shadow-lg" />
                         </div>
-                      )}
+                      ) : null}
 
                       {/* Platform icons top-right */}
                       {project.applications && project.applications.length > 0 && (

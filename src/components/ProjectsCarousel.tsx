@@ -160,10 +160,10 @@ export default function ProjectsCarousel() {
             key={displayProject.id}
             src={displayProject.mockup}
             alt=""
-            className="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-500"
-            style={{ opacity: 0.15 }}
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+            style={{ opacity: 0.25, zIndex: 1 }}
           />
-          <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: "linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / 0.7) 40%, hsl(var(--background) / 0.5) 100%)" }} />
+          <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 2, background: "linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / 0.85) 40%, hsl(var(--background) / 0.6) 100%)" }} />
         </>
       )}
       {/* Ambient glow */}

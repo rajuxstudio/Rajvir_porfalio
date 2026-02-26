@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import rLogo from "@/assets/r-logo.png";
 import cloudgavelMockup from "@/assets/cloudgavel-mockup.png";
+import ProjectDetailDialog from "@/components/ProjectDetailDialog";
 
 interface Project {
   id: number;
@@ -94,6 +95,7 @@ export default function ProjectsCarousel() {
   const [startX, setStartX] = useState(0);
   const [dragRotation, setDragRotation] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -153,19 +155,12 @@ export default function ProjectsCarousel() {
 
   return (
     <section className="relative w-full flex flex-col overflow-hidden" style={{ minHeight: "100vh", background: "hsl(var(--background))" }}>
-      {/* Section background mockup on hover */}
-      {displayProject.mockup && (
-        <>
-          <img
-            key={displayProject.id}
-            src={displayProject.mockup}
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-            style={{ opacity: 0.25, zIndex: 1 }}
-          />
-          <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 2, background: "linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / 0.85) 40%, hsl(var(--background) / 0.6) 100%)" }} />
-        </>
-      )}
+      {/* Project detail dialog */}
+      <ProjectDetailDialog
+        open={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+        project={selectedProject}
+      />
       {/* Ambient glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
@@ -245,7 +240,7 @@ export default function ProjectsCarousel() {
                     onClick={() => {
                       if (isActive) {
                         if (project.isViewAll) navigate(project.link);
-                        else window.open(project.link, "_blank");
+                        else setSelectedProject(project);
                       } else {
                         setRotation(-index * anglePerItem);
                       }

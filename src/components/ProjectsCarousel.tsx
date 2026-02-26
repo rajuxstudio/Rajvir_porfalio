@@ -3,6 +3,7 @@ import { ArrowRight, Monitor, Smartphone, Tablet } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import rLogo from "@/assets/r-logo.png";
+import cloudgavelMockup from "@/assets/cloudgavel-mockup.png";
 
 interface Project {
   id: number;
@@ -46,7 +47,7 @@ const projects: Project[] = [
     industryDomain: "Law Enforcement / Justice", applications: ["web", "mobile"],
     description: "An innovative eWarrant solution that streamlines the warrant approval process.",
     color: googleColors[1], link: "#",
-    mockup: "/placeholder.svg",
+    mockup: cloudgavelMockup,
   },
   {
     id: 3, title: "Echelon Constructors", category: "ERP",

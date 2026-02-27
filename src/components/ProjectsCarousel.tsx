@@ -2,7 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import { ArrowRight, Monitor, Smartphone, Tablet } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import rLogo from "@/assets/r-logo.png";
-import { projects } from "@/lib/projectsData";
+import { projects, Project } from "@/lib/projectsData";
+import ProjectDetailDialog from "@/components/ProjectDetailDialog";
 
 const stats = [
   { value: "3+", label: "Years Experience" },
@@ -20,7 +21,8 @@ export default function ProjectsCarousel() {
   const [startX, setStartX] = useState(0);
   const [dragRotation, setDragRotation] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -161,7 +163,7 @@ export default function ProjectsCarousel() {
                     onClick={() => {
                       if (isActive) {
                         if (project.isViewAll) navigate(project.link);
-                        else navigate(`/project/${project.slug}`);
+                        else setSelectedProject(project);
                       } else {
                         setRotation(-index * anglePerItem);
                       }
@@ -277,6 +279,12 @@ export default function ProjectsCarousel() {
           </p>
         </div>
       </div>
+
+      <ProjectDetailDialog
+        open={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+        project={selectedProject}
+      />
 
       <style>{`
         @keyframes fadeInUp {

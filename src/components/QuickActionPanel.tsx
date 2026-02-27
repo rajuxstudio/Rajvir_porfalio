@@ -1,15 +1,12 @@
 import { useState } from "react";
 import {
-  Linkedin,
-  Twitter,
-  Github,
-  Instagram,
-  Mail,
+  User,
   MessageCircle,
-  Bell,
-  HelpCircle,
+  Palette,
+  Code,
   ArrowUp,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import ContactFormDialog from "./ContactFormDialog";
 
 type ActionItem = {
@@ -17,17 +14,14 @@ type ActionItem = {
   label: string;
   href?: string;
   onClick?: () => void;
+  comingSoon?: boolean;
 };
 
 const actions: ActionItem[] = [
-  { icon: Linkedin,      label: "LinkedIn",    href: "https://linkedin.com" },
-  { icon: Twitter,       label: "Twitter / X", href: "https://twitter.com" },
-  { icon: Github,        label: "GitHub",      href: "https://github.com" },
-  { icon: Instagram,     label: "Instagram",   href: "https://instagram.com" },
-  { icon: Mail,          label: "Email me",    href: "mailto:hello@example.com" },
+  { icon: User,          label: "About",       href: "/about" },
   { icon: MessageCircle, label: "Let's Chat",  href: "#contact" },
-  { icon: Bell,          label: "Notifications" },
-  { icon: HelpCircle,    label: "Help" },
+  { icon: Palette,       label: "Design",      comingSoon: true },
+  { icon: Code,          label: "Code",        comingSoon: true },
 ];
 
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
@@ -35,13 +29,13 @@ const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 export default function QuickActionPanel() {
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
   const [contactOpen, setContactOpen] = useState(false);
+  const navigate = useNavigate();
 
-  // Inject onClick for "Let's Chat"
-  const resolvedActions = actions.map((a) =>
-    a.label === "Let's Chat"
-      ? { ...a, href: undefined, onClick: () => setContactOpen(true) }
-      : a
-  );
+  const resolvedActions = actions.map((a) => {
+    if (a.label === "Let's Chat") return { ...a, href: undefined, onClick: () => setContactOpen(true) };
+    if (a.href?.startsWith("/")) return { ...a, href: undefined, onClick: () => navigate(a.href!) };
+    return a;
+  });
 
   return (
     <>
@@ -57,25 +51,26 @@ export default function QuickActionPanel() {
           boxShadow: "4px 0 24px hsl(var(--foreground) / 0.06)",
         }}
       >
-        {resolvedActions.map(({ icon: Icon, label, href, onClick }) => {
+        {resolvedActions.map(({ icon: Icon, label, href, onClick, comingSoon }) => {
           const Tag = href ? "a" : "button";
           const extraProps = href
             ? { href, target: href.startsWith("http") ? "_blank" : undefined, rel: "noopener noreferrer" }
-            : { onClick };
+            : { onClick: comingSoon ? undefined : onClick };
 
           return (
             <div key={label} className="relative group flex items-center">
-              {/* Tooltip */}
               {activeTooltip === label && (
                 <div
-                  className="absolute left-full ml-3 whitespace-nowrap text-xs font-medium px-2.5 py-1 rounded-md pointer-events-none z-50 animate-fade-in"
+                  className="absolute left-full ml-3 whitespace-nowrap text-xs font-medium px-2.5 py-1 rounded-md pointer-events-none z-50 animate-fade-in flex items-center gap-1.5"
                   style={{
                     background: "hsl(var(--foreground))",
                     color: "hsl(var(--background))",
                   }}
                 >
                   {label}
-                  {/* arrow */}
+                  {comingSoon && (
+                    <span className="text-[9px] uppercase tracking-wider opacity-60">Soon</span>
+                  )}
                   <span
                     className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent"
                     style={{ borderRightColor: "hsl(var(--foreground))" }}
@@ -91,10 +86,12 @@ export default function QuickActionPanel() {
                 className="flex items-center justify-center w-9 h-9 rounded-lg transition-all duration-200 outline-none focus-visible:ring-2"
                 style={
                   {
-                    color: activeTooltip === label
+                    color: activeTooltip === label && !comingSoon
                       ? "hsl(var(--accent))"
                       : "hsl(var(--muted-foreground))",
-                    background: activeTooltip === label
+                    opacity: comingSoon ? 0.4 : 1,
+                    cursor: comingSoon ? "default" : "pointer",
+                    background: activeTooltip === label && !comingSoon
                       ? "hsl(var(--accent) / 0.10)"
                       : "transparent",
                     "--tw-ring-color": "hsl(var(--ring))",
@@ -140,33 +137,30 @@ export default function QuickActionPanel() {
           boxShadow: "0 -4px 24px hsl(var(--foreground) / 0.07)",
         }}
       >
-        {resolvedActions.slice(0, 6).map(({ icon: Icon, label, href, onClick }) => {
+        {resolvedActions.map(({ icon: Icon, label, href, onClick, comingSoon }) => {
           const Tag = href ? "a" : "button";
           const extraProps = href
             ? { href, target: href.startsWith("http") ? "_blank" : undefined, rel: "noopener noreferrer" }
-            : { onClick };
+            : { onClick: comingSoon ? undefined : onClick };
 
           return (
             <Tag
               key={label}
               {...(extraProps as any)}
               aria-label={label}
-              className="flex flex-col items-center justify-center w-10 h-10 rounded-xl transition-all duration-200 active:scale-90"
-              style={{ color: "hsl(var(--muted-foreground))" }}
+              className="flex flex-col items-center justify-center gap-0.5 px-2 py-1.5 rounded-xl transition-all duration-200 active:scale-90"
+              style={{
+                color: "hsl(var(--muted-foreground))",
+                opacity: comingSoon ? 0.4 : 1,
+                cursor: comingSoon ? "default" : "pointer",
+              }}
             >
-              <Icon size={20} strokeWidth={1.7} />
+              <Icon size={18} strokeWidth={1.7} />
+              <span className="text-[9px] font-medium tracking-wide">{label}</span>
             </Tag>
           );
         })}
 
-        <button
-          onClick={scrollToTop}
-          aria-label="Scroll to top"
-          className="flex flex-col items-center justify-center w-10 h-10 rounded-xl transition-all duration-200 active:scale-90"
-          style={{ color: "hsl(var(--muted-foreground))" }}
-        >
-          <ArrowUp size={20} strokeWidth={1.7} />
-        </button>
       </nav>
     </>
   );

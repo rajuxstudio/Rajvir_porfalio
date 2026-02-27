@@ -1,89 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
 import { ArrowRight, Monitor, Smartphone, Tablet } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import rLogo from "@/assets/r-logo.png";
-import cloudgavelMockup from "@/assets/cloudgavel-mockup.png";
-import ProjectDetailDialog from "@/components/ProjectDetailDialog";
-
-interface Project {
-  id: number;
-  title: string;
-  category: string;
-  industryDomain?: string;
-  applications?: ("web" | "mobile" | "tablet")[];
-  description: string;
-  color: string;
-  link: string;
-  isViewAll?: boolean;
-  mockup?: string;
-}
+import { projects } from "@/lib/projectsData";
 
 const stats = [
   { value: "3+", label: "Years Experience" },
   { value: "11", label: "Happy Clients" },
   { value: "12", label: "Projects Completed" },
   { value: "100+", label: "Templates Created" },
-];
-
-const googleColors = [
-  "linear-gradient(135deg, #9BCF7A 0%, #F28C28 100%)",
-  "linear-gradient(135deg, #FFA24C 0%, #E56A2E 100%)",
-  "linear-gradient(135deg, #6FA8FF 0%, #2E5AAC 100%)",
-  "linear-gradient(135deg, #E7C15A 0%, #9C7A1E 100%)",
-  "linear-gradient(135deg, #0F2A44 0%, #5F87A8 100%)",
-  "linear-gradient(135deg, #8B5CF6 0%, #F472B6 100%)",
-];
-
-const projects: Project[] = [
-  {
-    id: 1, title: "Utility Plus", category: "SaaS",
-    industryDomain: "Public Utilities / Government", applications: ["web", "mobile", "tablet"],
-    description: "Help agencies manage billing, track records, and streamline user data efficiently.",
-    color: googleColors[2], link: "#",
-    mockup: "/placeholder.svg",
-  },
-  {
-    id: 2, title: "CloudGavel", category: "SaaS",
-    industryDomain: "Law Enforcement / Justice", applications: ["web", "mobile"],
-    description: "An innovative eWarrant solution that streamlines the warrant approval process.",
-    color: googleColors[1], link: "#",
-    mockup: cloudgavelMockup,
-  },
-  {
-    id: 3, title: "Echelon Constructors", category: "ERP",
-    industryDomain: "Construction", applications: ["web"],
-    description: "Construction Project Management Software for planning, scheduling, and resource management.",
-    color: googleColors[0], link: "#",
-    mockup: "/placeholder.svg",
-  },
-  {
-    id: 4, title: "Captable", category: "Fintech",
-    industryDomain: "Finance / Investment", applications: ["web"],
-    description: "Manage equity, track cap tables, and streamline investment workflows.",
-    color: googleColors[4], link: "#",
-    mockup: "/placeholder.svg",
-  },
-  {
-    id: 5, title: "Bumper Mandi", category: "AgriTech",
-    industryDomain: "Agriculture", applications: ["mobile", "web"],
-    description: "A digital mandi app that helps farmers sell grain securely and transparently.",
-    color: googleColors[3], link: "#",
-    mockup: "/placeholder.svg",
-  },
-  {
-    id: 6, title: "React Portfolio", category: "Web Development",
-    industryDomain: "Personal / Creative", applications: ["web"],
-    description: "A modern, responsive portfolio website using React with smooth navigation and clean UI.",
-    color: googleColors[5], link: "#",
-    mockup: "/placeholder.svg",
-  },
-  {
-    id: 7, title: "View All Projects", category: "Projects",
-    description: "Explore my complete collection of design and development work.",
-    color: "linear-gradient(135deg, hsl(var(--accent)), hsl(280 80% 60%))", link: "/projects",
-    isViewAll: true,
-  },
 ];
 
 export default function ProjectsCarousel() {
@@ -95,7 +20,7 @@ export default function ProjectsCarousel() {
   const [startX, setStartX] = useState(0);
   const [dragRotation, setDragRotation] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -155,12 +80,8 @@ export default function ProjectsCarousel() {
 
   return (
     <section className="relative w-full flex flex-col overflow-hidden" style={{ minHeight: "100vh", background: "hsl(var(--background))" }}>
-      {/* Project detail dialog */}
-      <ProjectDetailDialog
-        open={!!selectedProject}
-        onClose={() => setSelectedProject(null)}
-        project={selectedProject}
-      />
+
+
       {/* Ambient glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
@@ -240,7 +161,7 @@ export default function ProjectsCarousel() {
                     onClick={() => {
                       if (isActive) {
                         if (project.isViewAll) navigate(project.link);
-                        else setSelectedProject(project);
+                        else navigate(`/project/${project.slug}`);
                       } else {
                         setRotation(-index * anglePerItem);
                       }

@@ -1,7 +1,8 @@
 import AboutHero from "@/components/about/AboutHero";
-import AboutMetrics from "@/components/about/AboutMetrics";
-import AboutNarrative from "@/components/about/AboutNarrative";
-import AboutTimeline from "@/components/about/AboutTimeline";
+import AboutExperience from "@/components/about/AboutExperience";
+import AboutEducation from "@/components/about/AboutEducation";
+import AboutCertifications from "@/components/about/AboutCertifications";
+import AboutHobbies from "@/components/about/AboutHobbies";
 import AboutPhilosophy from "@/components/about/AboutPhilosophy";
 import AboutCTA from "@/components/about/AboutCTA";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -15,9 +16,10 @@ export default function About() {
       </header>
       <main>
         <AboutHero />
-        <AboutMetrics />
-        <AboutNarrative />
-        <AboutTimeline />
+        <AboutExperience />
+        <AboutEducation />
+        <AboutCertifications />
+        <AboutHobbies />
         <AboutPhilosophy />
         <AboutCTA />
       </main>

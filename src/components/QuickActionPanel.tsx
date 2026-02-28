@@ -6,40 +6,59 @@ import {
   Code,
   ArrowUp,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import ContactFormDialog from "./ContactFormDialog";
+import SidePanel from "./SidePanel";
+import AboutPanel from "./AboutPanel";
+import ProjectListPanel from "./ProjectListPanel";
+
+type PanelType = "about" | "design" | "code" | null;
 
 type ActionItem = {
   icon: React.ElementType;
   label: string;
-  href?: string;
+  panel?: PanelType;
   onClick?: () => void;
-  comingSoon?: boolean;
 };
-
-const actions: ActionItem[] = [
-  { icon: User,          label: "About",       href: "/about" },
-  { icon: MessageCircle, label: "Let's Chat",  href: "#contact" },
-  { icon: Palette,       label: "Design",      comingSoon: true },
-  { icon: Code,          label: "Code",        comingSoon: true },
-];
 
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
 export default function QuickActionPanel() {
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
   const [contactOpen, setContactOpen] = useState(false);
-  const navigate = useNavigate();
+  const [activePanel, setActivePanel] = useState<PanelType>(null);
 
-  const resolvedActions = actions.map((a) => {
-    if (a.label === "Let's Chat") return { ...a, href: undefined, onClick: () => setContactOpen(true) };
-    if (a.href?.startsWith("/")) return { ...a, href: undefined, onClick: () => navigate(a.href!) };
-    return a;
-  });
+  const actions: ActionItem[] = [
+    { icon: User,          label: "About",       panel: "about" },
+    { icon: MessageCircle, label: "Let's Chat",  onClick: () => setContactOpen(true) },
+    { icon: Palette,       label: "Design",      panel: "design" },
+    { icon: Code,          label: "Code",         panel: "code" },
+  ];
+
+  const resolvedActions = actions.map((a) => ({
+    ...a,
+    onClick: a.panel ? () => setActivePanel(a.panel!) : a.onClick,
+  }));
+
+  const panelTitles: Record<string, string> = {
+    about: "About Me",
+    design: "Design Projects",
+    code: "Development Projects",
+  };
 
   return (
     <>
       <ContactFormDialog open={contactOpen} onClose={() => setContactOpen(false)} />
+
+      <SidePanel
+        open={!!activePanel}
+        onClose={() => setActivePanel(null)}
+        title={activePanel ? panelTitles[activePanel] : ""}
+      >
+        {activePanel === "about" && <AboutPanel />}
+        {activePanel === "design" && <ProjectListPanel filterType="design" />}
+        {activePanel === "code" && <ProjectListPanel filterType="code" />}
+      </SidePanel>
+
       {/* ── Desktop: fixed left panel ── */}
       <aside
         className="hidden md:flex fixed left-0 top-1/2 -translate-y-1/2 z-50 flex-col items-center gap-1 py-3 px-1.5"
@@ -51,58 +70,46 @@ export default function QuickActionPanel() {
           boxShadow: "4px 0 24px hsl(var(--foreground) / 0.06)",
         }}
       >
-        {resolvedActions.map(({ icon: Icon, label, href, onClick, comingSoon }) => {
-          const Tag = href ? "a" : "button";
-          const extraProps = href
-            ? { href, target: href.startsWith("http") ? "_blank" : undefined, rel: "noopener noreferrer" }
-            : { onClick: comingSoon ? undefined : onClick };
-
-          return (
-            <div key={label} className="relative group flex items-center">
-              {activeTooltip === label && (
-                <div
-                  className="absolute left-full ml-3 whitespace-nowrap text-xs font-medium px-2.5 py-1 rounded-md pointer-events-none z-50 animate-fade-in flex items-center gap-1.5"
-                  style={{
-                    background: "hsl(var(--foreground))",
-                    color: "hsl(var(--background))",
-                  }}
-                >
-                  {label}
-                  {comingSoon && (
-                    <span className="text-[9px] uppercase tracking-wider opacity-60">Soon</span>
-                  )}
-                  <span
-                    className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent"
-                    style={{ borderRightColor: "hsl(var(--foreground))" }}
-                  />
-                </div>
-              )}
-
-              <Tag
-                {...(extraProps as any)}
-                onMouseEnter={() => setActiveTooltip(label)}
-                onMouseLeave={() => setActiveTooltip(null)}
-                aria-label={label}
-                className="flex items-center justify-center w-9 h-9 rounded-lg transition-all duration-200 outline-none focus-visible:ring-2"
-                style={
-                  {
-                    color: activeTooltip === label && !comingSoon
-                      ? "hsl(var(--accent))"
-                      : "hsl(var(--muted-foreground))",
-                    opacity: comingSoon ? 0.4 : 1,
-                    cursor: comingSoon ? "default" : "pointer",
-                    background: activeTooltip === label && !comingSoon
-                      ? "hsl(var(--accent) / 0.10)"
-                      : "transparent",
-                    "--tw-ring-color": "hsl(var(--ring))",
-                  } as React.CSSProperties
-                }
+        {resolvedActions.map(({ icon: Icon, label, onClick }) => (
+          <div key={label} className="relative group flex items-center">
+            {activeTooltip === label && (
+              <div
+                className="absolute left-full ml-3 whitespace-nowrap text-xs font-medium px-2.5 py-1 rounded-md pointer-events-none z-50 animate-fade-in"
+                style={{
+                  background: "hsl(var(--foreground))",
+                  color: "hsl(var(--background))",
+                }}
               >
-                <Icon size={17} strokeWidth={1.8} />
-              </Tag>
-            </div>
-          );
-        })}
+                {label}
+                <span
+                  className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent"
+                  style={{ borderRightColor: "hsl(var(--foreground))" }}
+                />
+              </div>
+            )}
+
+            <button
+              onClick={onClick}
+              onMouseEnter={() => setActiveTooltip(label)}
+              onMouseLeave={() => setActiveTooltip(null)}
+              aria-label={label}
+              className="flex items-center justify-center w-9 h-9 rounded-lg transition-all duration-200 outline-none focus-visible:ring-2"
+              style={
+                {
+                  color: activeTooltip === label
+                    ? "hsl(var(--accent))"
+                    : "hsl(var(--muted-foreground))",
+                  background: activeTooltip === label
+                    ? "hsl(var(--accent) / 0.10)"
+                    : "transparent",
+                  "--tw-ring-color": "hsl(var(--ring))",
+                } as React.CSSProperties
+              }
+            >
+              <Icon size={17} strokeWidth={1.8} />
+            </button>
+          </div>
+        ))}
 
         {/* Divider + scroll-to-top */}
         <div className="w-5 my-1" style={{ height: "1px", background: "hsl(var(--border))" }} />
@@ -137,30 +144,18 @@ export default function QuickActionPanel() {
           boxShadow: "0 -4px 24px hsl(var(--foreground) / 0.07)",
         }}
       >
-        {resolvedActions.map(({ icon: Icon, label, href, onClick, comingSoon }) => {
-          const Tag = href ? "a" : "button";
-          const extraProps = href
-            ? { href, target: href.startsWith("http") ? "_blank" : undefined, rel: "noopener noreferrer" }
-            : { onClick: comingSoon ? undefined : onClick };
-
-          return (
-            <Tag
-              key={label}
-              {...(extraProps as any)}
-              aria-label={label}
-              className="flex flex-col items-center justify-center gap-0.5 px-2 py-1.5 rounded-xl transition-all duration-200 active:scale-90"
-              style={{
-                color: "hsl(var(--muted-foreground))",
-                opacity: comingSoon ? 0.4 : 1,
-                cursor: comingSoon ? "default" : "pointer",
-              }}
-            >
-              <Icon size={18} strokeWidth={1.7} />
-              <span className="text-[9px] font-medium tracking-wide">{label}</span>
-            </Tag>
-          );
-        })}
-
+        {resolvedActions.map(({ icon: Icon, label, onClick }) => (
+          <button
+            key={label}
+            onClick={onClick}
+            aria-label={label}
+            className="flex flex-col items-center justify-center gap-0.5 px-2 py-1.5 rounded-xl transition-all duration-200 active:scale-90"
+            style={{ color: "hsl(var(--muted-foreground))" }}
+          >
+            <Icon size={18} strokeWidth={1.7} />
+            <span className="text-[9px] font-medium tracking-wide">{label}</span>
+          </button>
+        ))}
       </nav>
     </>
   );

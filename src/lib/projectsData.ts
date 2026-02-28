@@ -7,6 +7,7 @@ export interface Project {
   category: string;
   industryDomain?: string;
   applications?: ("web" | "mobile" | "tablet")[];
+  projectType?: ("design" | "code")[];
   description: string;
   color: string;
   link: string;
@@ -37,6 +38,7 @@ export const projects: Project[] = [
     category: "SaaS",
     industryDomain: "Public Utilities / Government",
     applications: ["web", "mobile", "tablet"],
+    projectType: ["design"],
     description: "Help agencies manage billing, track records, and streamline user data efficiently.",
     color: googleColors[2],
     link: "#",
@@ -60,6 +62,7 @@ export const projects: Project[] = [
     category: "SaaS",
     industryDomain: "Law Enforcement / Justice",
     applications: ["web", "mobile"],
+    projectType: ["design"],
     description: "An innovative eWarrant solution that streamlines the warrant approval process.",
     color: googleColors[1],
     link: "#",
@@ -83,6 +86,7 @@ export const projects: Project[] = [
     category: "ERP",
     industryDomain: "Construction",
     applications: ["web"],
+    projectType: ["design"],
     description: "Construction Project Management Software for planning, scheduling, and resource management.",
     color: googleColors[0],
     link: "#",
@@ -106,6 +110,7 @@ export const projects: Project[] = [
     category: "Fintech",
     industryDomain: "Finance / Investment",
     applications: ["web"],
+    projectType: ["design", "code"],
     description: "Manage equity, track cap tables, and streamline investment workflows.",
     color: googleColors[4],
     link: "#",
@@ -129,6 +134,7 @@ export const projects: Project[] = [
     category: "AgriTech",
     industryDomain: "Agriculture",
     applications: ["mobile", "web"],
+    projectType: ["design", "code"],
     description: "A digital mandi app that helps farmers sell grain securely and transparently.",
     color: googleColors[3],
     link: "#",
@@ -152,6 +158,7 @@ export const projects: Project[] = [
     category: "Web Development",
     industryDomain: "Personal / Creative",
     applications: ["web"],
+    projectType: ["code"],
     description: "A modern, responsive portfolio website using React with smooth navigation and clean UI.",
     color: googleColors[5],
     link: "#",

@@ -1,5 +1,6 @@
 import heroPhoto from "@/assets/hero-photo.png";
 import { Award, Cpu, Palette, Server, Dumbbell, Linkedin, Twitter, Github, Instagram, Mail, Briefcase, GraduationCap } from "lucide-react";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
 const skills = ["UX Design", "UI Design", "Design Systems", "Product Thinking", "AI & Cloud Basics"];
 
@@ -76,8 +77,8 @@ const socials = [
 
 export default function AboutPanel() {
   return (
-    <div className="flex flex-col gap-10">
-      {/* Hero intro */}
+    <div className="flex flex-col gap-6">
+      {/* Hero intro - always visible */}
       <div className="flex flex-col sm:flex-row gap-6 items-start">
         <img
           src={heroPhoto}
@@ -100,7 +101,7 @@ export default function AboutPanel() {
         </div>
       </div>
 
-      {/* Skills */}
+      {/* Skills - always visible */}
       <div className="flex flex-wrap gap-1.5">
         {skills.map((s) => (
           <span key={s} className="px-2.5 py-1 rounded-full text-[11px] font-medium border border-border bg-secondary text-muted-foreground">
@@ -109,108 +110,127 @@ export default function AboutPanel() {
         ))}
       </div>
 
-      {/* Experience */}
-      <div>
-        <div className="flex items-center gap-2 mb-4">
-          <Briefcase size={16} className="text-accent" />
-          <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">Experience</h3>
-        </div>
-        <div className="space-y-4">
-          {experiences.map((exp) => (
-            <div key={exp.period + exp.company} className="rounded-xl border border-border bg-background p-4">
-              <div className="flex flex-wrap items-center gap-2 mb-1">
-                <span className="text-[11px] font-semibold text-accent">{exp.period}</span>
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full border border-border text-muted-foreground">{exp.type}</span>
-              </div>
-              <h4 className="text-sm font-bold text-foreground">{exp.title}</h4>
-              <p className="text-xs text-muted-foreground mb-2">
-                {exp.company}{exp.location && ` · ${exp.location}`}
-              </p>
-              <ul className="space-y-1">
-                {exp.points.map((p) => (
-                  <li key={p} className="text-xs text-muted-foreground flex items-start gap-1.5">
-                    <span className="w-1 h-1 rounded-full bg-accent mt-1.5 shrink-0" />
-                    {p}
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-wrap gap-1 mt-3">
-                {exp.skills.map((s) => (
-                  <span key={s} className="px-2 py-0.5 rounded-full text-[10px] font-medium border border-border text-muted-foreground">{s}</span>
-                ))}
-              </div>
+      {/* Accordion sections */}
+      <Accordion type="multiple" className="w-full space-y-1">
+        {/* Experience */}
+        <AccordionItem value="experience" className="border border-border rounded-xl px-4 overflow-hidden">
+          <AccordionTrigger className="hover:no-underline gap-2">
+            <div className="flex items-center gap-2">
+              <Briefcase size={16} className="text-accent" />
+              <span className="text-sm font-bold text-foreground uppercase tracking-wider">Experience</span>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Education */}
-      <div>
-        <div className="flex items-center gap-2 mb-4">
-          <GraduationCap size={16} className="text-accent" />
-          <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">Education</h3>
-        </div>
-        <div className="space-y-3">
-          {education.map((edu) => (
-            <div key={edu.degree} className="rounded-xl border border-border bg-background p-4">
-              <span className="text-[11px] font-semibold text-accent">{edu.period}</span>
-              <h4 className="text-sm font-bold text-foreground mt-1">{edu.degree}</h4>
-              <p className="text-xs text-muted-foreground">{edu.institution}</p>
-              {edu.skills.length > 0 && (
-                <div className="flex flex-wrap gap-1 mt-2">
-                  {edu.skills.map((s) => (
-                    <span key={s} className="px-2 py-0.5 rounded-full text-[10px] font-medium border border-border text-muted-foreground">{s}</span>
-                  ))}
+          </AccordionTrigger>
+          <AccordionContent>
+            <div className="space-y-4 pt-2">
+              {experiences.map((exp) => (
+                <div key={exp.period + exp.company} className="rounded-xl border border-border bg-background p-4">
+                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                    <span className="text-[11px] font-semibold text-accent">{exp.period}</span>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full border border-border text-muted-foreground">{exp.type}</span>
+                  </div>
+                  <h4 className="text-sm font-bold text-foreground">{exp.title}</h4>
+                  <p className="text-xs text-muted-foreground mb-2">
+                    {exp.company}{exp.location && ` · ${exp.location}`}
+                  </p>
+                  <ul className="space-y-1">
+                    {exp.points.map((p) => (
+                      <li key={p} className="text-xs text-muted-foreground flex items-start gap-1.5">
+                        <span className="w-1 h-1 rounded-full bg-accent mt-1.5 shrink-0" />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="flex flex-wrap gap-1 mt-3">
+                    {exp.skills.map((s) => (
+                      <span key={s} className="px-2 py-0.5 rounded-full text-[10px] font-medium border border-border text-muted-foreground">{s}</span>
+                    ))}
+                  </div>
                 </div>
-              )}
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
+          </AccordionContent>
+        </AccordionItem>
 
-      {/* Certifications */}
-      <div>
-        <div className="flex items-center gap-2 mb-4">
-          <Award size={16} className="text-accent" />
-          <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">Certifications</h3>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {certifications.map((cert) => (
-            <div key={cert.title} className="rounded-xl border border-border bg-background p-4 hover:shadow-sm transition-shadow">
-              <h4 className="text-sm font-bold text-foreground">{cert.title}</h4>
-              <p className="text-xs text-muted-foreground">{cert.org}</p>
-              <span className="text-[10px] font-semibold text-accent mt-1 inline-block">{cert.year}</span>
+        {/* Education */}
+        <AccordionItem value="education" className="border border-border rounded-xl px-4 overflow-hidden">
+          <AccordionTrigger className="hover:no-underline gap-2">
+            <div className="flex items-center gap-2">
+              <GraduationCap size={16} className="text-accent" />
+              <span className="text-sm font-bold text-foreground uppercase tracking-wider">Education</span>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Hobbies */}
-      <div>
-        <h3 className="text-sm font-bold text-foreground uppercase tracking-wider mb-4">Beyond Work</h3>
-        <div className="grid grid-cols-2 gap-2">
-          {hobbies.map((h) => {
-            const Icon = h.icon;
-            return (
-              <div key={h.title} className="rounded-xl border border-border bg-background p-3 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
-                  <Icon size={14} className="text-accent" />
+          </AccordionTrigger>
+          <AccordionContent>
+            <div className="space-y-3 pt-2">
+              {education.map((edu) => (
+                <div key={edu.degree} className="rounded-xl border border-border bg-background p-4">
+                  <span className="text-[11px] font-semibold text-accent">{edu.period}</span>
+                  <h4 className="text-sm font-bold text-foreground mt-1">{edu.degree}</h4>
+                  <p className="text-xs text-muted-foreground">{edu.institution}</p>
+                  {edu.skills.length > 0 && (
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {edu.skills.map((s) => (
+                        <span key={s} className="px-2 py-0.5 rounded-full text-[10px] font-medium border border-border text-muted-foreground">{s}</span>
+                      ))}
+                    </div>
+                  )}
                 </div>
-                <span className="text-xs font-medium text-foreground">{h.title}</span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
 
-      {/* Philosophy */}
+        {/* Certifications */}
+        <AccordionItem value="certifications" className="border border-border rounded-xl px-4 overflow-hidden">
+          <AccordionTrigger className="hover:no-underline gap-2">
+            <div className="flex items-center gap-2">
+              <Award size={16} className="text-accent" />
+              <span className="text-sm font-bold text-foreground uppercase tracking-wider">Certifications</span>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              {certifications.map((cert) => (
+                <div key={cert.title} className="rounded-xl border border-border bg-background p-4 hover:shadow-sm transition-shadow">
+                  <h4 className="text-sm font-bold text-foreground">{cert.title}</h4>
+                  <p className="text-xs text-muted-foreground">{cert.org}</p>
+                  <span className="text-[10px] font-semibold text-accent mt-1 inline-block">{cert.year}</span>
+                </div>
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+
+        {/* Hobbies */}
+        <AccordionItem value="hobbies" className="border border-border rounded-xl px-4 overflow-hidden">
+          <AccordionTrigger className="hover:no-underline gap-2">
+            <span className="text-sm font-bold text-foreground uppercase tracking-wider">Beyond Work</span>
+          </AccordionTrigger>
+          <AccordionContent>
+            <div className="grid grid-cols-2 gap-2 pt-2">
+              {hobbies.map((h) => {
+                const Icon = h.icon;
+                return (
+                  <div key={h.title} className="rounded-xl border border-border bg-background p-3 flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
+                      <Icon size={14} className="text-accent" />
+                    </div>
+                    <span className="text-xs font-medium text-foreground">{h.title}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+
+      {/* Philosophy - always visible */}
       <blockquote className="border-l-2 border-accent pl-4 py-2">
         <p className="text-base font-bold text-foreground italic">
           "I design systems that scale — not just screens."
         </p>
       </blockquote>
 
-      {/* Social links */}
+      {/* Social links - always visible */}
       <div className="flex items-center gap-2">
         {socials.map(({ icon: Icon, label, href }) => (
           <a

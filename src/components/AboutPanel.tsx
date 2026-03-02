@@ -1,288 +1,275 @@
-import heroPhoto from "@/assets/hero-photo.png";
-import { Award, Cpu, Palette, Server, Dumbbell, Linkedin, Twitter, Github, Instagram, Mail, Briefcase, GraduationCap } from "lucide-react";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import coverImage from "@/assets/cover-design.jpg";
+import { User, MapPin, Mail, Linkedin, Github, Twitter, Instagram, Clock, FolderOpen, Users, Briefcase, Award, Cpu, Palette, Server, Dumbbell, GraduationCap, ChevronDown } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
-const skills = ["UX Design", "UI Design", "Design Systems", "Product Thinking", "AI & Cloud Basics"];
+/* ── Data ── */
+
+const socialLinks = [
+  { href: "https://linkedin.com", icon: Linkedin, label: "LinkedIn" },
+  { href: "https://twitter.com", icon: Twitter, label: "Twitter" },
+  { href: "https://github.com", icon: Github, label: "GitHub" },
+  { href: "https://instagram.com", icon: Instagram, label: "Instagram" },
+  { href: "mailto:hello@example.com", icon: Mail, label: "Email" },
+];
 
 const stats = [
-  { value: "3+", label: "Years Experience" },
-  { value: "25+", label: "Projects Delivered" },
-  { value: "SaaS", label: "& Product Focus" },
+  { icon: Clock, label: "Years Experience", value: "3+" },
+  { icon: FolderOpen, label: "Projects Done", value: "25+" },
+  { icon: Users, label: "Clients", value: "15+" },
+  { icon: Briefcase, label: "Companies", value: "4" },
+];
+
+const skills = [
+  "UX Design", "UI Design", "Design Systems", "Product Thinking", "AI & Cloud Basics",
 ];
 
 const experiences = [
   {
-    period: "Mar 2025 – Present",
     title: "Freelance UX/UI Designer",
     company: "Self-employed",
+    period: "Mar 2025 – Present",
     type: "Freelance",
-    points: ["Designing product interfaces for startups", "Building scalable design systems", "Creating user flows and interaction patterns"],
+    bullets: ["Designed product interfaces for startups", "Built scalable design systems", "Created user flows and interaction patterns"],
     skills: ["Figma", "Design Systems", "User Flows", "Prototyping"],
   },
   {
-    period: "Aug 2025 – Sep 2025",
     title: "UX/UI Designer",
     company: "HummingWave Technologies Pvt. Ltd.",
-    type: "Part-time",
     location: "Bangalore",
-    points: ["UX improvements for product interfaces", "Interface execution and design QA", "Cross-functional collaboration with engineering"],
+    period: "Aug 2025 – Sep 2025",
+    type: "Part-time",
+    bullets: ["Improved UX for product interfaces", "Executed interface design and conducted design QA", "Collaborated cross-functionally with engineering teams"],
     skills: ["UX Research", "Interface Design", "Collaboration"],
   },
   {
-    period: "May 2022 – Mar 2025",
     title: "UX/UI Designer",
     company: "FusionStack LLC",
+    location: "Pune (Hybrid)",
+    period: "May 2022 – Mar 2025",
     type: "Full-time",
-    location: "Hybrid · Pune",
-    points: ["Enterprise SaaS interface design", "Built interaction systems and component libraries", "Designed scalable product experiences", "Worked closely with engineering teams"],
+    bullets: ["Designed enterprise SaaS interfaces", "Built interaction systems and component libraries", "Created scalable product experiences", "Worked closely with engineering teams"],
     skills: ["SaaS", "Enterprise", "Design Systems", "Product Design"],
   },
   {
-    period: "Jan 2022 – May 2022",
     title: "Freelance UX/UI Designer",
     company: "Self-employed",
+    period: "Jan 2022 – May 2022",
     type: "Freelance",
-    points: ["Designed interfaces for early-stage startups", "Rapid prototyping and user testing"],
+    bullets: ["Designed interfaces for early-stage startups", "Conducted rapid prototyping and user testing"],
     skills: ["Startup Design", "Prototyping", "UI Design"],
   },
 ];
 
 const education = [
-  { degree: "Master of Computer Applications (MCA)", institution: "Modi Institute of Management & Technology, Kota", period: "Jun 2024 – Jun 2026", skills: ["Programming", "DSA", "Cloud", "SQL", "AI/ML"] },
-  { degree: "Master of Commerce (MCom)", institution: "Birla College, Kalyan", period: "Dec 2020 – May 2022", skills: [] },
-  { degree: "Bachelor of Commerce (BCom)", institution: "Govt. Commerce College, Kota", period: "Apr 2017 – Apr 2020", skills: [] },
+  {
+    degree: "Master of Computer Applications (MCA)",
+    institution: "Modi Institute of Management & Technology, Kota",
+    period: "Jun 2024 – Jun 2026",
+    skills: ["Programming", "DSA", "Cloud", "SQL", "AI/ML"],
+  },
+  {
+    degree: "Master of Commerce (MCom)",
+    institution: "Birla College, Kalyan",
+    period: "Dec 2020 – May 2022",
+  },
+  {
+    degree: "Bachelor of Commerce (BCom)",
+    institution: "Govt. Commerce College, Kota",
+    period: "Apr 2017 – Apr 2020",
+  },
 ];
 
 const certifications = [
-  { title: "Google UX Design", org: "Google · Coursera", year: "2023" },
-  { title: "Interaction Design Specialization", org: "UC San Diego · Coursera", year: "2023" },
-  { title: "Advanced UI/UX Design", org: "Design Academy", year: "2022" },
-  { title: "Responsive Web Design", org: "freeCodeCamp", year: "2022" },
+  { name: "Google UX Design", org: "Google · Coursera", year: "2023" },
+  { name: "Interaction Design Specialization", org: "UC San Diego · Coursera", year: "2023" },
+  { name: "Advanced UI/UX Design", org: "Design Academy", year: "2022" },
+  { name: "Responsive Web Design", org: "freeCodeCamp", year: "2022" },
 ];
 
 const hobbies = [
-  { icon: Cpu, title: "Exploring AI & Emerging Tech" },
-  { icon: Palette, title: "UI Exploration & Trends" },
-  { icon: Server, title: "Learning System Architecture" },
-  { icon: Dumbbell, title: "Fitness & Discipline" },
+  { icon: Cpu, label: "Exploring AI & Emerging Technologies" },
+  { icon: Palette, label: "UI Exploration & Design Trends" },
+  { icon: Server, label: "Learning System Architecture" },
+  { icon: Dumbbell, label: "Fitness & Discipline" },
 ];
 
-const socials = [
-  { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com" },
-  { icon: Twitter, label: "Twitter / X", href: "https://twitter.com" },
-  { icon: Github, label: "GitHub", href: "https://github.com" },
-  { icon: Instagram, label: "Instagram", href: "https://instagram.com" },
-  { icon: Mail, label: "Email", href: "mailto:hello@example.com" },
-];
+/* ── Page ── */
 
-export default function AboutPanel() {
+const Index = () => {
   return (
-    <div className="flex flex-col">
-      {/* Cover Section */}
-      <div className="relative -mx-6 -mt-6 sm:-mx-10 sm:-mt-10 overflow-hidden">
-        {/* Design-related background */}
-        <div className="h-48 sm:h-56 w-full relative">
-          <div
-            className="absolute inset-0"
-            style={{
-              background: `
-                linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(var(--accent) / 0.6) 40%, hsl(var(--primary) / 0.3) 100%)
-              `,
-            }}
-          />
-          {/* Grid pattern overlay */}
-          <div
-            className="absolute inset-0 opacity-[0.08]"
-            style={{
-              backgroundImage: `
-                linear-gradient(hsl(var(--background)) 1px, transparent 1px),
-                linear-gradient(90deg, hsl(var(--background)) 1px, transparent 1px)
-              `,
-              backgroundSize: "32px 32px",
-            }}
-          />
-          {/* Floating design elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-8 right-12 w-20 h-20 rounded-2xl border border-background/20 rotate-12 opacity-30" />
-            <div className="absolute bottom-10 right-32 w-14 h-14 rounded-full border-2 border-background/15 opacity-25" />
-            <div className="absolute top-16 left-[40%] w-24 h-1 bg-background/10 rounded-full rotate-[-20deg]" />
-            <div className="absolute bottom-6 left-[20%] w-10 h-10 rounded-lg border border-background/15 rotate-45 opacity-20" />
+    <div className="min-h-screen bg-background">
+
+      {/* ── Cover + Profile Header ── */}
+      <div className="relative">
+        <div className="relative w-full h-[50vh] min-h-[320px] max-h-[480px] overflow-hidden">
+          <img src={coverImage} alt="Cover" className="w-full h-full object-cover cover-fade" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" style={{ top: "40%" }} />
+        </div>
+
+        <div className="relative -mt-32 z-10 max-w-2xl mx-auto px-6">
+          <div className="flex flex-col items-center text-center">
+            <div className="w-28 h-28 rounded-full bg-card border-4 border-card shadow-xl flex items-center justify-center mb-4">
+              <User className="w-12 h-12 text-primary" />
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Your Name</h1>
+            <p className="text-muted-foreground text-lg mt-2">UX/UI Designer · Product Thinker</p>
+            <div className="flex items-center gap-1.5 text-muted-foreground text-sm mt-2">
+              <MapPin className="w-4 h-4" />
+              <span>India</span>
+            </div>
+            <div className="flex gap-3 mt-5">
+              {socialLinks.map((s) => (
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
+                  className="w-10 h-10 rounded-full bg-card/80 backdrop-blur border border-border flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent hover:scale-110 transition-all duration-200">
+                  <s.icon className="w-4 h-4" />
+                </a>
+              ))}
+            </div>
           </div>
-          {/* Social links row at top */}
-          <div className="absolute top-4 right-4 flex items-center gap-1.5">
-            {socials.map(({ icon: Icon, label, href }) => (
-              <a
-                key={label}
-                href={href}
-                target={href.startsWith("http") ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="w-8 h-8 rounded-full bg-background/10 backdrop-blur-sm flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-background/25 text-background/80 hover:text-background"
-              >
-                <Icon size={14} strokeWidth={1.8} />
-              </a>
+        </div>
+      </div>
+
+      {/* ── Main Content ── */}
+      <main className="max-w-[680px] mx-auto px-5 mt-10 pb-20">
+
+        {/* Stats */}
+        <section className="golden-section">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {stats.map((stat) => (
+              <div key={stat.label} className="bg-card rounded-2xl p-5 text-center border border-border shadow-sm hover:shadow-md transition-shadow">
+                <div className="mx-auto w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center mb-3">
+                  <stat.icon className="w-5 h-5 text-accent" />
+                </div>
+                <p className="text-2xl font-bold">{stat.value}</p>
+                <p className="text-xs text-muted-foreground mt-1">{stat.label}</p>
+              </div>
             ))}
           </div>
-          {/* "About Me" heading */}
-          <div className="absolute bottom-6 left-6 sm:left-10">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-background tracking-tight">About Me</h2>
+        </section>
+
+        {/* Skills */}
+        <section className="golden-section">
+          <h2 className="text-xl font-semibold mb-5 text-center">Professional Skills</h2>
+          <div className="flex flex-wrap justify-center gap-3">
+            {skills.map((skill) => (
+              <span key={skill} className="px-4 py-2 rounded-full bg-badge text-badge-foreground text-sm font-medium transition-all hover:scale-105 hover:shadow-sm cursor-default">
+                {skill}
+              </span>
+            ))}
           </div>
-        </div>
-      </div>
+        </section>
 
-      {/* Profile + Intro */}
-      <div className="flex flex-col sm:flex-row gap-5 items-start mt-6">
-        <img
-          src={heroPhoto}
-          alt="Rajvir — Product UX/UI Designer"
-          className="w-18 h-18 rounded-2xl object-cover border-2 border-border shadow-sm shrink-0 -mt-12 relative z-10"
-        />
-        <div className="pt-1">
-          <h3 className="text-lg font-bold text-foreground mb-1">Designing Scalable Digital Experiences.</h3>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            UX/UI Designer with 3+ years of experience designing SaaS and enterprise platforms. Currently pursuing MCA to strengthen technical expertise in cloud, AI, and systems.
-          </p>
-        </div>
-      </div>
-
-      {/* Stats */}
-      <div className="flex flex-wrap gap-5 mt-5">
-        {stats.map((s) => (
-          <div key={s.label} className="flex flex-col">
-            <span className="text-lg font-black text-accent">{s.value}</span>
-            <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">{s.label}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* Skills */}
-      <div className="flex flex-wrap gap-1.5 mt-5">
-        {skills.map((s) => (
-          <span key={s} className="px-2.5 py-1 rounded-full text-[11px] font-medium border border-border bg-secondary text-muted-foreground">
-            {s}
-          </span>
-        ))}
-      </div>
-
-      {/* Clean Accordion sections */}
-      <Accordion type="multiple" className="w-full mt-6">
         {/* Experience */}
-        <AccordionItem value="experience" className="border-b border-border">
-          <AccordionTrigger className="hover:no-underline py-5">
-            <div className="flex items-center gap-2.5">
-              <Briefcase size={15} className="text-accent" />
-              <span className="text-sm font-semibold text-foreground">Experience</span>
-            </div>
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-5 pb-2">
-              {experiences.map((exp) => (
-                <div key={exp.period + exp.company}>
-                  <div className="flex flex-wrap items-center gap-2 mb-1">
-                    <span className="text-[11px] font-semibold text-accent">{exp.period}</span>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded-full border border-border text-muted-foreground">{exp.type}</span>
+        <section className="golden-section">
+          <h2 className="text-xl font-semibold mb-5 text-center">Professional Experience</h2>
+          <Accordion type="single" collapsible className="space-y-3">
+            {experiences.map((exp, i) => (
+              <AccordionItem key={i} value={`exp-${i}`} className="bg-card rounded-2xl border border-border shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                <AccordionTrigger className="px-5 py-4 hover:no-underline">
+                  <div className="flex flex-col items-start text-left gap-0.5">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="font-semibold text-sm">{exp.title}</span>
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-accent/10 text-accent font-medium">{exp.type}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      {exp.company}{exp.location && `, ${exp.location}`} · {exp.period}
+                    </p>
                   </div>
-                  <h4 className="text-sm font-bold text-foreground">{exp.title}</h4>
-                  <p className="text-xs text-muted-foreground mb-2">
-                    {exp.company}{exp.location && ` · ${exp.location}`}
-                  </p>
-                  <ul className="space-y-1">
-                    {exp.points.map((p) => (
-                      <li key={p} className="text-xs text-muted-foreground flex items-start gap-1.5">
-                        <span className="w-1 h-1 rounded-full bg-accent mt-1.5 shrink-0" />
-                        {p}
+                </AccordionTrigger>
+                <AccordionContent className="px-5 pb-5">
+                  <ul className="space-y-1.5">
+                    {exp.bullets.map((b, j) => (
+                      <li key={j} className="text-sm text-muted-foreground flex items-start gap-2">
+                        <span className="mt-2 w-1.5 h-1.5 rounded-full bg-accent/40 shrink-0" />
+                        {b}
                       </li>
                     ))}
                   </ul>
-                  <div className="flex flex-wrap gap-1 mt-2.5">
+                  <div className="flex flex-wrap gap-1.5 mt-3">
                     {exp.skills.map((s) => (
-                      <span key={s} className="px-2 py-0.5 rounded-full text-[10px] font-medium border border-border text-muted-foreground">{s}</span>
+                      <span key={s} className="text-xs px-2 py-0.5 rounded-md bg-muted text-muted-foreground">{s}</span>
                     ))}
                   </div>
-                </div>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </section>
 
         {/* Education */}
-        <AccordionItem value="education" className="border-b border-border">
-          <AccordionTrigger className="hover:no-underline py-5">
-            <div className="flex items-center gap-2.5">
-              <GraduationCap size={15} className="text-accent" />
-              <span className="text-sm font-semibold text-foreground">Education</span>
-            </div>
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-5 pb-2">
-              {education.map((edu) => (
-                <div key={edu.degree}>
-                  <span className="text-[11px] font-semibold text-accent">{edu.period}</span>
-                  <h4 className="text-sm font-bold text-foreground mt-0.5">{edu.degree}</h4>
-                  <p className="text-xs text-muted-foreground">{edu.institution}</p>
-                  {edu.skills.length > 0 && (
-                    <div className="flex flex-wrap gap-1 mt-2">
+        <section className="golden-section">
+          <h2 className="text-xl font-semibold mb-5 text-center">Education</h2>
+          <Accordion type="single" collapsible className="space-y-3">
+            {education.map((edu, i) => (
+              <AccordionItem key={i} value={`edu-${i}`} className="bg-card rounded-2xl border border-border shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                <AccordionTrigger className="px-5 py-4 hover:no-underline">
+                  <div className="flex items-start gap-3 text-left">
+                    <div className="w-9 h-9 rounded-xl bg-teal/10 flex items-center justify-center shrink-0 mt-0.5">
+                      <GraduationCap className="w-4 h-4 text-teal" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-sm">{edu.degree}</h3>
+                      <p className="text-xs text-muted-foreground">{edu.institution} · {edu.period}</p>
+                    </div>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-5 pb-5">
+                  {edu.skills ? (
+                    <div className="flex flex-wrap gap-1.5 ml-12">
                       {edu.skills.map((s) => (
-                        <span key={s} className="px-2 py-0.5 rounded-full text-[10px] font-medium border border-border text-muted-foreground">{s}</span>
+                        <span key={s} className="text-xs px-2 py-0.5 rounded-md bg-muted text-muted-foreground">{s}</span>
                       ))}
                     </div>
+                  ) : (
+                    <p className="text-sm text-muted-foreground ml-12">Completed successfully.</p>
                   )}
-                </div>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </section>
 
         {/* Certifications */}
-        <AccordionItem value="certifications" className="border-b border-border">
-          <AccordionTrigger className="hover:no-underline py-5">
-            <div className="flex items-center gap-2.5">
-              <Award size={15} className="text-accent" />
-              <span className="text-sm font-semibold text-foreground">Certifications</span>
-            </div>
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-4 pb-2">
-              {certifications.map((cert) => (
-                <div key={cert.title}>
-                  <h4 className="text-sm font-bold text-foreground">{cert.title}</h4>
-                  <p className="text-xs text-muted-foreground">{cert.org}</p>
-                  <span className="text-[10px] font-semibold text-accent mt-0.5 inline-block">{cert.year}</span>
+        <section className="golden-section">
+          <h2 className="text-xl font-semibold mb-6 text-center">Certifications</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {certifications.map((cert, i) => (
+              <div key={i} className="bg-card rounded-2xl p-5 border border-border shadow-sm flex items-start gap-3 hover:shadow-md transition-shadow">
+                <div className="w-10 h-10 rounded-xl bg-coral/10 flex items-center justify-center shrink-0">
+                  <Award className="w-5 h-5 text-coral" />
                 </div>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
+                <div>
+                  <h3 className="font-medium text-sm">{cert.name}</h3>
+                  <p className="text-xs text-muted-foreground mt-0.5">{cert.org} ({cert.year})</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* Hobbies */}
-        <AccordionItem value="hobbies" className="border-none">
-          <AccordionTrigger className="hover:no-underline py-5">
-            <span className="text-sm font-semibold text-foreground">Beyond Work</span>
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="grid grid-cols-2 gap-2 pb-2">
-              {hobbies.map((h) => {
-                const Icon = h.icon;
-                return (
-                  <div key={h.title} className="flex items-center gap-2.5 py-2">
-                    <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
-                      <Icon size={14} className="text-accent" />
-                    </div>
-                    <span className="text-xs font-medium text-foreground">{h.title}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+        <section className="golden-section">
+          <h2 className="text-xl font-semibold mb-5 text-center">Hobbies & Interests</h2>
+          <div className="grid grid-cols-2 gap-3">
+            {hobbies.map((h, i) => (
+              <div key={i} className="flex items-center gap-3 p-4 rounded-2xl bg-card border border-border shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                  <h.icon className="w-4 h-4 text-primary" />
+                </div>
+                <span className="text-sm font-medium">{h.label}</span>
+              </div>
+            ))}
+          </div>
+        </section>
 
-      {/* Philosophy */}
-      <blockquote className="border-l-2 border-accent pl-4 py-2 mt-6">
-        <p className="text-base font-bold text-foreground italic">
-          "I design systems that scale — not just screens."
-        </p>
-      </blockquote>
+      </main>
     </div>
   );
-}
+};
+
+export default Index;

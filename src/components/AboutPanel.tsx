@@ -1,4 +1,3 @@
-import coverImage from "@/assets/cover-design.jpg";
 import { User, MapPin, Mail, Linkedin, Github, Twitter, Instagram, Clock, FolderOpen, Users, Briefcase, Award, Cpu, Palette, Server, Dumbbell, GraduationCap, ChevronDown } from "lucide-react";
 import {
   Accordion,
@@ -106,8 +105,16 @@ const Index = () => {
 
       {/* ── Cover + Profile Header ── */}
       <div className="relative">
-        <div className="relative w-full h-[50vh] min-h-[320px] max-h-[480px] overflow-hidden">
-          <img src={coverImage} alt="Cover" className="w-full h-full object-cover cover-fade" />
+        <div className="relative w-full h-[50vh] min-h-[320px] max-h-[480px] overflow-hidden"
+          style={{
+            background: "linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(var(--primary)) 50%, hsl(var(--accent)) 100%)",
+          }}
+        >
+          {/* Decorative grid pattern */}
+          <div className="absolute inset-0 opacity-10" style={{
+            backgroundImage: "radial-gradient(circle at 1px 1px, hsl(var(--accent-foreground)) 1px, transparent 0)",
+            backgroundSize: "32px 32px",
+          }} />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" style={{ top: "40%" }} />
         </div>
 

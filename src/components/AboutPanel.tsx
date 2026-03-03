@@ -86,28 +86,27 @@ const hobbies = [
 
 const AboutPanel = () => {
   return (
-    <div className="-mx-8 -mt-10 sm:-mx-8 sm:-mt-10">
+    <div>
 
       {/* ── Gradient Cover ── */}
       <div className="relative h-44 sm:h-52 overflow-hidden">
-        {/* Layered gradient background */}
+        {/* Theme-aware gradient */}
+        <div className="absolute inset-0 bg-secondary" />
         <div className="absolute inset-0" style={{
-          background: `
-            linear-gradient(135deg, 
-              hsl(var(--accent)) 0%, 
-              hsl(260 70% 55%) 30%, 
-              hsl(280 60% 50%) 60%, 
-              hsl(var(--accent)) 100%
-            )`,
+          background: `linear-gradient(135deg, hsl(var(--accent) / 0.15) 0%, hsl(var(--accent) / 0.08) 40%, hsl(var(--muted)) 100%)`,
+        }} />
+        {/* Subtle dot pattern */}
+        <div className="absolute inset-0 opacity-[0.06]" style={{
+          backgroundImage: "radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 0.5px, transparent 0)",
+          backgroundSize: "20px 20px",
         }} />
         {/* Wave overlay */}
-        <svg className="absolute bottom-0 left-0 w-full" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ height: "60px" }}>
+        <svg className="absolute bottom-0 left-0 w-full" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ height: "50px" }}>
           <path d="M0,60 C200,120 400,0 600,60 C800,120 1000,0 1200,60 L1200,120 L0,120 Z" fill="hsl(var(--card))" />
         </svg>
-        {/* Decorative circles */}
-        <div className="absolute top-6 right-10 w-20 h-20 rounded-full border border-white/10" />
-        <div className="absolute top-12 right-20 w-32 h-32 rounded-full border border-white/5" />
-        <div className="absolute -bottom-4 left-10 w-16 h-16 rounded-full bg-white/5" />
+        {/* Decorative elements */}
+        <div className="absolute top-6 right-10 w-20 h-20 rounded-full border border-foreground/5" />
+        <div className="absolute top-14 right-24 w-28 h-28 rounded-full border border-foreground/[0.03]" />
       </div>
 
       {/* ── Centered Avatar ── */}

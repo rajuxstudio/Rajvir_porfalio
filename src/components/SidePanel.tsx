@@ -58,8 +58,8 @@ export default function SidePanel({ open, onClose, title, children }: Props) {
           boxShadow: "-8px 0 30px hsl(var(--foreground) / 0.08)",
         }}
       >
-        <div className="p-8 pt-10 flex flex-col gap-6">
-          <h2 className="text-4xl font-extrabold leading-tight text-accent">{title}</h2>
+        <div className={`flex flex-col ${title ? 'p-8 pt-10 gap-6' : ''}`}>
+          {title && <h2 className="text-4xl font-extrabold leading-tight text-accent">{title}</h2>}
           {children}
         </div>
       </div>

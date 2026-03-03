@@ -40,7 +40,7 @@ export default function QuickActionPanel() {
   }));
 
   const panelTitles: Record<string, string> = {
-    about: "About Me",
+    about: "",
     design: "Design Projects",
     code: "Development Projects",
   };

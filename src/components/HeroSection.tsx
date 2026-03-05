@@ -3,7 +3,6 @@ import heroPhoto from "@/assets/hero-photo.png";
 import { useEffect, useState } from "react";
 import {
   Code2,
-  Figma,
   LayoutDashboard,
   Database,
   Globe,
@@ -13,16 +12,15 @@ import {
 "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
-// Colored icons for outer orbit
+// Tech stack icons for outer orbit
 const orbitIcons = [
-{ Icon: Code2, color: "#61DAFB", label: "01" },
-{ Icon: Figma, color: "#F24E1E", label: "02" },
-{ Icon: LayoutDashboard, color: "#6366F1", label: "03" },
-{ Icon: Database, color: "#38BDF8", label: "04" },
-{ Icon: Globe, color: "#34D399", label: "05" },
-{ Icon: Layers, color: "#FBBF24", label: "06" },
-{ Icon: Cpu, color: "#F472B6", label: "07" },
-{ Icon: PenTool, color: "#A78BFA", label: "08" }];
+{ Icon: Code2, color: "#E44D26", label: "HTML" },
+{ Icon: PenTool, color: "#264DE4", label: "CSS" },
+{ Icon: Layers, color: "#DD0031", label: "Angular" },
+{ Icon: Globe, color: "#61DAFB", label: "React" },
+{ Icon: LayoutDashboard, color: "#38BDF8", label: "Tailwind" },
+{ Icon: Cpu, color: "#3776AB", label: "Python" },
+{ Icon: Database, color: "#4479A1", label: "MySQL" }];
 
 
 const words = ["Website", "Application", "Dashboard", "Platform", "Experience"];

@@ -12,7 +12,7 @@ import {
 "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
-// Tech stack icons for outer orbit
+// Tech stack icons for outer orbit (lucide)
 const orbitIcons = [
 { Icon: Code2, color: "#E44D26", label: "HTML" },
 { Icon: PenTool, color: "#264DE4", label: "CSS" },
@@ -21,6 +21,17 @@ const orbitIcons = [
 { Icon: LayoutDashboard, color: "#38BDF8", label: "Tailwind" },
 { Icon: Cpu, color: "#3776AB", label: "Python" },
 { Icon: Database, color: "#4479A1", label: "MySQL" }];
+
+// Brand SVG icons for inner ring
+const brandIcons: { svg: React.ReactNode; color: string }[] = [
+  { color: "#E44D26", svg: <svg viewBox="0 0 32 32" width="16" height="16"><path d="M6 3l2.4 26L16 32l7.6-3L26 3z" fill="#E44D26"/><path d="M16 5v24.5l6.1-2.4L24 5z" fill="#F16529"/><path d="M11.5 10h9l-.3 3H12l.3 3h7.5l-.5 6-3.3 1-3.3-1-.2-2.5h3l.1 1.2 1.4.4 1.4-.4.2-2.2H11.8z" fill="#fff"/></svg> },
+  { color: "#264DE4", svg: <svg viewBox="0 0 32 32" width="16" height="16"><path d="M6 3l2.4 26L16 32l7.6-3L26 3z" fill="#264DE4"/><path d="M16 5v24.5l6.1-2.4L24 5z" fill="#2965F1"/><path d="M11.5 10h9l-.1 3H12l.3 3h7.5l-.5 6-3.3 1-3.3-1-.2-2.5h3l.1 1.2 1.4.4 1.4-.4.2-2.2H11.8z" fill="#fff"/></svg> },
+  { color: "#DD0031", svg: <svg viewBox="0 0 32 32" width="16" height="16"><path d="M16 2L3 7l2 18 11 6 11-6 2-18z" fill="#DD0031"/><path d="M16 2v28l11-6 2-18z" fill="#C3002F"/><path d="M16 5.7l-8 17.8h3l1.6-4h6.8l1.6 4h3zm2.3 11H13.7L16 10.3z" fill="#fff"/></svg> },
+  { color: "#61DAFB", svg: <svg viewBox="0 0 32 32" width="16" height="16"><circle cx="16" cy="16" r="2.8" fill="#61DAFB"/><ellipse cx="16" cy="16" rx="11" ry="4.2" fill="none" stroke="#61DAFB" strokeWidth="1"/><ellipse cx="16" cy="16" rx="11" ry="4.2" fill="none" stroke="#61DAFB" strokeWidth="1" transform="rotate(60 16 16)"/><ellipse cx="16" cy="16" rx="11" ry="4.2" fill="none" stroke="#61DAFB" strokeWidth="1" transform="rotate(120 16 16)"/></svg> },
+  { color: "#38BDF8", svg: <svg viewBox="0 0 32 32" width="16" height="16"><path d="M16 6c-3.6 0-5.8 1.8-6.6 5.4 1.3-1.8 2.8-2.5 4.6-2 1 .3 1.7 1 2.5 1.9 1.3 1.3 2.7 2.7 5.9 2.7 3.6 0 5.8-1.8 6.6-5.4-1.3 1.8-2.8 2.5-4.6 2-1-.3-1.7-1-2.5-1.9C20.6 7.4 19.2 6 16 6zm-6.6 8C5.8 14 3.6 15.8 2.8 19.4c1.3-1.8 2.8-2.5 4.6-2 1 .3 1.7 1 2.5 1.9C11.2 20.6 12.6 22 15.8 22c3.6 0 5.8-1.8 6.6-5.4-1.3 1.8-2.8 2.5-4.6 2-1-.3-1.7-1-2.5-1.9-1.3-1.3-2.7-2.7-5.9-2.7z" fill="#38BDF8"/></svg> },
+  { color: "#3776AB", svg: <svg viewBox="0 0 32 32" width="16" height="16"><path d="M15.9 4c-3.2 0-6 .6-6 3.2v2.4h6v.8H7.7C5.2 10.4 3 12 3 15.8s2.2 5.2 5.1 5.2h2v-2.6c0-2.6 2.2-4.8 4.8-4.8h6c2.2 0 4-1.8 4-4V7.2C24.9 5 23 4 20 4zm-3.4 1.8c.8 0 1.4.6 1.4 1.4s-.6 1.4-1.4 1.4-1.4-.6-1.4-1.4.6-1.4 1.4-1.4z" fill="#3776AB"/><path d="M16.1 28c3.2 0 6-.6 6-3.2v-2.4h-6v-.8h8.2c2.5 0 4.7-1.6 4.7-5.4s-2.2-5.2-5.1-5.2h-2v2.6c0 2.6-2.2 4.8-4.8 4.8h-6c-2.2 0-4 1.8-4 4v4.4c0 2.2 1.9 3.2 4.9 3.2zm3.4-1.8c-.8 0-1.4-.6-1.4-1.4s.6-1.4 1.4-1.4 1.4.6 1.4 1.4-.6 1.4-1.4 1.4z" fill="#FFD43B"/></svg> },
+  { color: "#4479A1", svg: <svg viewBox="0 0 32 32" width="16" height="16"><ellipse cx="16" cy="16" rx="10" ry="5" fill="none" stroke="#4479A1" strokeWidth="2"/><ellipse cx="16" cy="10" rx="10" ry="5" fill="none" stroke="#4479A1" strokeWidth="2"/><path d="M6 10v12c0 2.8 4.5 5 10 5s10-2.2 10-5V10" fill="none" stroke="#4479A1" strokeWidth="2"/><ellipse cx="16" cy="22" rx="10" ry="5" fill="none" stroke="#4479A1" strokeWidth="1"/></svg> },
+];
 
 
 const words = ["Website", "Application", "Dashboard", "Platform", "Experience"];
@@ -198,8 +209,8 @@ export default function HeroSection() {
               className="absolute inset-0 rounded-full orbit-ring-inner"
               style={{ border: "4px solid hsl(var(--border))" }}>
 
-              {orbitIcons.map(({ Icon, color }, i) => {
-                const angle = i / orbitIcons.length * 360;
+              {brandIcons.map(({ svg }, i) => {
+                const angle = i / brandIcons.length * 360;
                 return (
                   <div
                     key={i}
@@ -213,8 +224,7 @@ export default function HeroSection() {
                     <div
                       className="orbit-label-counter flex items-center justify-center rounded-full shadow-sm w-9 h-9"
                       style={{ background: "hsl(var(--card))" }}>
-
-                      <Icon style={{ color }} className="w-4 h-4" strokeWidth={1.8} />
+                      {svg}
                     </div>
                   </div>);
 

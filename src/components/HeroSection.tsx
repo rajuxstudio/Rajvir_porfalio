@@ -1,26 +1,19 @@
 import { Button } from "./ui/button";
 import heroPhoto from "@/assets/hero-photo.png";
 import { useEffect, useState } from "react";
-import {
-  Code2,
-  LayoutDashboard,
-  Database,
-  Globe,
-  Layers,
-  Cpu,
-  PenTool } from
-"lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
-// Tech stack icons for outer orbit (lucide)
-const orbitIcons = [
-{ Icon: Code2, color: "#E44D26", label: "HTML" },
-{ Icon: PenTool, color: "#264DE4", label: "CSS" },
-{ Icon: Layers, color: "#DD0031", label: "Angular" },
-{ Icon: Globe, color: "#61DAFB", label: "React" },
-{ Icon: LayoutDashboard, color: "#38BDF8", label: "Tailwind" },
-{ Icon: Cpu, color: "#3776AB", label: "Python" },
-{ Icon: Database, color: "#4479A1", label: "MySQL" }];
+// Tool/platform SVG icons for outer orbit
+const outerIcons: { svg: React.ReactNode; label: string }[] = [
+  { label: "Figma", svg: <svg viewBox="0 0 32 32" width="18" height="18"><path d="M10.5 28c2.5 0 4.5-2 4.5-4.5V19h-4.5C8 19 6 21 6 23.5S8 28 10.5 28z" fill="#0ACF83"/><path d="M6 14.5C6 12 8 10 10.5 10H15v9h-4.5C8 19 6 17 6 14.5z" fill="#A259FF"/><path d="M6 5.5C6 3 8 1 10.5 1H15v9h-4.5C8 10 6 8 6 5.5z" fill="#F24E1E"/><path d="M15 1h4.5C22 1 24 3 24 5.5S22 10 19.5 10H15V1z" fill="#FF7262"/><path d="M24 14.5c0 2.5-2 4.5-4.5 4.5S15 17 15 14.5 17 10 19.5 10 24 12 24 14.5z" fill="#1ABCFE"/></svg> },
+  { label: "VS Code", svg: <svg viewBox="0 0 32 32" width="18" height="18"><path d="M23.5 2L10 14 4.5 9.5 2 11l8 5-8 5 2.5 1.5L10 18l13.5 12 4.5-2V4z" fill="#007ACC"/><path d="M23.5 2L10 14 4.5 9.5 2 11l8 5-8 5 2.5 1.5L10 18l13.5 12 4.5-2V4z" fill="#007ACC" opacity="0.8"/></svg> },
+  { label: "Framer", svg: <svg viewBox="0 0 32 32" width="18" height="18"><path d="M6 1h20v10H16L6 1z" fill="#05F"/><path d="M6 11h10l10 10H6z" fill="#05F" opacity="0.7"/><path d="M6 21h10v10z" fill="#05F" opacity="0.5"/></svg> },
+  { label: "WordPress", svg: <svg viewBox="0 0 32 32" width="18" height="18"><circle cx="16" cy="16" r="14" fill="#21759B"/><path d="M3.5 16c0 4.6 2.7 8.6 6.6 10.5L4.4 11.3C3.8 12.8 3.5 14.3 3.5 16zm21.1-1.6c0-1.4-.5-2.4-1-3.2-.6-1-1.2-1.8-1.2-2.8 0-1.1.8-2.1 2-2.1h.2c-2.2-2-5-3.2-8.2-3.2-4.2 0-7.9 2.2-10 5.4h.8c1.3 0 3.2-.2 3.2-.2.7 0 .7 1 .1 1 0 0-.7.1-1.4.1L14 24l3-9-2.1-5.8c-.7 0-1.3-.1-1.3-.1-.7 0-.6-1 0-1 0 0 2 .2 3.2.2 1.3 0 3.2-.2 3.2-.2.7 0 .7 1 .1 1 0 0-.7.1-1.4.1l4.7 14 1.3-4.3c.6-1.8 1-3.1 1-4.2z" fill="#fff"/></svg> },
+  { label: "Notion", svg: <svg viewBox="0 0 32 32" width="18" height="18"><path d="M5.5 4.2l14-1c1.7-.1 2.2 0 3.2.7l4.5 3.2c.7.5 1 .7 1 1.3v17.3c0 1-.4 1.6-1.7 1.7l-16.3 1c-1 0-1.5-.1-2-.8L4.3 22c-.7-1-.9-1.4-.9-2.3V5.9c0-1.1.4-1.6 2.1-1.7z" fill="#fff" stroke="#000" strokeWidth="1.5"/><path d="M18 5l-10.5.7v18l3.5 4.8 14-1V8.5L21.5 6z" fill="#000" fillOpacity="0.06"/><line x1="12" y1="11" x2="22" y2="10.5" stroke="#000" strokeWidth="1.2"/><line x1="12" y1="15" x2="22" y2="14.5" stroke="#000" strokeWidth="1.2"/><line x1="12" y1="19" x2="18" y2="18.7" stroke="#000" strokeWidth="1.2"/></svg> },
+  { label: "Jira", svg: <svg viewBox="0 0 32 32" width="18" height="18"><path d="M27.1 15L17 4.9 16 4l-8.4 8.4-3.5 3.5c-.4.4-.4 1 0 1.4L12 25.1l4 4 8.4-8.4.7-.7zm-11.1 4L19.6 16 16 12.4 12.4 16z" fill="#2684FF"/><path d="M16 12.4A5.4 5.4 0 0112 4l-7.9 7.9 5.6 5.6z" fill="url(#jira-a)" opacity="0.8"/><path d="M19.6 16L16 19.6a5.4 5.4 0 010-7.6l3.6 4z" fill="url(#jira-b)" opacity="0.8"/><defs><linearGradient id="jira-a" x1="12" y1="9" x2="7" y2="14"><stop stopColor="#0052CC"/><stop offset="1" stopColor="#2684FF"/></linearGradient><linearGradient id="jira-b" x1="16" y1="17" x2="21" y2="12"><stop stopColor="#0052CC"/><stop offset="1" stopColor="#2684FF"/></linearGradient></defs></svg> },
+  { label: "GitHub", svg: <svg viewBox="0 0 32 32" width="18" height="18"><path d="M16 2C8.3 2 2 8.3 2 16c0 6.2 4 11.4 9.5 13.3.7.1 1-.3 1-.7v-2.4c-3.9.8-4.7-1.9-4.7-1.9-.6-1.6-1.5-2-1.5-2-1.3-.9.1-.9.1-.9 1.4.1 2.1 1.4 2.1 1.4 1.2 2.1 3.2 1.5 4 1.1.1-.9.5-1.5.9-1.8-3.1-.4-6.3-1.5-6.3-6.9 0-1.5.5-2.8 1.4-3.7-.1-.4-.6-1.8.1-3.7 0 0 1.2-.4 3.8 1.4 1.1-.3 2.3-.5 3.5-.5s2.4.2 3.5.5c2.6-1.8 3.8-1.4 3.8-1.4.8 1.9.3 3.3.1 3.7.9 1 1.4 2.2 1.4 3.7 0 5.4-3.3 6.5-6.4 6.9.5.4 1 1.3 1 2.6v3.9c0 .4.3.8 1 .7C26 27.4 30 22.2 30 16c0-7.7-6.3-14-14-14z" fill="currentColor"/></svg> },
+  { label: "Canva", svg: <svg viewBox="0 0 32 32" width="18" height="18"><circle cx="16" cy="16" r="14" fill="#00C4CC"/><circle cx="16" cy="16" r="5" fill="#fff"/><circle cx="16" cy="16" r="2.5" fill="#00C4CC"/></svg> },
+];
 
 // Brand SVG icons for inner ring
 const brandIcons: { svg: React.ReactNode; color: string }[] = [
@@ -176,8 +169,8 @@ export default function HeroSection() {
               className="absolute inset-0 rounded-full orbit-ring-outer"
               style={{ border: "6px dashed hsl(var(--border))" }}>
 
-              {orbitIcons.map(({ Icon, color }, i) => {
-                const angle = i / orbitIcons.length * 360;
+              {outerIcons.map(({ svg }, i) => {
+                const angle = i / outerIcons.length * 360;
                 return (
                   <div
                     key={i}
@@ -191,8 +184,7 @@ export default function HeroSection() {
                     <div
                       className="orbit-icon-counter flex items-center justify-center rounded-full shadow-sm w-12 h-12"
                       style={{ background: "hsl(var(--card))" }}>
-
-                      <Icon style={{ color }} className="w-5 h-5" strokeWidth={1.8} />
+                      {svg}
                     </div>
                   </div>);
 

@@ -48,7 +48,8 @@ export default function UtilityPlusDetail() {
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              {tab.icon} {tab.label}
+              <span className="sm:hidden">{tab.icon}</span>
+              <span className="hidden sm:inline-flex sm:items-center sm:gap-1.5">{tab.icon} {tab.label}</span>
             </button>
           ))}
         </div>

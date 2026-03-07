@@ -39,14 +39,16 @@ export default function ProjectDetailDialog({ open, onClose, project }: Props) {
         onClick={onClose}
       />
 
-      {/* Close button — top-left within the visible strip */}
-      <button
-        onClick={onClose}
-        className="absolute z-20 top-3 left-3 w-10 h-10 flex items-center justify-center rounded-full backdrop-blur-md bg-card/80 text-muted-foreground border border-border shadow-sm"
-        aria-label="Close"
-      >
-        <X size={18} />
-      </button>
+      {/* Close button — centered above the sheet */}
+      <div className="relative z-20 flex justify-center mb-3">
+        <button
+          onClick={onClose}
+          className="w-10 h-10 flex items-center justify-center rounded-full backdrop-blur-md bg-card/80 text-muted-foreground border border-border shadow-sm"
+          aria-label="Close"
+        >
+          <X size={18} />
+        </button>
+      </div>
 
       {/* Bottom sheet — takes up 88vh */}
       <div

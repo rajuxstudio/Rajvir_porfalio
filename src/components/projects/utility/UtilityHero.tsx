@@ -3,7 +3,7 @@ import utilityLogo from "@/assets/utility-plus-logo.png";
 export default function UtilityHero() {
   return (
     <div
-      className="relative -mx-8 -mt-10 px-8 py-16 overflow-hidden"
+      className="relative -mx-6 sm:-mx-8 -mt-6 sm:-mt-8 px-6 sm:px-8 py-16 overflow-hidden"
       style={{
         background:
           "linear-gradient(135deg, hsl(var(--accent) / 0.12) 0%, hsl(var(--accent) / 0.06) 50%, hsl(var(--muted)) 100%)",

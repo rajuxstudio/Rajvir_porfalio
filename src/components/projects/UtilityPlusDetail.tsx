@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { Search, Workflow, Layers, Map, CheckCircle2, Lock } from "lucide-react";
+import { Search, Workflow, Layers, Map, CheckCircle2, Lock, Monitor, Shield, Smartphone } from "lucide-react";
 import UtilityHero from "./utility/UtilityHero";
 import WebPortalTab from "./utility/WebPortalTab";
 import AdminPortalTab from "./utility/AdminPortalTab";
 import MobileAppTab from "./utility/MobileAppTab";
 
 const tabs = [
-  { id: "web", label: "Web Portal" },
-  { id: "admin", label: "Admin Portal" },
-  { id: "mobile", label: "Mobile Application" },
+  { id: "web", label: "Web Portal", icon: <Monitor size={14} /> },
+  { id: "admin", label: "Admin Portal", icon: <Shield size={14} /> },
+  { id: "mobile", label: "Mobile Application", icon: <Smartphone size={14} /> },
 ] as const;
 
 const designProcess = [

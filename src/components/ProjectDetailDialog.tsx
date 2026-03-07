@@ -82,7 +82,6 @@ export default function ProjectDetailDialog({ open, onClose, project }: Props) {
         }}
       >
         <div className="p-8 pt-10 flex flex-col gap-6">
-          <h2 className="text-4xl font-extrabold leading-tight text-accent">{project.title}</h2>
           {content}
         </div>
       </div>

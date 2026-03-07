@@ -6,9 +6,9 @@ import AdminPortalTab from "./utility/AdminPortalTab";
 import MobileAppTab from "./utility/MobileAppTab";
 
 const tabs = [
-  { id: "web", label: "Web Portal", color: "bg-accent" },
-  { id: "admin", label: "Admin Portal", color: "bg-purple-500" },
-  { id: "mobile", label: "Mobile Application", color: "bg-emerald-500" },
+  { id: "web", label: "Web Portal" },
+  { id: "admin", label: "Admin Portal" },
+  { id: "mobile", label: "Mobile Application" },
 ] as const;
 
 const designProcess = [
@@ -35,24 +35,19 @@ export default function UtilityPlusDetail() {
       {/* Hero */}
       <UtilityHero />
 
-      {/* Sticky Tabs */}
-      <div className="sticky top-0 z-20 bg-card/95 backdrop-blur-md border-b border-border -mx-8 px-8 py-3">
-        <div className="flex gap-2">
+      {/* Segmented Switch */}
+      <div className="flex justify-center">
+        <div className="inline-flex items-center gap-1 p-1 rounded-full bg-muted border border-border shadow-sm">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`relative text-sm font-medium px-4 py-2 rounded-lg transition-all ${
+              className={`relative text-sm font-medium px-5 py-2 rounded-full transition-all duration-300 ${
                 activeTab === tab.id
-                  ? "bg-muted text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  ? "bg-card text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              {activeTab === tab.id && (
-                <span
-                  className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-0.5 rounded-full ${tab.color}`}
-                />
-              )}
               {tab.label}
             </button>
           ))}

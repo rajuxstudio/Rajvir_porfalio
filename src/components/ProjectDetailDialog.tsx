@@ -1,5 +1,4 @@
 import { X } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { Project } from "@/lib/projectsData";
 import { lazy, Suspense } from "react";
 
@@ -20,8 +19,6 @@ type Props = {
 };
 
 export default function ProjectDetailDialog({ open, onClose, project }: Props) {
-  const isMobile = useIsMobile();
-
   if (!open || !project) return null;
 
   const DetailComponent = detailComponents[project.slug];
@@ -34,54 +31,32 @@ export default function ProjectDetailDialog({ open, onClose, project }: Props) {
     </Suspense>
   );
 
-  // ── Mobile: Bottom Sheet ──
-  if (isMobile) {
-    return (
-      <div className="fixed inset-0 z-[100] flex flex-col justify-end">
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in" onClick={onClose} />
-        <div className="relative z-10 flex justify-center mb-3">
-          <button
-            onClick={onClose}
-            className="w-10 h-10 flex items-center justify-center rounded-full backdrop-blur-md bg-card/80 text-muted-foreground border border-border"
-            aria-label="Close"
-          >
-            <X size={18} />
-          </button>
-        </div>
-        <div className="relative z-10 w-full rounded-t-2xl p-6 pb-8 animate-slide-up max-h-[85vh] overflow-y-auto bg-card border border-border border-b-0">
-          <div className="flex justify-center mb-4">
-            <div className="w-10 h-1 rounded-full bg-border" />
-          </div>
-          <h2 className="text-xl font-bold mb-4 text-accent">{project.title}</h2>
-          {content}
-        </div>
-      </div>
-    );
-  }
-
-  // ── Desktop: Right Side Panel (64vw) ──
   return (
-    <div className="fixed inset-0 z-[100] flex justify-end">
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-fade-in" onClick={onClose} />
+    <div className="fixed inset-0 z-[100] flex flex-col justify-end">
+      {/* Backdrop — top 12vh is click-to-close */}
+      <div
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in"
+        onClick={onClose}
+      />
+
+      {/* Close button — top-left within the visible strip */}
       <button
         onClick={onClose}
-        className="absolute z-20 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full transition-colors bg-card text-muted-foreground border border-border"
-        style={{
-          right: "calc(64vw + 12px)",
-          boxShadow: "0 2px 12px hsl(var(--foreground) / 0.1)",
-        }}
+        className="absolute z-20 top-3 left-3 w-10 h-10 flex items-center justify-center rounded-full backdrop-blur-md bg-card/80 text-muted-foreground border border-border shadow-sm"
         aria-label="Close"
       >
-        <X size={16} />
+        <X size={18} />
       </button>
+
+      {/* Bottom sheet — takes up 88vh */}
       <div
-        className="relative z-10 h-full animate-slide-left overflow-y-auto bg-card border-l border-border"
-        style={{
-          width: "64vw",
-          boxShadow: "-8px 0 30px hsl(var(--foreground) / 0.08)",
-        }}
+        className="relative z-10 w-full rounded-t-2xl animate-slide-up overflow-y-auto bg-card border border-border border-b-0"
+        style={{ maxHeight: "88vh" }}
       >
-        <div className="p-8 pt-10 flex flex-col gap-6">
+        <div className="flex justify-center pt-3 pb-1">
+          <div className="w-10 h-1 rounded-full bg-border" />
+        </div>
+        <div className="p-6 sm:p-8 flex flex-col gap-6">
           {content}
         </div>
       </div>

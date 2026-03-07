@@ -42,7 +42,7 @@ export default function UtilityPlusDetail() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`relative text-sm font-medium px-5 py-2 rounded-full transition-all duration-300 ${
+              className={`flex items-center gap-1.5 text-sm font-medium px-5 py-2 rounded-full transition-all duration-300 ${
                 activeTab === tab.id
                   ? "bg-card text-foreground shadow-sm"
                   : "text-muted-foreground hover:text-foreground"

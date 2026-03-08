@@ -34,7 +34,8 @@ export default function MobileAppTab() {
         <div className="flex items-center gap-3">
           <a
             href="#"
-            className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold bg-foreground text-background transition-transform hover:scale-[1.03] active:scale-[0.97]"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold text-white transition-transform hover:scale-[1.03] active:scale-[0.97]"
+            style={{ background: "#000000" }}
           >
             <Apple size={16} />
             <div className="flex flex-col items-start leading-tight">
@@ -44,7 +45,8 @@ export default function MobileAppTab() {
           </a>
           <a
             href="#"
-            className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold bg-primary text-primary-foreground transition-transform hover:scale-[1.03] active:scale-[0.97]"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold text-white transition-transform hover:scale-[1.03] active:scale-[0.97]"
+            style={{ background: "#01875f" }}
           >
             <Play size={16} />
             <div className="flex flex-col items-start leading-tight">
@@ -55,22 +57,13 @@ export default function MobileAppTab() {
         </div>
       </div>
 
-      {/* Phone Mockups — fan display */}
-      <div className="relative flex items-end justify-center py-6 overflow-hidden rounded-2xl bg-muted/60 border border-border">
-        {/* Subtle radial glow */}
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            background: "radial-gradient(ellipse at center bottom, hsl(var(--primary) / 0.15), transparent 70%)",
-          }}
-        />
-        <div className="relative flex items-end justify-center gap-4 sm:gap-8 px-4">
-          <div className="w-32 sm:w-40 rounded-2xl overflow-hidden shadow-xl border border-border bg-card transform -rotate-3 translate-y-2">
-            <img src={mobileMockup1} alt="Utility Plus mobile dashboard" className="w-full h-auto" />
-          </div>
-          <div className="w-36 sm:w-44 rounded-2xl overflow-hidden shadow-2xl border border-border bg-card z-10">
-            <img src={mobileMockup2} alt="Utility Plus work order form" className="w-full h-auto" />
-          </div>
+      {/* Phone Mockups — clean display */}
+      <div className="flex items-end justify-center gap-4 sm:gap-8 py-4">
+        <div className="w-32 sm:w-40 rounded-2xl overflow-hidden shadow-xl transform -rotate-3 translate-y-2">
+          <img src={mobileMockup1} alt="Utility Plus mobile dashboard" className="w-full h-auto" />
+        </div>
+        <div className="w-36 sm:w-44 rounded-2xl overflow-hidden shadow-2xl z-10">
+          <img src={mobileMockup2} alt="Utility Plus work order form" className="w-full h-auto" />
         </div>
       </div>
 

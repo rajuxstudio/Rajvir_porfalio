@@ -10,6 +10,8 @@ const detailComponents: Record<string, React.LazyExoticComponent<() => JSX.Eleme
   "captable": lazy(() => import("@/components/projects/CaptableDetail")),
   "bumper-mandi": lazy(() => import("@/components/projects/BumperMandiDetail")),
   "react-portfolio": lazy(() => import("@/components/projects/ReactPortfolioDetail")),
+  "recruit-ease": lazy(() => import("@/components/projects/RecruitEaseDetail")),
+  "new-project": lazy(() => import("@/components/projects/NewProjectDetail")),
 };
 
 type Props = {

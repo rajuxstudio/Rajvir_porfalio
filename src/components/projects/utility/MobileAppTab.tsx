@@ -55,22 +55,13 @@ export default function MobileAppTab() {
         </div>
       </div>
 
-      {/* Phone Mockups — fan display */}
-      <div className="relative flex items-end justify-center py-6 overflow-hidden rounded-2xl bg-muted/60 border border-border">
-        {/* Subtle radial glow */}
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            background: "radial-gradient(ellipse at center bottom, hsl(var(--primary) / 0.15), transparent 70%)",
-          }}
-        />
-        <div className="relative flex items-end justify-center gap-4 sm:gap-8 px-4">
-          <div className="w-32 sm:w-40 rounded-2xl overflow-hidden shadow-xl border border-border bg-card transform -rotate-3 translate-y-2">
-            <img src={mobileMockup1} alt="Utility Plus mobile dashboard" className="w-full h-auto" />
-          </div>
-          <div className="w-36 sm:w-44 rounded-2xl overflow-hidden shadow-2xl border border-border bg-card z-10">
-            <img src={mobileMockup2} alt="Utility Plus work order form" className="w-full h-auto" />
-          </div>
+      {/* Phone Mockups — clean display */}
+      <div className="flex items-end justify-center gap-4 sm:gap-8 py-4">
+        <div className="w-32 sm:w-40 rounded-2xl overflow-hidden shadow-xl transform -rotate-3 translate-y-2">
+          <img src={mobileMockup1} alt="Utility Plus mobile dashboard" className="w-full h-auto" />
+        </div>
+        <div className="w-36 sm:w-44 rounded-2xl overflow-hidden shadow-2xl z-10">
+          <img src={mobileMockup2} alt="Utility Plus work order form" className="w-full h-auto" />
         </div>
       </div>
 

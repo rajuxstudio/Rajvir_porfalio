@@ -28,6 +28,8 @@ export const googleColors = [
   "linear-gradient(135deg, #E7C15A 0%, #9C7A1E 100%)",
   "linear-gradient(135deg, #0F2A44 0%, #5F87A8 100%)",
   "linear-gradient(135deg, #8B5CF6 0%, #F472B6 100%)",
+  "linear-gradient(135deg, #F97316 0%, #DC2626 100%)",
+  "linear-gradient(135deg, #06B6D4 0%, #3B82F6 100%)",
 ];
 
 export const projects: Project[] = [

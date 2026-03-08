@@ -34,7 +34,8 @@ export default function MobileAppTab() {
         <div className="flex items-center gap-3">
           <a
             href="#"
-            className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold bg-foreground text-background transition-transform hover:scale-[1.03] active:scale-[0.97]"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold text-white transition-transform hover:scale-[1.03] active:scale-[0.97]"
+            style={{ background: "#000000" }}
           >
             <Apple size={16} />
             <div className="flex flex-col items-start leading-tight">
@@ -44,7 +45,8 @@ export default function MobileAppTab() {
           </a>
           <a
             href="#"
-            className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold bg-primary text-primary-foreground transition-transform hover:scale-[1.03] active:scale-[0.97]"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold text-white transition-transform hover:scale-[1.03] active:scale-[0.97]"
+            style={{ background: "#01875f" }}
           >
             <Play size={16} />
             <div className="flex flex-col items-start leading-tight">

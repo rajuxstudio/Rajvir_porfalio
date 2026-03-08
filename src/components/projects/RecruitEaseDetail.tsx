@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
   Monitor, Smartphone, Users, Search, Calendar, CreditCard, BarChart3,
-  CheckCircle2, Lock, Layers, Target, Zap, TrendingUp,
+  CheckCircle2, Lock, Layers, Target, Zap,
 } from "lucide-react";
 import MobileAppDownload from "@/components/projects/shared/MobileAppDownload";
 

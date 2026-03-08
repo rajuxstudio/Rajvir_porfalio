@@ -19,6 +19,8 @@ export interface Project {
   features?: string[];
   challenge?: string;
   solution?: string;
+  duration?: string;
+  role?: string;
 }
 
 export const googleColors = [

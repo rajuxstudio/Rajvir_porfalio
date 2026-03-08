@@ -57,14 +57,18 @@ export default function MobileAppTab() {
         </div>
       </div>
 
-      {/* Phone Mockups — clean display */}
-      <div className="flex items-end justify-center gap-4 sm:gap-8 py-4">
-        <div className="w-32 sm:w-40 rounded-2xl overflow-hidden shadow-xl transform -rotate-3 translate-y-2">
-          <img src={mobileMockup1} alt="Utility Plus mobile dashboard" className="w-full h-auto" />
-        </div>
-        <div className="w-36 sm:w-44 rounded-2xl overflow-hidden shadow-2xl z-10">
-          <img src={mobileMockup2} alt="Utility Plus work order form" className="w-full h-auto" />
-        </div>
+      {/* Phone Mockups */}
+      <div className="flex items-end justify-center gap-6 sm:gap-10 py-6">
+        <img
+          src={mobileMockup1}
+          alt="Utility Plus mobile dashboard"
+          className="w-28 sm:w-36 rounded-[1.25rem] shadow-[0_8px_30px_-8px_hsl(var(--foreground)/0.25)] -rotate-6 translate-y-3"
+        />
+        <img
+          src={mobileMockup2}
+          alt="Utility Plus work order form"
+          className="w-32 sm:w-40 rounded-[1.25rem] shadow-[0_12px_40px_-10px_hsl(var(--foreground)/0.3)] z-10 rotate-2"
+        />
       </div>
 
       {/* Features & Changes */}

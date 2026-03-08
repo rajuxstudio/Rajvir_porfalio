@@ -68,19 +68,19 @@ export default function MobileAppDownload({
               <img
                 src={mockups[0]}
                 alt="Mobile app screen 1"
-                className="w-28 sm:w-36 rounded-[1.5rem] -rotate-6 translate-y-3 drop-shadow-[0_20px_40px_hsl(var(--foreground)/0.15)]"
+                className="w-28 sm:w-36 -rotate-6 translate-y-3 drop-shadow-[0_20px_40px_hsl(var(--foreground)/0.15)]"
               />
               <img
                 src={mockups[1]}
                 alt="Mobile app screen 2"
-                className="w-32 sm:w-40 rounded-[1.5rem] z-10 rotate-2 drop-shadow-[0_25px_50px_hsl(var(--foreground)/0.2)]"
+                className="w-32 sm:w-40 z-10 rotate-2 drop-shadow-[0_25px_50px_hsl(var(--foreground)/0.2)]"
               />
             </>
           ) : (
             <img
               src={mockups[0]}
               alt="Mobile app screen"
-              className="w-36 sm:w-44 rounded-[1.5rem] drop-shadow-[0_25px_50px_hsl(var(--foreground)/0.2)]"
+              className="w-36 sm:w-44 drop-shadow-[0_25px_50px_hsl(var(--foreground)/0.2)]"
             />
           )}
         </div>

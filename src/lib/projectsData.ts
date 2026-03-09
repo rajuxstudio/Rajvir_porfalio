@@ -223,6 +223,7 @@ export const projects: Project[] = [
     techStack: ["React", "TypeScript", "Tailwind CSS"],
     duration: "TBD",
     role: "Design + Code",
+    hideFromCarousel: true,
     features: [
       "Feature 1",
       "Feature 2",

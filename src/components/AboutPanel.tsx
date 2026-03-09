@@ -213,19 +213,30 @@ const AboutPanel = () => {
           </h3>
           <div className="space-y-3">
             {experiences.map((exp, i) => (
-              <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-secondary/40 hover:bg-secondary/70 transition-colors">
-                <div className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center shrink-0 mt-0.5">
-                  <Building2 className="w-4 h-4 text-accent" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="font-medium text-sm text-foreground truncate">{exp.title}</span>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent/10 text-accent font-medium shrink-0">{exp.type}</span>
+              <div key={i} className="relative p-4 rounded-sm bg-card border border-border overflow-hidden group hover:shadow-md transition-shadow">
+                {/* Ornamental inner border */}
+                <div className="absolute inset-[3px] rounded-sm border border-dashed border-accent/15 pointer-events-none" />
+                {/* Corner ornaments */}
+                <svg className="absolute top-1 left-1 w-4 h-4 text-accent/20" viewBox="0 0 16 16"><path d="M0 8 Q0 0 8 0" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg>
+                <svg className="absolute top-1 right-1 w-4 h-4 text-accent/20" viewBox="0 0 16 16"><path d="M8 0 Q16 0 16 8" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg>
+                <svg className="absolute bottom-1 left-1 w-4 h-4 text-accent/20" viewBox="0 0 16 16"><path d="M0 8 Q0 16 8 16" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg>
+                <svg className="absolute bottom-1 right-1 w-4 h-4 text-accent/20" viewBox="0 0 16 16"><path d="M8 16 Q16 16 16 8" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg>
+                {/* Seal */}
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-full border-2 border-accent/25 flex items-center justify-center shrink-0 mt-0.5">
+                    <Building2 className="w-4 h-4 text-accent" />
                   </div>
-                  <p className="text-xs text-muted-foreground mt-0.5">{exp.company}</p>
-                  <div className="flex items-center gap-1 text-[11px] text-muted-foreground/70 mt-1">
-                    <Calendar className="w-3 h-3" />
-                    {exp.period}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-semibold text-sm text-foreground truncate">{exp.title}</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent/10 text-accent font-medium shrink-0">{exp.type}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-0.5">{exp.company}</p>
+                    <div className="mx-0 mt-1.5 mb-1 w-6 h-px bg-accent/15" />
+                    <div className="flex items-center gap-1 text-[11px] text-muted-foreground/70">
+                      <Calendar className="w-3 h-3" />
+                      {exp.period}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -241,17 +252,33 @@ const AboutPanel = () => {
           </h3>
           <div className="space-y-3">
             {education.map((edu, i) => (
-              <div key={i} className="p-3 rounded-xl bg-secondary/40 hover:bg-secondary/70 transition-colors">
-                <h4 className="font-medium text-sm text-foreground">{edu.degree}</h4>
-                <p className="text-xs text-muted-foreground mt-0.5">{edu.institution}</p>
-                <p className="text-[11px] text-muted-foreground/70 mt-1">{edu.period}</p>
-                {edu.skills && (
-                  <div className="flex flex-wrap gap-1 mt-2">
-                    {edu.skills.map((s) => (
-                      <span key={s} className="text-[10px] px-2 py-0.5 rounded-full bg-accent/10 text-accent font-medium">{s}</span>
-                    ))}
+              <div key={i} className="relative p-4 pt-5 rounded-sm bg-card border border-border overflow-hidden group hover:shadow-md transition-shadow">
+                {/* Ornamental inner border */}
+                <div className="absolute inset-[3px] rounded-sm border border-dashed border-accent/15 pointer-events-none" />
+                {/* Corner ornaments */}
+                <svg className="absolute top-1 left-1 w-4 h-4 text-accent/20" viewBox="0 0 16 16"><path d="M0 8 Q0 0 8 0" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg>
+                <svg className="absolute top-1 right-1 w-4 h-4 text-accent/20" viewBox="0 0 16 16"><path d="M8 0 Q16 0 16 8" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg>
+                <svg className="absolute bottom-1 left-1 w-4 h-4 text-accent/20" viewBox="0 0 16 16"><path d="M0 8 Q0 16 8 16" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg>
+                <svg className="absolute bottom-1 right-1 w-4 h-4 text-accent/20" viewBox="0 0 16 16"><path d="M8 16 Q16 16 16 8" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg>
+                {/* Seal */}
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-full border-2 border-accent/25 flex items-center justify-center shrink-0 mt-0.5">
+                    <GraduationCap className="w-4 h-4 text-accent" />
                   </div>
-                )}
+                  <div className="min-w-0 flex-1">
+                    <h4 className="font-semibold text-sm text-foreground">{edu.degree}</h4>
+                    <p className="text-xs text-muted-foreground mt-0.5">{edu.institution}</p>
+                    <div className="mx-0 mt-1.5 mb-1 w-6 h-px bg-accent/15" />
+                    <p className="text-[11px] text-muted-foreground/70">{edu.period}</p>
+                    {edu.skills && (
+                      <div className="flex flex-wrap gap-1 mt-2">
+                        {edu.skills.map((s) => (
+                          <span key={s} className="text-[10px] px-2 py-0.5 rounded-full bg-accent/10 text-accent font-medium">{s}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             ))}
           </div>

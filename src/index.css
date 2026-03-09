@@ -191,3 +191,37 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/* 3D Globe */
+.globe-3d {
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #4fc3f7 0%, #0288d1 35%, #01579b 70%, #002f6c 100%);
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset -3px -3px 6px rgba(0,0,0,0.35), inset 1px 1px 4px rgba(255,255,255,0.2), 0 0 4px rgba(79,195,247,0.3);
+}
+
+.globe-3d::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse 40% 80% at 25% 50%, rgba(76,175,80,0.6) 0%, transparent 50%),
+    radial-gradient(ellipse 30% 50% at 65% 35%, rgba(76,175,80,0.5) 0%, transparent 50%),
+    radial-gradient(ellipse 20% 40% at 50% 70%, rgba(76,175,80,0.4) 0%, transparent 50%);
+  animation: globe-rotate 8s linear infinite;
+}
+
+.globe-3d::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.35) 0%, transparent 60%);
+}
+
+@keyframes globe-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

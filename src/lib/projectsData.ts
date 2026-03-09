@@ -196,6 +196,7 @@ export const projects: Project[] = [
     techStack: ["React", "Node.js", "PostgreSQL", "Tailwind CSS", "Stripe"],
     duration: "4 months",
     role: "Design + Code",
+    hideFromCarousel: true,
     features: [
       "Candidate marketplace with filters",
       "Smart matching algorithm",

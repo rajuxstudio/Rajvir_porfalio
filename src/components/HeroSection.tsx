@@ -201,7 +201,7 @@ export default function HeroSection() {
 
             <div
               className="absolute inset-0 rounded-full orbit-ring-inner"
-              style={{ border: "4px solid hsl(var(--border))" }}>
+              style={{ border: "1.5px solid hsl(var(--border) / 0.6)" }}>
 
               {brandIcons.map(({ svg }, i) => {
                 const angle = i / brandIcons.length * 360;

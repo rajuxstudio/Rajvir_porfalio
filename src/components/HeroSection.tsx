@@ -169,7 +169,7 @@ export default function HeroSection() {
 
             <div
               className="absolute inset-0 rounded-full orbit-ring-outer"
-              style={{ border: "2px solid hsl(var(--border))" }}>
+              style={{ border: "6px dashed hsl(var(--border))" }}>
 
               {outerIcons.map(({ svg }, i) => {
                 const angle = i / outerIcons.length * 360;
@@ -184,8 +184,8 @@ export default function HeroSection() {
                     }}>
 
                     <div
-                      className="orbit-icon-counter flex items-center justify-center rounded-full shadow-md w-11 h-11 border border-border/50 backdrop-blur-sm"
-                      style={{ background: "hsl(var(--card) / 0.9)" }}>
+                      className="orbit-icon-counter flex items-center justify-center rounded-full shadow-sm w-12 h-12"
+                      style={{ background: "hsl(var(--card))" }}>
                       {svg}
                     </div>
                   </div>);
@@ -201,7 +201,7 @@ export default function HeroSection() {
 
             <div
               className="absolute inset-0 rounded-full orbit-ring-inner"
-              style={{ border: "1.5px solid hsl(var(--border) / 0.6)" }}>
+              style={{ border: "4px solid hsl(var(--border))" }}>
 
               {brandIcons.map(({ svg }, i) => {
                 const angle = i / brandIcons.length * 360;
@@ -216,8 +216,8 @@ export default function HeroSection() {
                     }}>
 
                     <div
-                      className="orbit-label-counter flex items-center justify-center rounded-full shadow-md w-9 h-9 border border-border/40 backdrop-blur-sm"
-                      style={{ background: "hsl(var(--card) / 0.9)" }}>
+                      className="orbit-label-counter flex items-center justify-center rounded-full shadow-sm w-9 h-9"
+                      style={{ background: "hsl(var(--card))" }}>
                       {svg}
                     </div>
                   </div>);

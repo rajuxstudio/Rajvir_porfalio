@@ -88,23 +88,68 @@ const AboutPanel = () => {
   return (
     <div>
 
-      {/* ── Gradient Cover ── */}
-      <div className="relative h-44 sm:h-52 overflow-hidden">
-        {/* Theme-aware gradient */}
-        <div className="absolute inset-0 bg-secondary" />
+      {/* ── Tech-Inspired Cover ── */}
+      <div className="relative h-48 sm:h-56 overflow-hidden bg-secondary">
+        {/* Base gradient */}
         <div className="absolute inset-0" style={{
-          background: `linear-gradient(135deg, hsl(var(--accent) / 0.15) 0%, hsl(var(--accent) / 0.08) 40%, hsl(var(--muted)) 100%)`,
+          background: `linear-gradient(160deg, hsl(var(--secondary)) 0%, hsl(var(--accent) / 0.08) 50%, hsl(var(--muted)) 100%)`,
         }} />
-        {/* Subtle dot pattern */}
-        <div className="absolute inset-0 opacity-[0.06]" style={{
-          backgroundImage: "radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 0.5px, transparent 0)",
-          backgroundSize: "20px 20px",
-        }} />
-        {/* Fade overlay */}
-        <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-b from-transparent to-card" />
-        {/* Decorative elements */}
-        <div className="absolute top-6 right-10 w-20 h-20 rounded-full border border-foreground/5" />
-        <div className="absolute top-14 right-24 w-28 h-28 rounded-full border border-foreground/[0.03]" />
+
+        {/* Circuit board SVG pattern */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.07] text-accent" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="circuit" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+              {/* Horizontal traces */}
+              <line x1="0" y1="20" x2="35" y2="20" stroke="currentColor" strokeWidth="1" />
+              <line x1="45" y1="20" x2="80" y2="20" stroke="currentColor" strokeWidth="1" />
+              <line x1="0" y1="60" x2="25" y2="60" stroke="currentColor" strokeWidth="1" />
+              <line x1="55" y1="60" x2="80" y2="60" stroke="currentColor" strokeWidth="1" />
+              {/* Vertical traces */}
+              <line x1="40" y1="0" x2="40" y2="15" stroke="currentColor" strokeWidth="1" />
+              <line x1="40" y1="25" x2="40" y2="55" stroke="currentColor" strokeWidth="1" />
+              <line x1="40" y1="65" x2="40" y2="80" stroke="currentColor" strokeWidth="1" />
+              <line x1="20" y1="20" x2="20" y2="60" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 4" />
+              <line x1="60" y1="0" x2="60" y2="40" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 4" />
+              {/* Circuit nodes */}
+              <circle cx="40" cy="20" r="3" fill="none" stroke="currentColor" strokeWidth="1" />
+              <circle cx="40" cy="60" r="2" fill="currentColor" opacity="0.6" />
+              <circle cx="20" cy="20" r="1.5" fill="currentColor" />
+              <circle cx="60" cy="20" r="1.5" fill="currentColor" />
+              <circle cx="20" cy="60" r="1.5" fill="currentColor" />
+              {/* IC chip */}
+              <rect x="33" y="14" width="14" height="12" rx="1" fill="none" stroke="currentColor" strokeWidth="0.8" />
+              <line x1="35" y1="14" x2="35" y2="12" stroke="currentColor" strokeWidth="0.6" />
+              <line x1="38" y1="14" x2="38" y2="12" stroke="currentColor" strokeWidth="0.6" />
+              <line x1="41" y1="14" x2="41" y2="12" stroke="currentColor" strokeWidth="0.6" />
+              <line x1="44" y1="14" x2="44" y2="12" stroke="currentColor" strokeWidth="0.6" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#circuit)" />
+        </svg>
+
+        {/* Floating binary strings */}
+        <div className="absolute top-3 left-6 text-[10px] font-mono text-accent/15 animate-pulse" style={{ animationDuration: "3s" }}>01101001</div>
+        <div className="absolute top-8 right-12 text-[10px] font-mono text-accent/12 animate-pulse" style={{ animationDuration: "4s" }}>10110100</div>
+        <div className="absolute bottom-14 left-1/4 text-[10px] font-mono text-accent/10 animate-pulse" style={{ animationDuration: "5s" }}>{"{ design: true }"}</div>
+        <div className="absolute top-5 left-1/3 text-[10px] font-mono text-accent/10 animate-pulse" style={{ animationDuration: "3.5s" }}>0xFF</div>
+        <div className="absolute bottom-16 right-1/4 text-[10px] font-mono text-accent/8 animate-pulse" style={{ animationDuration: "4.5s" }}>sudo rm -rf</div>
+
+        {/* Code syntax highlight snippet */}
+        <div className="absolute top-6 right-6 text-[9px] font-mono leading-relaxed opacity-[0.06] text-foreground select-none">
+          <div><span className="text-accent/30">const</span> designer = {"{"}</div>
+          <div>&nbsp;&nbsp;name: <span className="text-accent/30">"Rajvir"</span>,</div>
+          <div>&nbsp;&nbsp;role: <span className="text-accent/30">"UX/UI"</span>,</div>
+          <div>&nbsp;&nbsp;passion: <span className="text-accent/30">∞</span></div>
+          <div>{"};"}</div>
+        </div>
+
+        {/* Pulsing tech nodes */}
+        <div className="absolute top-10 left-16 w-2 h-2 rounded-full bg-accent/20 animate-pulse" style={{ animationDuration: "2s" }} />
+        <div className="absolute top-20 left-1/2 w-1.5 h-1.5 rounded-full bg-accent/15 animate-pulse" style={{ animationDuration: "2.5s" }} />
+        <div className="absolute bottom-20 right-16 w-2.5 h-2.5 rounded-full bg-accent/10 animate-pulse" style={{ animationDuration: "3s" }} />
+
+        {/* Fade to card */}
+        <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-b from-transparent to-card" />
       </div>
 
       {/* ── Centered Avatar ── */}

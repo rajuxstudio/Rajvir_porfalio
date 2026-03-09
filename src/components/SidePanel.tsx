@@ -27,9 +27,6 @@ export default function SidePanel({ open, onClose, title, children }: Props) {
           </button>
         </div>
         <div className={`relative z-10 w-full rounded-t-2xl animate-slide-up max-h-[88vh] overflow-y-auto bg-card border border-border border-b-0 ${title ? 'p-6 pb-8' : ''}`}>
-          <div className="flex justify-center py-3">
-            <div className="w-10 h-1 rounded-full bg-border" />
-          </div>
           {title && <h2 className="text-xl font-bold mb-4 text-accent">{title}</h2>}
           {children}
         </div>

@@ -1,7 +1,8 @@
 import { Button } from "./ui/button";
 import heroPhoto from "@/assets/hero-photo.png";
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import ThemeToggle from "./ThemeToggle";
+const Globe3D = lazy(() => import("./Globe3D"));
 
 // Tool/platform SVG icons for outer orbit
 const outerIcons: { svg: React.ReactNode; label: string }[] = [
@@ -76,12 +77,9 @@ const RLogo = () =>
     <svg width="28" height="40" viewBox="0 0 50 100" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M4 4.16663V4.16663C28.3005 4.16663 48 23.8661 48 48.1666V95.8333H4V4.16663Z" fill="currentColor" />
     </svg>
-    <div className="globe-3d-wrapper select-none" style={{ width: 18, height: 18, marginTop: 1 }}>
-      <div className="globe-3d-sphere">
-        <div className="globe-3d-land" />
-        <div className="globe-3d-highlight" />
-      </div>
-    </div>
+    <Suspense fallback={<div style={{ width: 18, height: 18 }} />}>
+      <Globe3D size={18} />
+    </Suspense>
   </div>;
 
 

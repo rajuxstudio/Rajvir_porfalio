@@ -209,7 +209,8 @@
     inset -4px -4px 8px rgba(0,0,0,0.5),
     inset 2px 2px 6px rgba(255,255,255,0.15),
     0 0 3px rgba(30,136,229,0.4);
-  animation: globe-tilt 8s ease-in-out infinite alternate;
+  animation: globe-tilt 10s linear infinite;
+  transform-style: preserve-3d;
 }
 
 /* Continent/land layer that scrolls horizontally for rotation effect */
@@ -252,12 +253,11 @@
 }
 
 @keyframes globe-surface-rotate {
-  0% { transform: translateX(0%); }
-  50% { transform: translateX(-8%); }
-  100% { transform: translateX(0%); }
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
 }
 
 @keyframes globe-tilt {
-  0% { transform: rotateY(-8deg) rotateX(2deg); }
-  100% { transform: rotateY(8deg) rotateX(-2deg); }
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
 }

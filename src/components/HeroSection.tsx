@@ -169,9 +169,9 @@ export default function HeroSection() {
 
             <div
               className="absolute inset-0 rounded-full orbit-ring-outer"
-              style={{ border: "6px dashed hsl(var(--border))" }}>
+              style={{ border: "2px solid hsl(var(--border))" }}>
 
-              {outerIcons.map(({ svg }, i) => {
+              {outerIcons.map(({ svg, label }, i) => {
                 const angle = i / outerIcons.length * 360;
                 return (
                   <div
@@ -179,13 +179,13 @@ export default function HeroSection() {
                     className="absolute top-1/2 left-1/2"
                     style={{
                       transform: `rotate(${angle}deg) translate(min(300px, 39vw)) rotate(-${angle}deg)`,
-                      marginLeft: "-24px",
-                      marginTop: "-24px"
+                      marginLeft: "-22px",
+                      marginTop: "-22px"
                     }}>
 
                     <div
-                      className="orbit-icon-counter flex items-center justify-center rounded-full shadow-sm w-12 h-12"
-                      style={{ background: "hsl(var(--card))" }}>
+                      className="orbit-icon-counter flex items-center justify-center rounded-full w-11 h-11 border border-border shadow-md backdrop-blur-sm"
+                      style={{ background: "hsl(var(--card) / 0.9)" }}>
                       {svg}
                     </div>
                   </div>);

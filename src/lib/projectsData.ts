@@ -21,6 +21,7 @@ export interface Project {
   solution?: string;
   duration?: string;
   role?: string;
+  hideFromCarousel?: boolean;
 }
 
 export const googleColors = [

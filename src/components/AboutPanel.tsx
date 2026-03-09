@@ -263,12 +263,27 @@ const AboutPanel = () => {
             <Award className="w-3.5 h-3.5 text-accent" />
             Certifications
           </h3>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-3">
             {certifications.map((cert, i) => (
-              <div key={i} className="p-3 rounded-xl bg-secondary/40 hover:bg-secondary/70 transition-colors text-center">
-                <h4 className="font-medium text-xs text-foreground leading-tight">{cert.name}</h4>
-                <p className="text-[10px] text-muted-foreground mt-1">{cert.org}</p>
-                <span className="inline-block mt-1.5 text-[10px] font-semibold text-accent">{cert.year}</span>
+              <div key={i} className="relative p-4 pt-5 rounded-sm bg-card border border-border text-center overflow-hidden group hover:shadow-md transition-shadow">
+                {/* Certificate ornamental border */}
+                <div className="absolute inset-[3px] rounded-sm border border-dashed border-accent/20 pointer-events-none" />
+                {/* Corner ornaments */}
+                <svg className="absolute top-1 left-1 w-4 h-4 text-accent/25" viewBox="0 0 16 16"><path d="M0 8 Q0 0 8 0" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg>
+                <svg className="absolute top-1 right-1 w-4 h-4 text-accent/25" viewBox="0 0 16 16"><path d="M8 0 Q16 0 16 8" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg>
+                <svg className="absolute bottom-1 left-1 w-4 h-4 text-accent/25" viewBox="0 0 16 16"><path d="M0 8 Q0 16 8 16" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg>
+                <svg className="absolute bottom-1 right-1 w-4 h-4 text-accent/25" viewBox="0 0 16 16"><path d="M8 16 Q16 16 16 8" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg>
+                {/* Ribbon/seal */}
+                <div className="mx-auto w-7 h-7 rounded-full border-2 border-accent/30 flex items-center justify-center mb-2">
+                  <Award className="w-3.5 h-3.5 text-accent" />
+                </div>
+                {/* Certificate text */}
+                <p className="text-[8px] uppercase tracking-[0.15em] text-muted-foreground/50 mb-1">Certificate of Completion</p>
+                <h4 className="font-semibold text-xs text-foreground leading-tight">{cert.name}</h4>
+                <p className="text-[10px] text-muted-foreground mt-1.5">{cert.org}</p>
+                {/* Decorative line */}
+                <div className="mx-auto mt-2 mb-1.5 w-8 h-px bg-accent/20" />
+                <span className="text-[10px] font-semibold text-accent">{cert.year}</span>
               </div>
             ))}
           </div>

@@ -184,8 +184,8 @@ export default function HeroSection() {
                     }}>
 
                     <div
-                      className="orbit-icon-counter flex items-center justify-center rounded-full shadow-sm w-12 h-12"
-                      style={{ background: "hsl(var(--card))" }}>
+                      className="orbit-icon-counter flex items-center justify-center rounded-full shadow-md w-11 h-11 border border-border/50 backdrop-blur-sm"
+                      style={{ background: "hsl(var(--card) / 0.9)" }}>
                       {svg}
                     </div>
                   </div>);

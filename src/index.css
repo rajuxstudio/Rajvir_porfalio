@@ -209,7 +209,8 @@
     inset -4px -4px 8px rgba(0,0,0,0.5),
     inset 2px 2px 6px rgba(255,255,255,0.15),
     0 0 3px rgba(30,136,229,0.4);
-  animation: globe-tilt 8s ease-in-out infinite alternate;
+  animation: globe-tilt 10s linear infinite;
+  transform-style: preserve-3d;
 }
 
 /* Continent/land layer that scrolls horizontally for rotation effect */

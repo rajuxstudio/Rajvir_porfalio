@@ -100,10 +100,8 @@ const AboutPanel = () => {
           backgroundImage: "radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 0.5px, transparent 0)",
           backgroundSize: "20px 20px",
         }} />
-        {/* Wave overlay */}
-        <svg className="absolute bottom-0 left-0 w-full" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ height: "50px" }}>
-          <path d="M0,60 C200,120 400,0 600,60 C800,120 1000,0 1200,60 L1200,120 L0,120 Z" fill="hsl(var(--card))" />
-        </svg>
+        {/* Fade overlay */}
+        <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-b from-transparent to-card" />
         {/* Decorative elements */}
         <div className="absolute top-6 right-10 w-20 h-20 rounded-full border border-foreground/5" />
         <div className="absolute top-14 right-24 w-28 h-28 rounded-full border border-foreground/[0.03]" />

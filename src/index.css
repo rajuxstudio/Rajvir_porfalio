@@ -147,14 +147,15 @@
   animation: marquee 30s linear infinite;
 }
 
-/* Logo carousel marquee */
-@keyframes logo-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-33.333%); }
+/* Logo carousel – Earth-like X-axis rotation */
+@keyframes logo-orbit {
+  from { transform: rotateX(0deg); }
+  to { transform: rotateX(360deg); }
 }
 
-.animate-logo-marquee {
-  animation: logo-marquee 24s linear infinite;
+.logo-orbit-ring {
+  animation: logo-orbit 12s linear infinite;
+  transform-style: preserve-3d;
 }
 
 @keyframes scale-in {

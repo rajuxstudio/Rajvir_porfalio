@@ -10,59 +10,64 @@ const logos = [
   { src: logoRecruitEase, alt: "Recruit Ease" },
 ];
 
-// Duplicate for seamless loop
-const allLogos = [...logos, ...logos, ...logos];
-
 export default function LogoCarouselSection() {
+  const count = logos.length;
+  const radius = 120; // px – orbit radius
+
   return (
     <section
-      className="w-full py-16 overflow-hidden"
+      className="w-full py-20 overflow-hidden"
       style={{ background: "hsl(var(--background))" }}
     >
       <p
-        className="text-center text-[10px] tracking-[0.22em] uppercase font-medium mb-10"
+        className="text-center text-[10px] tracking-[0.22em] uppercase font-medium mb-14"
         style={{ color: "hsl(var(--muted-foreground))" }}
       >
         Trusted by
       </p>
 
-      {/* Marquee track */}
-      <div className="relative w-full overflow-hidden">
-        {/* Left fade */}
+      {/* 3D orbit container */}
+      <div
+        className="mx-auto flex items-center justify-center"
+        style={{ perspective: "800px", height: `${radius * 2 + 60}px` }}
+      >
         <div
-          className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+          className="relative logo-orbit-ring"
           style={{
-            background: "linear-gradient(to right, hsl(var(--background)), transparent)"
+            width: "200px",
+            height: "200px",
+            transformStyle: "preserve-3d",
           }}
-        />
-        {/* Right fade */}
-        <div
-          className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-          style={{
-            background: "linear-gradient(to left, hsl(var(--background)), transparent)"
-          }}
-        />
-
-        <div className="flex items-center animate-logo-marquee whitespace-nowrap gap-16 px-8">
-          {allLogos.map((logo, i) => (
-            <div
-              key={i}
-              className="inline-flex items-center justify-center shrink-0"
-              style={{ height: "40px" }}
-            >
-              <img
-                src={logo.src}
-                alt={logo.alt}
-                className="h-full w-auto object-contain"
+        >
+          {logos.map((logo, i) => {
+            const angle = (360 / count) * i;
+            return (
+              <div
+                key={i}
+                className="absolute left-1/2 top-1/2 flex items-center justify-center"
                 style={{
-                  filter: "var(--logo-filter, brightness(0))",
-                  opacity: 0.75,
-                  maxWidth: "160px"
+                  width: "140px",
+                  height: "50px",
+                  marginLeft: "-70px",
+                  marginTop: "-25px",
+                  transform: `rotateX(${angle}deg) translateZ(${radius}px)`,
+                  backfaceVisibility: "hidden",
                 }}
-                draggable={false}
-              />
-            </div>
-          ))}
+              >
+                <img
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="h-10 w-auto object-contain"
+                  style={{
+                    filter: "var(--logo-filter, brightness(0))",
+                    opacity: 0.75,
+                    maxWidth: "140px",
+                  }}
+                  draggable={false}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

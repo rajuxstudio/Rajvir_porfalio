@@ -192,36 +192,72 @@
   to { transform: rotate(360deg); }
 }
 
-/* 3D Globe */
-.globe-3d {
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #4fc3f7 0%, #0288d1 35%, #01579b 70%, #002f6c 100%);
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset -3px -3px 6px rgba(0,0,0,0.35), inset 1px 1px 4px rgba(255,255,255,0.2), 0 0 4px rgba(79,195,247,0.3);
+/* 3D Globe - detailed with continents and realistic rotation */
+.globe-3d-wrapper {
+  perspective: 200px;
+  display: inline-block;
 }
 
-.globe-3d::before {
-  content: '';
+.globe-3d-sphere {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at 35% 30%, #5bc8f5 0%, #1e88e5 25%, #0d47a1 55%, #0a2e6e 80%, #071a3f 100%);
+  box-shadow:
+    inset -4px -4px 8px rgba(0,0,0,0.5),
+    inset 2px 2px 6px rgba(255,255,255,0.15),
+    0 0 3px rgba(30,136,229,0.4);
+  animation: globe-tilt 8s ease-in-out infinite alternate;
+}
+
+/* Continent/land layer that scrolls horizontally for rotation effect */
+.globe-3d-land {
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background:
-    radial-gradient(ellipse 40% 80% at 25% 50%, rgba(76,175,80,0.6) 0%, transparent 50%),
-    radial-gradient(ellipse 30% 50% at 65% 35%, rgba(76,175,80,0.5) 0%, transparent 50%),
-    radial-gradient(ellipse 20% 40% at 50% 70%, rgba(76,175,80,0.4) 0%, transparent 50%);
-  animation: globe-rotate 8s linear infinite;
+    /* Americas */
+    radial-gradient(ellipse 18% 35% at 20% 40%, rgba(56,142,60,0.75) 0%, transparent 100%),
+    radial-gradient(ellipse 10% 20% at 25% 65%, rgba(56,142,60,0.6) 0%, transparent 100%),
+    /* Europe/Africa */
+    radial-gradient(ellipse 12% 22% at 55% 35%, rgba(76,175,80,0.65) 0%, transparent 100%),
+    radial-gradient(ellipse 14% 30% at 58% 55%, rgba(56,142,60,0.6) 0%, transparent 100%),
+    /* Asia */
+    radial-gradient(ellipse 22% 18% at 72% 32%, rgba(76,175,80,0.6) 0%, transparent 100%),
+    radial-gradient(ellipse 16% 12% at 80% 45%, rgba(56,142,60,0.5) 0%, transparent 100%),
+    /* Australia */
+    radial-gradient(ellipse 8% 8% at 82% 65%, rgba(76,175,80,0.5) 0%, transparent 100%),
+    /* Arctic */
+    radial-gradient(ellipse 30% 8% at 50% 5%, rgba(220,237,245,0.5) 0%, transparent 100%),
+    /* Antarctic */
+    radial-gradient(ellipse 25% 6% at 50% 96%, rgba(220,237,245,0.4) 0%, transparent 100%),
+    /* Cloud wisps */
+    radial-gradient(ellipse 35% 6% at 40% 25%, rgba(255,255,255,0.15) 0%, transparent 100%),
+    radial-gradient(ellipse 25% 5% at 65% 55%, rgba(255,255,255,0.12) 0%, transparent 100%),
+    radial-gradient(ellipse 20% 4% at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 100%);
+  animation: globe-surface-rotate 10s linear infinite;
 }
 
-.globe-3d::after {
-  content: '';
+/* Specular highlight - stays fixed for 3D realism */
+.globe-3d-highlight {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.35) 0%, transparent 60%);
+  background:
+    radial-gradient(circle at 28% 22%, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.1) 25%, transparent 55%),
+    radial-gradient(circle at 70% 80%, rgba(0,0,0,0.2) 0%, transparent 40%);
+  pointer-events: none;
 }
 
-@keyframes globe-rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes globe-surface-rotate {
+  0% { transform: translateX(0%); }
+  50% { transform: translateX(-8%); }
+  100% { transform: translateX(0%); }
+}
+
+@keyframes globe-tilt {
+  0% { transform: rotateY(-8deg) rotateX(2deg); }
+  100% { transform: rotateY(8deg) rotateX(-2deg); }
 }

@@ -72,15 +72,11 @@ const TypingWord = () => {
 
 // R Logo SVG (inline)
 const RLogo = () =>
-<div className="flex items-center gap-0 relative" aria-label="Website logo">
+<div className="flex items-start gap-0 relative" aria-label="Website logo">
     <svg width="28" height="40" viewBox="0 0 50 100" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M4 4.16663V4.16663C28.3005 4.16663 48 23.8661 48 48.1666V95.8333H4V4.16663Z" fill="currentColor" />
     </svg>
-    <span
-      className="text-lg select-none"
-      style={{ animation: "spin-globe 12s linear infinite", display: "inline-block" }}>
-      🌎
-    </span>
+    <div className="globe-3d select-none" style={{ width: 16, height: 16, marginTop: 2 }} />
   </div>;
 
 

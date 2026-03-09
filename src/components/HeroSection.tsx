@@ -1,7 +1,8 @@
 import { Button } from "./ui/button";
 import heroPhoto from "@/assets/hero-photo.png";
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import ThemeToggle from "./ThemeToggle";
+const Globe3D = lazy(() => import("./Globe3D"));
 
 // Tool/platform SVG icons for outer orbit
 const outerIcons: { svg: React.ReactNode; label: string }[] = [

@@ -2,8 +2,10 @@ import { useState, useEffect, useCallback } from "react";
 import { ArrowRight, Monitor, Smartphone, Tablet } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import rLogo from "@/assets/r-logo.png";
-import { projects, Project } from "@/lib/projectsData";
+import { projects as allProjects, Project } from "@/lib/projectsData";
 import ProjectDetailDialog from "@/components/ProjectDetailDialog";
+
+const projects = allProjects.filter(p => !p.hideFromCarousel);
 
 const stats = [
   { value: "3+", label: "Years Experience" },

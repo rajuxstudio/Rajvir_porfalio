@@ -242,7 +242,7 @@ function Earth() {
 
 export default function Globe3D({ size = 18 }: { size?: number }) {
   return (
-    <div style={{ width: size, height: size }}>
+    <div style={{ width: size, height: size, borderRadius: "50%", overflow: "hidden" }}>
       <Canvas
         camera={{ position: [0, 0, 2.6], fov: 45 }}
         gl={{ alpha: true, antialias: true }}

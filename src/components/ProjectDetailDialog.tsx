@@ -57,7 +57,7 @@ export default function ProjectDetailDialog({ open, onClose, project }: Props) {
         className="relative z-10 w-full rounded-t-2xl animate-slide-up overflow-y-auto bg-card border border-border border-b-0"
         style={{ maxHeight: "88vh" }}
       >
-        <div className="p-6 sm:p-8 pt-4 flex flex-col gap-6">
+        <div className="flex flex-col">
           {content}
         </div>
       </div>

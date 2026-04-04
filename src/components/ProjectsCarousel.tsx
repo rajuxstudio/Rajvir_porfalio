@@ -276,6 +276,15 @@ export default function ProjectsCarousel() {
           key={displayProject.id}
           style={{ animation: "fadeInUp 0.35s ease-out" }}
         >
+          <h3 className="text-lg md:text-xl font-bold text-foreground text-center mb-1">
+            {displayProject.title}
+          </h3>
+          <div className="flex justify-center gap-2 mb-3">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-accent">{displayProject.category}</span>
+            {displayProject.industryDomain && (
+              <span className="text-[10px] text-muted-foreground">· {displayProject.industryDomain}</span>
+            )}
+          </div>
           <p className="text-sm md:text-base text-muted-foreground leading-relaxed text-center">
             {displayProject.description}
           </p>

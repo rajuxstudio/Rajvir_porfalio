@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import { Project } from "@/lib/projectsData";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 
 // Per-project detail components
 const detailComponents: Record<string, React.LazyExoticComponent<() => JSX.Element>> = {

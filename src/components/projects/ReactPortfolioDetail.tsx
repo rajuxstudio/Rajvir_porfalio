@@ -1,5 +1,8 @@
 import { Palette, Zap, Moon, Smartphone as Responsive, Mail } from "lucide-react";
-import ProjectDetailHero from "@/components/projects/shared/ProjectDetailHero";
+import {
+  ProjectDetailHero, FeatureGrid, TechStackSection,
+  HighlightBanner, ProjectContentWrapper,
+} from "./projectUI";
 
 const highlights = [
   { icon: <Palette size={16} />, label: "3D Carousel" },
@@ -23,39 +26,15 @@ export default function ReactPortfolioDetail() {
         role="Code"
       />
 
-      <div className="px-6 sm:px-8 pb-8 flex flex-col gap-6 mt-6">
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          A beautifully crafted developer portfolio showcasing projects, skills, and experience with smooth animations and an interactive 3D carousel.
-        </p>
-
-        {/* Visual highlight banner */}
-        <div className="rounded-xl p-6" style={{ background: "linear-gradient(135deg, #8B5CF6 0%, #F472B6 100%)" }}>
-          <p className="text-lg font-bold text-white mb-1">Custom-Built, Not Templated</p>
-          <p className="text-sm text-white/80">Every element hand-crafted for a unique developer identity.</p>
-        </div>
-
-        {/* Highlights */}
-        <div>
-          <h3 className="text-lg font-bold text-foreground mb-3">Highlights</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {highlights.map((h) => (
-              <div key={h.label} className="flex flex-col items-center gap-2 p-4 rounded-xl bg-muted border border-border text-center">
-                <span className="text-accent">{h.icon}</span>
-                <span className="text-xs font-medium text-foreground">{h.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">Tech Stack</h4>
-          <div className="flex flex-wrap gap-2">
-            {techStack.map((t) => (
-              <span key={t} className="text-xs font-medium px-3 py-1.5 rounded-lg bg-background text-foreground border border-border">{t}</span>
-            ))}
-          </div>
-        </div>
-      </div>
+      <ProjectContentWrapper description="A beautifully crafted developer portfolio showcasing projects, skills, and experience with smooth animations and an interactive 3D carousel.">
+        <HighlightBanner
+          title="Custom-Built, Not Templated"
+          subtitle="Every element hand-crafted for a unique developer identity."
+          gradient="linear-gradient(135deg, #8B5CF6 0%, #F472B6 100%)"
+        />
+        <FeatureGrid title="Highlights" features={highlights} />
+        <TechStackSection stack={techStack} />
+      </ProjectContentWrapper>
     </div>
   );
 }

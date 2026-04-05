@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Monitor, Smartphone } from "lucide-react";
 import cloudgavelMockup from "@/assets/cloudgavel-mockup.png";
-import MobileAppDownload from "@/components/projects/shared/MobileAppDownload";
-import ProjectDetailHero from "@/components/projects/shared/ProjectDetailHero";
+import {
+  ProjectDetailHero, SegmentedTabs, TimelineGrid,
+  StatsRow, TechStackSection, MobileAppDownload, ProjectContentWrapper,
+} from "./projectUI";
 
 const tabs = [
   { id: "overview", label: "Overview", icon: <Monitor size={14} /> },
   { id: "mobile", label: "Mobile App", icon: <Smartphone size={14} /> },
-] as const;
-
-type TabId = (typeof tabs)[number]["id"];
+];
 
 const timeline = [
   { step: "01", title: "Create Warrant", desc: "Officers digitally fill warrant applications" },
@@ -18,10 +18,16 @@ const timeline = [
   { step: "04", title: "Approval & Logging", desc: "Instant approval with full audit trail" },
 ];
 
+const stats = [
+  { val: "<15min", label: "Approval Time" },
+  { val: "100%", label: "Digital Audit" },
+  { val: "24/7", label: "Availability" },
+];
+
 const techStack = ["React", "Python", "Django", "PostgreSQL", "Docker"];
 
 export default function CloudGavelDetail() {
-  const [activeTab, setActiveTab] = useState<TabId>("overview");
+  const [activeTab, setActiveTab] = useState("overview");
 
   return (
     <div className="flex flex-col">
@@ -35,66 +41,17 @@ export default function CloudGavelDetail() {
         mockupSrc={cloudgavelMockup}
       />
 
-      <div className="px-6 sm:px-8 pb-8 flex flex-col gap-6 mt-6">
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          CloudGavel digitizes the entire warrant lifecycle — from creation and submission to judicial review and approval — reducing turnaround from days to minutes.
-        </p>
-
-        {/* Tab Switch */}
-        <div className="flex justify-center">
-          <div className="inline-flex items-center gap-1 p-1 rounded-full bg-muted border border-border shadow-sm">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-1.5 text-sm font-medium px-5 py-2 rounded-full transition-all duration-300 ${
-                  activeTab === tab.id
-                    ? "bg-card text-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                <span className="sm:hidden">{tab.icon}</span>
-                <span className="hidden sm:inline-flex sm:items-center sm:gap-1.5">{tab.icon} {tab.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
+      <ProjectContentWrapper description="CloudGavel digitizes the entire warrant lifecycle — from creation and submission to judicial review and approval — reducing turnaround from days to minutes.">
+        <SegmentedTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
 
         <div key={activeTab} className="animate-fade-in">
           {activeTab === "overview" && (
             <>
-              <div className="mb-6">
-                <h3 className="text-lg font-bold text-foreground mb-4">How It Works</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {timeline.map((t) => (
-                    <div key={t.step} className="flex items-start gap-4 p-4 rounded-xl bg-muted border border-border">
-                      <span className="text-2xl font-black text-accent/30">{t.step}</span>
-                      <div>
-                        <p className="text-sm font-semibold text-foreground">{t.title}</p>
-                        <p className="text-xs text-muted-foreground">{t.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-3 mb-6">
-                {[{ val: "<15min", label: "Approval Time" }, { val: "100%", label: "Digital Audit" }, { val: "24/7", label: "Availability" }].map((s) => (
-                  <div key={s.label} className="text-center p-4 rounded-xl bg-muted border border-border">
-                    <p className="text-lg font-extrabold text-accent">{s.val}</p>
-                    <p className="text-xs text-muted-foreground">{s.label}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">Tech Stack</h4>
-                <div className="flex flex-wrap gap-2">
-                  {techStack.map((t) => (
-                    <span key={t} className="text-xs font-medium px-3 py-1.5 rounded-lg bg-background text-foreground border border-border">{t}</span>
-                  ))}
-                </div>
-              </div>
+              <TimelineGrid steps={timeline} />
+              <div className="mt-6" />
+              <StatsRow stats={stats} />
+              <div className="mt-6" />
+              <TechStackSection stack={techStack} />
             </>
           )}
 
@@ -116,7 +73,7 @@ export default function CloudGavelDetail() {
             />
           )}
         </div>
-      </div>
+      </ProjectContentWrapper>
     </div>
   );
 }

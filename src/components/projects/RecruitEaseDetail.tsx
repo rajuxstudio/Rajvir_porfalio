@@ -3,6 +3,7 @@ import {
   Monitor, Smartphone, Users, Search, Calendar, CreditCard, BarChart3,
   Layers, Target, Zap,
 } from "lucide-react";
+import iconRecruitease from "@/assets/icon-recruitease.png";
 import {
   ProjectDetailHero, SegmentedTabs, ChallengeSolution, StatsRow,
   FeatureGrid, DesignProcessGrid, OutcomeSection, TechStackSection,
@@ -51,17 +52,20 @@ export default function RecruitEaseDetail() {
     <div className="flex flex-col">
       <ProjectDetailHero
         title="RecruitEase"
-        category="E-commerce"
-        industryDomain="Recruitment / HR"
+        subtitle="Recruitment Marketplace Platform"
+        category="E-commerce / HR Tech"
+        description="A marketplace-style recruitment platform where employers browse, shortlist, and hire candidates — while job seekers showcase profiles like storefronts."
         gradient="linear-gradient(135deg, #F97316 0%, #DC2626 100%)"
-        applications={["web", "mobile"]}
-        role="Design + Code"
-        duration="4 months"
+        iconSrc={iconRecruitease}
+        metaChips={[
+          { label: "Role", value: "Design + Code" },
+          { label: "Platform", value: "Web, Mobile" },
+          { label: "Focus", value: "Smart Matching" },
+        ]}
       />
 
-      <ProjectContentWrapper description="RecruitEase is a marketplace-style recruitment platform where employers browse, shortlist, and hire candidates — while job seekers showcase profiles like storefronts. The platform combines e-commerce UX patterns with HR workflows.">
+      <ProjectContentWrapper>
         <SegmentedTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
-
         <div key={activeTab} className="animate-fade-in">
           {activeTab === "overview" && (
             <>
@@ -83,7 +87,6 @@ export default function RecruitEaseDetail() {
               <ConfidentialityNote />
             </>
           )}
-
           {activeTab === "mobile" && (
             <MobileAppDownload
               headline="Hire smarter, right from your phone"

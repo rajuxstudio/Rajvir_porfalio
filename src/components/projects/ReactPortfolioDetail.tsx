@@ -1,4 +1,5 @@
 import { Palette, Zap, Moon, Smartphone as Responsive, Mail } from "lucide-react";
+import iconPortfolio from "@/assets/icon-portfolio.png";
 import {
   ProjectDetailHero, FeatureGrid, TechStackSection,
   HighlightBanner, ProjectContentWrapper,
@@ -19,14 +20,19 @@ export default function ReactPortfolioDetail() {
     <div className="flex flex-col">
       <ProjectDetailHero
         title="React Portfolio"
+        subtitle="Developer Portfolio Website"
         category="Web Development"
-        industryDomain="Personal / Creative"
+        description="A beautifully crafted developer portfolio showcasing projects, skills, and experience with smooth animations, interactive 3D carousel, and responsive design."
         gradient="linear-gradient(135deg, #8B5CF6 0%, #F472B6 100%)"
-        applications={["web"]}
-        role="Code"
+        iconSrc={iconPortfolio}
+        metaChips={[
+          { label: "Role", value: "Developer" },
+          { label: "Platform", value: "Web" },
+          { label: "Focus", value: "Visual Identity" },
+        ]}
       />
 
-      <ProjectContentWrapper description="A beautifully crafted developer portfolio showcasing projects, skills, and experience with smooth animations and an interactive 3D carousel.">
+      <ProjectContentWrapper>
         <HighlightBanner
           title="Custom-Built, Not Templated"
           subtitle="Every element hand-crafted for a unique developer identity."

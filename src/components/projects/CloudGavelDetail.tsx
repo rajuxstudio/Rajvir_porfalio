@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Monitor, Smartphone } from "lucide-react";
-import cloudgavelMockup from "@/assets/cloudgavel-mockup.png";
+import iconCloudgavel from "@/assets/icon-cloudgavel.png";
 import {
   ProjectDetailHero, SegmentedTabs, TimelineGrid,
   StatsRow, TechStackSection, MobileAppDownload, ProjectContentWrapper,
@@ -33,17 +33,20 @@ export default function CloudGavelDetail() {
     <div className="flex flex-col">
       <ProjectDetailHero
         title="CloudGavel"
-        category="SaaS"
-        industryDomain="Law Enforcement / Justice"
+        subtitle="eWarrant Management System"
+        category="Software as a Service (SaaS)"
+        description="CloudGavel digitizes the entire warrant lifecycle — from creation and submission to judicial review and approval — reducing turnaround from days to minutes."
         gradient="linear-gradient(135deg, #FFA24C 0%, #E56A2E 100%)"
-        applications={["web", "mobile"]}
-        role="UX/UI Design"
-        mockupSrc={cloudgavelMockup}
+        iconSrc={iconCloudgavel}
+        metaChips={[
+          { label: "Role", value: "UX/UI Designer" },
+          { label: "Platform", value: "Web, Mobile" },
+          { label: "Focus", value: "Digital Workflow" },
+        ]}
       />
 
-      <ProjectContentWrapper description="CloudGavel digitizes the entire warrant lifecycle — from creation and submission to judicial review and approval — reducing turnaround from days to minutes.">
+      <ProjectContentWrapper>
         <SegmentedTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
-
         <div key={activeTab} className="animate-fade-in">
           {activeTab === "overview" && (
             <>
@@ -54,7 +57,6 @@ export default function CloudGavelDetail() {
               <TechStackSection stack={techStack} />
             </>
           )}
-
           {activeTab === "mobile" && (
             <MobileAppDownload
               headline="eWarrant processing on the go"

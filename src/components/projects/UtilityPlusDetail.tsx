@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Monitor, Shield, Smartphone, Search, Workflow, Layers, Map } from "lucide-react";
+import { Monitor, Shield, Smartphone, Search, Workflow, Layers, Map, Image } from "lucide-react";
 import iconUtilityPlus from "@/assets/icon-utility-plus.png";
+import mockupUtility1 from "@/assets/mockup-utility-1.jpg";
 import {
   ProjectDetailHero, SegmentedTabs, DesignProcessGrid,
-  OutcomeSection, ConfidentialityNote, ProjectContentWrapper,
+  OutcomeSection, ConfidentialityNote, ProjectContentWrapper, MockupGallery,
 } from "./projectUI";
 import WebPortalTab from "./utility/WebPortalTab";
 import AdminPortalTab from "./utility/AdminPortalTab";
@@ -13,6 +14,7 @@ const tabs = [
   { id: "web", label: "Web Portal", icon: <Monitor size={14} /> },
   { id: "admin", label: "Admin Portal", icon: <Shield size={14} /> },
   { id: "mobile", label: "Mobile Application", icon: <Smartphone size={14} /> },
+  { id: "mockups", label: "Mockups", icon: <Image size={14} /> },
 ];
 
 const designProcess = [
@@ -27,6 +29,10 @@ const outcomes = [
   "Reduced workflow complexity",
   "Established scalable SaaS design system",
   "Unified Web + Admin + Mobile ecosystem",
+];
+
+const mockups = [
+  { src: mockupUtility1, alt: "UtilityPlus Dashboard - Billing Overview" },
 ];
 
 export default function UtilityPlusDetail() {
@@ -54,6 +60,7 @@ export default function UtilityPlusDetail() {
           {activeTab === "web" && <WebPortalTab />}
           {activeTab === "admin" && <AdminPortalTab />}
           {activeTab === "mobile" && <MobileAppTab />}
+          {activeTab === "mockups" && <MockupGallery mockups={mockups} />}
         </div>
         <DesignProcessGrid steps={designProcess} />
         <OutcomeSection outcomes={outcomes} />

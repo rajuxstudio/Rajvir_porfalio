@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { Monitor, Smartphone, Gavel, TrendingUp, CreditCard, Award, Truck } from "lucide-react";
+import { Monitor, Smartphone, Gavel, TrendingUp, CreditCard, Award, Truck, Image } from "lucide-react";
 import iconBumperMandi from "@/assets/icon-bumper-mandi.png";
+import mockupBumper1 from "@/assets/mockup-bumper-1.jpg";
 import {
   ProjectDetailHero, SegmentedTabs, ChallengeSolution, FeatureGrid,
-  TechStackSection, ImpactBanner, MobileAppDownload, ProjectContentWrapper,
+  TechStackSection, ImpactBanner, MobileAppDownload, ProjectContentWrapper, MockupGallery,
 } from "./projectUI";
 
 const tabs = [
   { id: "overview", label: "Overview", icon: <Monitor size={14} /> },
   { id: "mobile", label: "Mobile App", icon: <Smartphone size={14} /> },
+  { id: "mockups", label: "Mockups", icon: <Image size={14} /> },
 ];
 
 const webFeatures = [
@@ -20,6 +22,10 @@ const webFeatures = [
 ];
 
 const techStack = ["React Native", "Node.js", "Firebase", "Google Maps API"];
+
+const mockups = [
+  { src: mockupBumper1, alt: "Bumper Mandi - Agricultural Marketplace App" },
+];
 
 export default function BumperMandiDetail() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -78,6 +84,7 @@ export default function BumperMandiDetail() {
               uxFocus={["Simple for rural users", "Low-bandwidth optimized", "Trust-driven UI", "Vernacular language support"]}
             />
           )}
+          {activeTab === "mockups" && <MockupGallery mockups={mockups} />}
         </div>
       </ProjectContentWrapper>
     </div>

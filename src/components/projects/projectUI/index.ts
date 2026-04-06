@@ -10,6 +10,7 @@ export { default as ImpactBanner } from "./ImpactBanner";
 export { default as TimelineGrid } from "./TimelineGrid";
 export { default as HighlightBanner } from "./HighlightBanner";
 export { default as ProjectContentWrapper } from "./ProjectContentWrapper";
+export { default as MockupGallery } from "./MockupGallery";
 export { default as ProjectDetailHero } from "../shared/ProjectDetailHero";
 export { default as MobileAppDownload } from "../shared/MobileAppDownload";
 export type { TabItem } from "./SegmentedTabs";

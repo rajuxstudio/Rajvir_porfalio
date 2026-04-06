@@ -1,8 +1,9 @@
 import { Palette, Zap, Moon, Smartphone as Responsive, Mail } from "lucide-react";
 import iconPortfolio from "@/assets/icon-portfolio.png";
+import mockupPortfolio1 from "@/assets/mockup-portfolio-1.jpg";
 import {
   ProjectDetailHero, FeatureGrid, TechStackSection,
-  HighlightBanner, ProjectContentWrapper,
+  HighlightBanner, ProjectContentWrapper, MockupGallery,
 } from "./projectUI";
 
 const highlights = [
@@ -14,6 +15,10 @@ const highlights = [
 ];
 
 const techStack = ["React", "TypeScript", "Tailwind CSS", "Framer Motion"];
+
+const mockups = [
+  { src: mockupPortfolio1, alt: "React Portfolio - Homepage" },
+];
 
 export default function ReactPortfolioDetail() {
   return (
@@ -39,6 +44,7 @@ export default function ReactPortfolioDetail() {
           gradient="linear-gradient(135deg, #8B5CF6 0%, #F472B6 100%)"
         />
         <FeatureGrid title="Highlights" features={highlights} />
+        <MockupGallery mockups={mockups} />
         <TechStackSection stack={techStack} />
       </ProjectContentWrapper>
     </div>

@@ -1,4 +1,5 @@
 import { PieChart, TrendingUp, FileText, Users, Calculator } from "lucide-react";
+import iconCaptable from "@/assets/icon-captable.png";
 import {
   ProjectDetailHero, FeatureGrid, TechStackSection, ProjectContentWrapper,
 } from "./projectUI";
@@ -18,14 +19,19 @@ export default function CaptableDetail() {
     <div className="flex flex-col">
       <ProjectDetailHero
         title="Captable"
+        subtitle="Equity Management Platform"
         category="Fintech"
-        industryDomain="Finance / Investment"
+        description="Simplifies equity management for startups and investors, providing clear visibility into ownership structures, funding rounds, and cap table calculations."
         gradient="linear-gradient(135deg, #0F2A44 0%, #5F87A8 100%)"
-        applications={["web"]}
-        role="Design + Code"
+        iconSrc={iconCaptable}
+        metaChips={[
+          { label: "Role", value: "Design + Code" },
+          { label: "Platform", value: "Web" },
+          { label: "Focus", value: "Data Visualization" },
+        ]}
       />
 
-      <ProjectContentWrapper description="Captable simplifies equity management for startups and investors, providing clear visibility into ownership structures and funding rounds.">
+      <ProjectContentWrapper>
         <FeatureGrid
           features={features}
           columns={2}

@@ -1,4 +1,5 @@
 import { Calendar, DollarSign, Users, FileText, TrendingUp } from "lucide-react";
+import iconEchelon from "@/assets/icon-echelon.png";
 import {
   ProjectDetailHero, ChallengeSolution, FeatureGrid,
   TechStackSection, ProjectContentWrapper,
@@ -19,14 +20,19 @@ export default function EchelonConstructorsDetail() {
     <div className="flex flex-col">
       <ProjectDetailHero
         title="Echelon Constructors"
-        category="ERP"
-        industryDomain="Construction"
+        subtitle="Construction Project Management Software"
+        category="Enterprise Resource Planning (ERP)"
+        description="End-to-end project management from bidding to completion, enabling real-time visibility into budgets, timelines, and resources for construction firms."
         gradient="linear-gradient(135deg, #9BCF7A 0%, #F28C28 100%)"
-        applications={["web"]}
-        role="UX/UI Design"
+        iconSrc={iconEchelon}
+        metaChips={[
+          { label: "Role", value: "UX/UI Designer" },
+          { label: "Platform", value: "Web" },
+          { label: "Focus", value: "Project Planning" },
+        ]}
       />
 
-      <ProjectContentWrapper description="Echelon Constructors is an ERP solution tailored for the construction industry, enabling end-to-end project management from bidding to completion.">
+      <ProjectContentWrapper>
         <ChallengeSolution
           challenge="Scattered spreadsheets and disconnected tools causing cost overruns and missed deadlines."
           solution="Centralized ERP with real-time visibility into budgets, timelines, and resources."

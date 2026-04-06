@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Monitor, Shield, Smartphone, Search, Workflow, Layers, Map } from "lucide-react";
+import iconUtilityPlus from "@/assets/icon-utility-plus.png";
 import {
   ProjectDetailHero, SegmentedTabs, DesignProcessGrid,
   OutcomeSection, ConfidentialityNote, ProjectContentWrapper,
@@ -34,23 +35,26 @@ export default function UtilityPlusDetail() {
   return (
     <div className="flex flex-col">
       <ProjectDetailHero
-        title="Utility Plus"
-        category="SaaS"
-        industryDomain="Public Utilities / Government"
+        title="UtilityPlus"
+        subtitle="Government Utility Billing Application"
+        category="Software as a Service (SaaS)"
+        description="A unified government utility management ecosystem enabling bill payments, work order tracking, and occupational license management across Web, Admin, and Mobile platforms."
         gradient="linear-gradient(135deg, #6FA8FF 0%, #2E5AAC 100%)"
-        applications={["web", "mobile", "tablet"]}
-        role="UX/UI Design"
+        iconSrc={iconUtilityPlus}
+        metaChips={[
+          { label: "Role", value: "UX/UI Designer" },
+          { label: "Platform", value: "Web, Admin, Mobile" },
+          { label: "Focus", value: "Workflow Simplification" },
+        ]}
       />
 
       <ProjectContentWrapper>
         <SegmentedTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
-
         <div key={activeTab} className="animate-fade-in">
           {activeTab === "web" && <WebPortalTab />}
           {activeTab === "admin" && <AdminPortalTab />}
           {activeTab === "mobile" && <MobileAppTab />}
         </div>
-
         <DesignProcessGrid steps={designProcess} />
         <OutcomeSection outcomes={outcomes} />
         <ConfidentialityNote />

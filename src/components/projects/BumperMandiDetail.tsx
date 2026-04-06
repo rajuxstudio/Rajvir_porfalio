@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Monitor, Smartphone, Gavel, TrendingUp, CreditCard, Award, Truck } from "lucide-react";
+import iconBumperMandi from "@/assets/icon-bumper-mandi.png";
 import {
   ProjectDetailHero, SegmentedTabs, ChallengeSolution, FeatureGrid,
   TechStackSection, ImpactBanner, MobileAppDownload, ProjectContentWrapper,
@@ -27,22 +28,25 @@ export default function BumperMandiDetail() {
     <div className="flex flex-col">
       <ProjectDetailHero
         title="Bumper Mandi"
+        subtitle="Digital Agricultural Marketplace"
         category="AgriTech"
-        industryDomain="Agriculture"
+        description="Connects farmers directly with buyers, eliminating middlemen and ensuring fair pricing through transparent real-time bidding on agricultural produce."
         gradient="linear-gradient(135deg, #E7C15A 0%, #9C7A1E 100%)"
-        applications={["mobile", "web"]}
-        role="Design + Code"
+        iconSrc={iconBumperMandi}
+        metaChips={[
+          { label: "Role", value: "Design + Code" },
+          { label: "Platform", value: "Mobile, Web" },
+          { label: "Focus", value: "Fair Trade" },
+        ]}
       />
 
-      <ProjectContentWrapper description="Bumper Mandi connects farmers directly with buyers, eliminating middlemen and ensuring fair pricing through transparent bidding.">
+      <ProjectContentWrapper>
         <ImpactBanner
           value="20-30%"
           label="More earnings for farmers"
           gradient="linear-gradient(135deg, #E7C15A 0%, #9C7A1E 100%)"
         />
-
         <SegmentedTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
-
         <div key={activeTab} className="animate-fade-in">
           {activeTab === "overview" && (
             <>
@@ -56,7 +60,6 @@ export default function BumperMandiDetail() {
               <TechStackSection stack={techStack} />
             </>
           )}
-
           {activeTab === "mobile" && (
             <MobileAppDownload
               headline="Farm-to-buyer trading, right from your phone"

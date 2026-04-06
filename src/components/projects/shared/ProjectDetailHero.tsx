@@ -1,102 +1,75 @@
-import { Monitor, Smartphone, Tablet } from "lucide-react";
-
 interface ProjectDetailHeroProps {
   title: string;
+  subtitle?: string;
   category: string;
-  industryDomain?: string;
+  description?: string;
   gradient: string;
-  applications?: ("web" | "mobile" | "tablet")[];
-  role?: string;
-  duration?: string;
-  mockupSrc?: string;
+  iconSrc?: string;
+  metaChips?: { label: string; value: string }[];
 }
 
 export default function ProjectDetailHero({
   title,
+  subtitle,
   category,
-  industryDomain,
+  description,
   gradient,
-  applications,
-  role,
-  duration,
-  mockupSrc,
+  iconSrc,
+  metaChips,
 }: ProjectDetailHeroProps) {
-  const platformIcons = {
-    web: <Monitor size={12} />,
-    mobile: <Smartphone size={12} />,
-    tablet: <Tablet size={12} />,
-  };
-
   return (
-    <div className="relative -mx-6 sm:-mx-8 -mt-4 mb-2">
-      {/* Gradient banner */}
-      <div
-        className="relative h-44 sm:h-56 overflow-hidden"
-        style={{ background: gradient }}
-      >
-        {/* Subtle pattern overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage: `radial-gradient(circle at 20% 50%, rgba(255,255,255,0.3) 1px, transparent 1px),
-              radial-gradient(circle at 80% 20%, rgba(255,255,255,0.2) 1px, transparent 1px)`,
-            backgroundSize: "40px 40px, 60px 60px",
-          }}
-        />
-        {/* Mockup image */}
-        {mockupSrc && mockupSrc !== "/placeholder.svg" && (
-          <img
-            src={mockupSrc}
-            alt={title}
-            className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay"
-          />
+    <div
+      className="relative -mx-6 sm:-mx-8 -mt-4 mb-2"
+      style={{
+        background: `linear-gradient(180deg, ${gradient.includes("linear-gradient") ? gradient.replace("linear-gradient(135deg, ", "").replace(")", "").split(",")[0].trim() : "hsl(var(--muted))"}15 0%, transparent 100%)`,
+      }}
+    >
+      <div className="flex flex-col items-center text-center px-6 sm:px-8 pt-10 pb-8 gap-5">
+        {/* App Icon */}
+        {iconSrc && (
+          <div className="w-16 h-16 rounded-2xl overflow-hidden shadow-lg border border-border/30">
+            <img src={iconSrc} alt={title} className="w-full h-full object-cover" width={64} height={64} />
+          </div>
         )}
-        {/* Fade to card */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-card to-transparent" />
-      </div>
 
-      {/* Content overlay at bottom of banner */}
-      <div className="relative -mt-20 px-6 sm:px-8 z-10">
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-white drop-shadow-md leading-tight">
-          {title}
-        </h2>
-
-        <div className="flex flex-wrap items-center gap-2 mt-3">
-          <span className="text-xs font-bold px-3 py-1 rounded-full bg-white/20 text-white backdrop-blur-sm">
-            {category}
-          </span>
-          {industryDomain && (
-            <span className="text-xs font-medium px-3 py-1 rounded-full bg-white/10 text-white/80 backdrop-blur-sm">
-              {industryDomain}
-            </span>
+        {/* Title */}
+        <div className="flex flex-col items-center gap-1.5">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground leading-tight">
+            {title}
+          </h2>
+          {subtitle && (
+            <p className="text-sm font-medium" style={{ color: gradient.includes("linear-gradient") ? gradient.replace("linear-gradient(135deg, ", "").replace(")", "").split(",")[0].trim() : "hsl(var(--accent))" }}>
+              {subtitle}
+            </p>
           )}
         </div>
 
-        {/* Meta chips row */}
-        <div className="flex flex-wrap items-center gap-3 mt-4">
-          {applications && applications.length > 0 && (
-            <div className="flex items-center gap-1.5">
-              {applications.map((app) => (
-                <span
-                  key={app}
-                  className="w-7 h-7 rounded-lg bg-secondary/80 backdrop-blur-sm flex items-center justify-center text-muted-foreground border border-border/50"
-                >
-                  {platformIcons[app]}
-                </span>
-              ))}
-            </div>
-          )}
-          {role && (
-            <span className="text-xs font-medium px-3 py-1.5 rounded-lg bg-secondary/80 text-foreground border border-border/50">
-              {role}
-            </span>
-          )}
-          {duration && (
-            <span className="text-xs font-medium px-3 py-1.5 rounded-lg bg-secondary/80 text-muted-foreground border border-border/50">
-              {duration}
-            </span>
-          )}
-        </div>
+        {/* Category Badge */}
+        <span className="text-xs font-semibold px-4 py-1.5 rounded-full border border-border bg-background text-foreground">
+          {category}
+        </span>
+
+        {/* Description */}
+        {description && (
+          <p className="text-sm text-muted-foreground leading-relaxed max-w-lg">
+            {description}
+          </p>
+        )}
+
+        {/* Meta Chips */}
+        {metaChips && metaChips.length > 0 && (
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-1">
+            {metaChips.map((chip) => (
+              <span
+                key={chip.label}
+                className="text-xs font-medium px-3 py-1.5 rounded-lg border border-border bg-background text-muted-foreground"
+              >
+                <span className="font-bold text-foreground">{chip.label}:</span>{" "}
+                {chip.value}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { Monitor, Smartphone } from "lucide-react";
+import { Monitor, Smartphone, Image } from "lucide-react";
 import iconCloudgavel from "@/assets/icon-cloudgavel.png";
+import mockupCloudgavel1 from "@/assets/mockup-cloudgavel-1.jpg";
 import {
   ProjectDetailHero, SegmentedTabs, TimelineGrid,
-  StatsRow, TechStackSection, MobileAppDownload, ProjectContentWrapper,
+  StatsRow, TechStackSection, MobileAppDownload, ProjectContentWrapper, MockupGallery,
 } from "./projectUI";
 
 const tabs = [
   { id: "overview", label: "Overview", icon: <Monitor size={14} /> },
   { id: "mobile", label: "Mobile App", icon: <Smartphone size={14} /> },
+  { id: "mockups", label: "Mockups", icon: <Image size={14} /> },
 ];
 
 const timeline = [
@@ -25,6 +27,10 @@ const stats = [
 ];
 
 const techStack = ["React", "Python", "Django", "PostgreSQL", "Docker"];
+
+const mockups = [
+  { src: mockupCloudgavel1, alt: "CloudGavel - Warrant Management Dashboard" },
+];
 
 export default function CloudGavelDetail() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -74,6 +80,7 @@ export default function CloudGavelDetail() {
               ]}
             />
           )}
+          {activeTab === "mockups" && <MockupGallery mockups={mockups} />}
         </div>
       </ProjectContentWrapper>
     </div>

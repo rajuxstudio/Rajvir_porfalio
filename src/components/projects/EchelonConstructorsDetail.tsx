@@ -1,8 +1,9 @@
 import { Calendar, DollarSign, Users, FileText, TrendingUp } from "lucide-react";
 import iconEchelon from "@/assets/icon-echelon.png";
+import mockupEchelon1 from "@/assets/mockup-echelon-1.jpg";
 import {
   ProjectDetailHero, ChallengeSolution, FeatureGrid,
-  TechStackSection, ProjectContentWrapper,
+  TechStackSection, ProjectContentWrapper, MockupGallery,
 } from "./projectUI";
 
 const modules = [
@@ -14,6 +15,10 @@ const modules = [
 ];
 
 const techStack = ["React", "Node.js", "MongoDB", "Material UI", "Azure"];
+
+const mockups = [
+  { src: mockupEchelon1, alt: "Echelon Constructors - Project Management Dashboard" },
+];
 
 export default function EchelonConstructorsDetail() {
   return (
@@ -39,6 +44,7 @@ export default function EchelonConstructorsDetail() {
           gradient="linear-gradient(135deg, #9BCF7A 0%, #F28C28 100%)"
         />
         <FeatureGrid title="Core Modules" features={modules} />
+        <MockupGallery mockups={mockups} />
         <TechStackSection stack={techStack} />
       </ProjectContentWrapper>
     </div>

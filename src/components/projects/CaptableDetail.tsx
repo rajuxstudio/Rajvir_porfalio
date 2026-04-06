@@ -1,7 +1,8 @@
 import { PieChart, TrendingUp, FileText, Users, Calculator } from "lucide-react";
 import iconCaptable from "@/assets/icon-captable.png";
+import mockupCaptable1 from "@/assets/mockup-captable-1.jpg";
 import {
-  ProjectDetailHero, FeatureGrid, TechStackSection, ProjectContentWrapper,
+  ProjectDetailHero, FeatureGrid, TechStackSection, ProjectContentWrapper, MockupGallery,
 } from "./projectUI";
 
 const features = [
@@ -13,6 +14,10 @@ const features = [
 ];
 
 const techStack = ["React", "TypeScript", "Supabase", "Tailwind CSS"];
+
+const mockups = [
+  { src: mockupCaptable1, alt: "Captable - Equity Management Dashboard" },
+];
 
 export default function CaptableDetail() {
   return (
@@ -37,6 +42,7 @@ export default function CaptableDetail() {
           columns={2}
           gradient="linear-gradient(135deg, #0F2A44 0%, #5F87A8 100%)"
         />
+        <MockupGallery mockups={mockups} />
         <TechStackSection stack={techStack} />
       </ProjectContentWrapper>
     </div>

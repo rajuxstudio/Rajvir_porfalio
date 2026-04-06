@@ -1,18 +1,20 @@
 import { useState } from "react";
 import {
   Monitor, Smartphone, Users, Search, Calendar, CreditCard, BarChart3,
-  Layers, Target, Zap,
+  Layers, Target, Zap, Image,
 } from "lucide-react";
 import iconRecruitease from "@/assets/icon-recruitease.png";
+import mockupRecruitease1 from "@/assets/mockup-recruitease-1.jpg";
 import {
   ProjectDetailHero, SegmentedTabs, ChallengeSolution, StatsRow,
   FeatureGrid, DesignProcessGrid, OutcomeSection, TechStackSection,
-  ConfidentialityNote, MobileAppDownload, ProjectContentWrapper,
+  ConfidentialityNote, MobileAppDownload, ProjectContentWrapper, MockupGallery,
 } from "./projectUI";
 
 const tabs = [
   { id: "overview", label: "Overview", icon: <Monitor size={14} /> },
   { id: "mobile", label: "Mobile App", icon: <Smartphone size={14} /> },
+  { id: "mockups", label: "Mockups", icon: <Image size={14} /> },
 ];
 
 const features = [
@@ -44,6 +46,10 @@ const stats = [
 ];
 
 const techStack = ["React", "Node.js", "PostgreSQL", "Tailwind CSS", "Stripe"];
+
+const mockups = [
+  { src: mockupRecruitease1, alt: "RecruitEase - Recruitment Dashboard" },
+];
 
 export default function RecruitEaseDetail() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -105,6 +111,7 @@ export default function RecruitEaseDetail() {
               uxFocus={["Fast candidate discovery", "Frictionless applications", "Real-time engagement", "Cross-platform consistency"]}
             />
           )}
+          {activeTab === "mockups" && <MockupGallery mockups={mockups} />}
         </div>
       </ProjectContentWrapper>
     </div>

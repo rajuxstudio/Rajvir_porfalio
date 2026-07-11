@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Monitor, Smartphone, Tablet, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { projects, Project } from "@/lib/projectsData";
 
 const platformLabel = { web: "Web App", mobile: "Mobile App", tablet: "Tablet App" };
@@ -29,18 +30,13 @@ export default function ProjectDetail() {
     <div className="min-h-screen bg-background">
       {/* Back button */}
       <div className="fixed top-6 left-6 z-50">
-        <button
+        <Button
+          variant="outline"
+          className="gap-2 rounded-full px-4 py-2 text-sm font-medium backdrop-blur-md transition-all hover:scale-105"
           onClick={() => navigate("/")}
-          className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-md transition-all hover:scale-105"
-          style={{
-            background: "hsl(var(--card) / 0.85)",
-            color: "hsl(var(--foreground))",
-            border: "1px solid hsl(var(--border))",
-            boxShadow: "0 4px 20px hsl(var(--foreground) / 0.08)",
-          }}
         >
           <ArrowLeft size={16} /> Back
-        </button>
+        </Button>
       </div>
 
       {/* Hero banner */}

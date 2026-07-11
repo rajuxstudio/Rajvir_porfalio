@@ -1,14 +1,14 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Award } from "lucide-react";
 
-const certifications = [
+export const CERTS = [
   { title: "Google UX Design", org: "Google · Coursera", year: "2023" },
   { title: "Interaction Design Specialization", org: "UC San Diego · Coursera", year: "2023" },
   { title: "Advanced UI/UX Design", org: "Design Academy", year: "2022" },
   { title: "Responsive Web Design", org: "freeCodeCamp", year: "2022" },
 ];
 
-function CertCard({ cert, index, isVisible }: { cert: typeof certifications[0]; index: number; isVisible: boolean }) {
+function CertCard({ cert, index, isVisible }: { cert: typeof CERTS[0]; index: number; isVisible: boolean }) {
   return (
     <div
       className="group rounded-2xl border border-border bg-card p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
@@ -60,7 +60,7 @@ export default function AboutCertifications() {
           Credentials & Badges
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {certifications.map((cert, i) => (
+          {CERTS.map((cert, i) => (
             <CertCard key={cert.title} cert={cert} index={i} isVisible={isVisible} />
           ))}
         </div>

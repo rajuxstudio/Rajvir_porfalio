@@ -1,5 +1,5 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import heroPhoto from "@/assets/hero-photo.png";
+import heroPhoto from "@/assets/Pages/hero-photo.png";
 
 const skills = ["UX Design", "UI Design", "Design Systems", "Product Thinking", "AI & Cloud Basics"];
 

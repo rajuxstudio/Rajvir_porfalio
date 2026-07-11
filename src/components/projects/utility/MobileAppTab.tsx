@@ -1,6 +1,6 @@
 import MobileAppDownload from "@/components/projects/shared/MobileAppDownload";
-import mobileMockup1 from "@/assets/utility-mobile-mockup-1.png";
-import mobileMockup2 from "@/assets/utility-mobile-mockup-2.png";
+import mobileMockup1 from "@/assets/Pages/utility-mobile-mockup-1.png";
+import mobileMockup2 from "@/assets/Pages/utility-mobile-mockup-2.png";
 
 export default function MobileAppTab() {
   return (

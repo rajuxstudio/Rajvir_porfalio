@@ -13,7 +13,7 @@ const detailComponents: Record<string, React.LazyExoticComponent<() => JSX.Eleme
   "recruit-ease": lazy(() => import("@/components/projects/RecruitEaseDetail")),
   "new-project": lazy(() => import("@/components/projects/NewProjectDetail")),
 };
-
+5
 type Props = {
   open: boolean;
   onClose: () => void;

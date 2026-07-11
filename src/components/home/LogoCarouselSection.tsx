@@ -1,7 +1,7 @@
-import logoCilcx from "@/assets/logo-cilcx.svg";
-import logoName from "@/assets/logo-name.svg";
-import logoFrame1 from "@/assets/logo-frame1.svg";
-import logoRecruitEase from "@/assets/logo-recruit-ease.svg";
+import logoCilcx from "@/assets/pages/logo-cilcx.svg";
+import logoName from "@/assets/pages/logo-name.svg";
+import logoFrame1 from "@/assets/pages/logo-frame1.svg";
+import logoRecruitEase from "@/assets/pages/logo-recruit-ease.svg";
 
 const logos = [
   { src: logoCilcx, alt: "Cilcx" },
@@ -20,7 +20,7 @@ export default function LogoCarouselSection() {
       style={{ background: "hsl(var(--background))" }}
     >
       <p
-        className="text-center text-[10px] tracking-[0.22em] uppercase font-medium mb-10"
+        className="text-center text-xs tracking-[0.22em] uppercase font-medium mb-10"
         style={{ color: "hsl(var(--muted-foreground))" }}
       >
         Trusted by

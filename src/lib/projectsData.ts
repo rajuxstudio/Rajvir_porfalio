@@ -1,4 +1,4 @@
-import cloudgavelMockup from "@/assets/cloudgavel-mockup.png";
+import cloudgavelMockup from "@/assets/pages/cloudgavel-mockup.png";
 
 export interface Project {
   id: number;

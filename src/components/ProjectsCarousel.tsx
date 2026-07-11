@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { ArrowRight, Monitor, Smartphone, Tablet } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import rLogo from "@/assets/r-logo.png";
+import rLogo from "@/assets/Pages/r-logo.png";
 import { projects as allProjects, Project } from "@/lib/projectsData";
 import ProjectDetailDialog from "@/components/ProjectDetailDialog";
+import LogoCarouselSection from "./home/LogoCarouselSection";
 
 const projects = allProjects.filter(p => !p.hideFromCarousel);
 
@@ -83,9 +84,7 @@ export default function ProjectsCarousel() {
   const displayProject = hoveredIndex !== null ? projects[hoveredIndex] : projects[activeIndex];
 
   return (
-    <section className="relative w-full flex flex-col overflow-hidden" style={{ minHeight: "100vh", background: "hsl(var(--background))" }}>
-
-
+<section className="relative flex flex-col h-[92vh] md:h-screen overflow-hidden bg-background text-foreground">
       {/* Ambient glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
@@ -93,9 +92,10 @@ export default function ProjectsCarousel() {
           style={{ background: "hsl(var(--accent))" }}
         />
       </div>
+      <LogoCarouselSection />
 
       {/* Stats row */}
-      <div className="relative z-10 w-full py-4 md:py-10">
+      {/* <div className="relative z-10 w-full py-4 md:py-10">
         <div className="max-w-5xl mx-auto px-4 md:px-6 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
           {stats.map((s) => (
             <div key={s.label} className="flex flex-col items-center gap-1">
@@ -108,7 +108,7 @@ export default function ProjectsCarousel() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* Carousel — top portion */}
       <div className="flex-1 flex items-center justify-center">

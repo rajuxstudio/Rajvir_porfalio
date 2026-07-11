@@ -1,28 +1,35 @@
+import QuickActionPanel from "@/components/newUI/QuickActionPanel";
+import Header from "@/components/newUI/header";
 import AboutHero from "@/components/about/AboutHero";
-import AboutExperience from "@/components/about/AboutExperience";
 import AboutEducation from "@/components/about/AboutEducation";
+import AboutExperience from "@/components/about/AboutExperience";
 import AboutCertifications from "@/components/about/AboutCertifications";
-import AboutHobbies from "@/components/about/AboutHobbies";
-import AboutPhilosophy from "@/components/about/AboutPhilosophy";
-import AboutCTA from "@/components/about/AboutCTA";
-import ThemeToggle from "@/components/ThemeToggle";
+import Footer from "@/components/newUI/footer";
+import Detail from "@/components/me/Detail";
 
-export default function About() {
+
+const SectionDivider = () => (
+  <div className="flex items-center justify-center py-4">
+    <div className="w-24 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+  </div>
+);
+  
+const About = () => {
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 sm:px-10 py-3 bg-transparent backdrop-blur-md">
-        <a href="/" className="text-foreground font-bold text-lg tracking-tight">← Back</a>
-        <ThemeToggle />
-      </header>
-      <main>
+      <Header />
+      <QuickActionPanel />
+
+      <main className="min-h-screen bg-background text-foreground">
+        <Detail />
         <AboutHero />
         <AboutExperience />
         <AboutEducation />
         <AboutCertifications />
-        <AboutHobbies />
-        <AboutPhilosophy />
-        <AboutCTA />
+        <Footer />
       </main>
     </>
   );
-}
+};
+
+export default About;

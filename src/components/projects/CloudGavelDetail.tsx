@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Monitor, Smartphone, Lock } from "lucide-react";
-import cloudgavelMockup from "@/assets/cloudgavel-mockup.png";
+import cloudgavelMockup from "@/assets/cloudGavel/cgmockup.png";
 import MobileAppDownload from "@/components/projects/shared/MobileAppDownload";
 
 const tabs = [

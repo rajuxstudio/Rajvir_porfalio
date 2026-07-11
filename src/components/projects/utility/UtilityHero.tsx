@@ -1,4 +1,4 @@
-import utilityLogo from "@/assets/utility-plus-logo.png";
+import utilityLogo from "@/assets/Pages/utility-plus-logo.png";
 
 export default function UtilityHero() {
   return (

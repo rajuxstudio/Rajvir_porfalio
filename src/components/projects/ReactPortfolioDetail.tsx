@@ -1,4 +1,10 @@
-import { Monitor, Palette, Zap, Moon, Smartphone as Responsive, Mail } from "lucide-react";
+import { Palette, Zap, Moon, Smartphone as Responsive, Mail } from "lucide-react";
+import iconPortfolio from "@/assets/icon-portfolio.png";
+import mockupPortfolio1 from "@/assets/mockup-portfolio-1.jpg";
+import {
+  ProjectDetailHero, FeatureGrid, TechStackSection,
+  HighlightBanner, ProjectContentWrapper, MockupGallery,
+} from "./projectUI";
 
 const highlights = [
   { icon: <Palette size={16} />, label: "3D Carousel" },
@@ -10,51 +16,37 @@ const highlights = [
 
 const techStack = ["React", "TypeScript", "Tailwind CSS", "Framer Motion"];
 
+const mockups = [
+  { src: mockupPortfolio1, alt: "React Portfolio - Homepage" },
+];
+
 export default function ReactPortfolioDetail() {
   return (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-wrap gap-2">
-        <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-accent/15 text-accent">Web Development</span>
-        <span className="text-xs font-medium px-3 py-1.5 rounded-full bg-muted text-muted-foreground">Personal / Creative</span>
-      </div>
+    <div className="flex flex-col">
+      <ProjectDetailHero
+        title="React Portfolio"
+        subtitle="Developer Portfolio Website"
+        category="Web Development"
+        description="A beautifully crafted developer portfolio showcasing projects, skills, and experience with smooth animations, interactive 3D carousel, and responsive design."
+        gradient="linear-gradient(135deg, #8B5CF6 0%, #F472B6 100%)"
+        iconSrc={iconPortfolio}
+        metaChips={[
+          { label: "Role", value: "Developer" },
+          { label: "Platform", value: "Web" },
+          { label: "Focus", value: "Visual Identity" },
+        ]}
+      />
 
-      <p className="text-sm text-muted-foreground leading-relaxed">
-        A beautifully crafted developer portfolio showcasing projects, skills, and experience with smooth animations and an interactive 3D carousel.
-      </p>
-
-      {/* Visual highlight banner */}
-      <div className="rounded-2xl p-6" style={{ background: "linear-gradient(135deg, #8B5CF6 0%, #F472B6 100%)" }}>
-        <p className="text-lg font-bold text-white mb-1">Custom-Built, Not Templated</p>
-        <p className="text-sm text-white/80">Every element hand-crafted for a unique developer identity.</p>
-      </div>
-
-      {/* Highlights */}
-      <div>
-        <h3 className="text-lg font-bold text-foreground mb-3">Highlights</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          {highlights.map((h) => (
-            <div key={h.label} className="flex flex-col items-center gap-2 p-4 rounded-xl bg-muted border border-border text-center">
-              <span className="text-accent">{h.icon}</span>
-              <span className="text-xs font-medium text-foreground">{h.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="flex gap-3">
-        <span className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-muted text-foreground border border-border">
-          <Monitor size={14} /> Web
-        </span>
-      </div>
-
-      <div>
-        <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">Tech Stack</h4>
-        <div className="flex flex-wrap gap-2">
-          {techStack.map((t) => (
-            <span key={t} className="text-xs font-medium px-3 py-1.5 rounded-lg bg-background text-foreground border border-border">{t}</span>
-          ))}
-        </div>
-      </div>
+      <ProjectContentWrapper>
+        <HighlightBanner
+          title="Custom-Built, Not Templated"
+          subtitle="Every element hand-crafted for a unique developer identity."
+          gradient="linear-gradient(135deg, #8B5CF6 0%, #F472B6 100%)"
+        />
+        <FeatureGrid title="Highlights" features={highlights} />
+        <MockupGallery mockups={mockups} />
+        <TechStackSection stack={techStack} />
+      </ProjectContentWrapper>
     </div>
   );
 }

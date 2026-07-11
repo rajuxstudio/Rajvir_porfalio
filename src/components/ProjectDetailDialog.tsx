@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import { Project } from "@/lib/projectsData";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 
 // Per-project detail components
 const detailComponents: Record<string, React.LazyExoticComponent<() => JSX.Element>> = {
@@ -21,6 +21,17 @@ type Props = {
 };
 
 export default function ProjectDetailDialog({ open, onClose, project }: Props) {
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   if (!open || !project) return null;
 
   const DetailComponent = detailComponents[project.slug];
@@ -57,7 +68,7 @@ export default function ProjectDetailDialog({ open, onClose, project }: Props) {
         className="relative z-10 w-full rounded-t-2xl animate-slide-up overflow-y-auto bg-card border border-border border-b-0"
         style={{ maxHeight: "88vh" }}
       >
-        <div className="p-6 sm:p-8 pt-4 flex flex-col gap-6">
+        <div className="flex flex-col">
           {content}
         </div>
       </div>

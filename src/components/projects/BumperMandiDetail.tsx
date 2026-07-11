@@ -1,13 +1,17 @@
 import { useState } from "react";
-import { Monitor, Smartphone, Gavel, TrendingUp, CreditCard, Award, Truck } from "lucide-react";
-import MobileAppDownload from "@/components/projects/shared/MobileAppDownload";
+import { Monitor, Smartphone, Gavel, TrendingUp, CreditCard, Award, Truck, Image } from "lucide-react";
+import iconBumperMandi from "@/assets/icon-bumper-mandi.png";
+import mockupBumper1 from "@/assets/mockup-bumper-1.jpg";
+import {
+  ProjectDetailHero, SegmentedTabs, ChallengeSolution, FeatureGrid,
+  TechStackSection, ImpactBanner, MobileAppDownload, ProjectContentWrapper, MockupGallery,
+} from "./projectUI";
 
 const tabs = [
   { id: "overview", label: "Overview", icon: <Monitor size={14} /> },
   { id: "mobile", label: "Mobile App", icon: <Smartphone size={14} /> },
-] as const;
-
-type TabId = (typeof tabs)[number]["id"];
+  { id: "mockups", label: "Mockups", icon: <Image size={14} /> },
+];
 
 const webFeatures = [
   { icon: <Gavel size={16} />, label: "Live Auction & Bidding" },
@@ -19,113 +23,70 @@ const webFeatures = [
 
 const techStack = ["React Native", "Node.js", "Firebase", "Google Maps API"];
 
+const mockups = [
+  { src: mockupBumper1, alt: "Bumper Mandi - Agricultural Marketplace App" },
+];
+
 export default function BumperMandiDetail() {
-  const [activeTab, setActiveTab] = useState<TabId>("overview");
+  const [activeTab, setActiveTab] = useState("overview");
 
   return (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-wrap gap-2">
-        <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-accent/15 text-accent">AgriTech</span>
-        <span className="text-xs font-medium px-3 py-1.5 rounded-full bg-muted text-muted-foreground">Agriculture</span>
-      </div>
+    <div className="flex flex-col">
+      <ProjectDetailHero
+        title="Bumper Mandi"
+        subtitle="Digital Agricultural Marketplace"
+        category="AgriTech"
+        description="Connects farmers directly with buyers, eliminating middlemen and ensuring fair pricing through transparent real-time bidding on agricultural produce."
+        gradient="linear-gradient(135deg, #E7C15A 0%, #9C7A1E 100%)"
+        iconSrc={iconBumperMandi}
+        metaChips={[
+          { label: "Role", value: "Design + Code" },
+          { label: "Platform", value: "Mobile, Web" },
+          { label: "Focus", value: "Fair Trade" },
+        ]}
+      />
 
-      <p className="text-sm text-muted-foreground leading-relaxed">
-        Bumper Mandi connects farmers directly with buyers, eliminating middlemen and ensuring fair pricing through transparent bidding.
-      </p>
-
-      {/* Impact highlight */}
-      <div className="rounded-2xl p-6 text-center" style={{ background: "linear-gradient(135deg, #E7C15A 0%, #9C7A1E 100%)" }}>
-        <p className="text-4xl font-black text-white">20-30%</p>
-        <p className="text-sm text-white/80 mt-1">More earnings for farmers</p>
-      </div>
-
-      {/* Tab Switch */}
-      <div className="flex justify-center">
-        <div className="inline-flex items-center gap-1 p-1 rounded-full bg-muted border border-border shadow-sm">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-1.5 text-sm font-medium px-5 py-2 rounded-full transition-all duration-300 ${
-                activeTab === tab.id
-                  ? "bg-card text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              <span className="sm:hidden">{tab.icon}</span>
-              <span className="hidden sm:inline-flex sm:items-center sm:gap-1.5">{tab.icon} {tab.label}</span>
-            </button>
-          ))}
+      <ProjectContentWrapper>
+        <ImpactBanner
+          value="20-30%"
+          label="More earnings for farmers"
+          gradient="linear-gradient(135deg, #E7C15A 0%, #9C7A1E 100%)"
+        />
+        <SegmentedTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+        <div key={activeTab} className="animate-fade-in">
+          {activeTab === "overview" && (
+            <>
+              <ChallengeSolution
+                challenge="Farmers exploited by middlemen, receiving a fraction of market price."
+                solution="Transparent digital marketplace with real-time bidding for direct farmer-to-buyer sales."
+              />
+              <div className="mt-6" />
+              <FeatureGrid features={webFeatures} />
+              <div className="mt-6" />
+              <TechStackSection stack={techStack} />
+            </>
+          )}
+          {activeTab === "mobile" && (
+            <MobileAppDownload
+              headline="Farm-to-buyer trading, right from your phone"
+              features={[
+                { title: "Live Bidding", desc: "Participate in real-time auctions and place bids from anywhere." },
+                { title: "Price Alerts", desc: "Get notified when market prices hit your target range." },
+                { title: "Quality Upload", desc: "Capture and upload produce photos for quality grading." },
+                { title: "Payment Tracking", desc: "Track payments and transaction history on the go." },
+              ]}
+              contributions={[
+                "Mobile-first marketplace design",
+                "Bidding flow UX optimization",
+                "Farmer onboarding experience",
+                "Multilingual interface support",
+              ]}
+              uxFocus={["Simple for rural users", "Low-bandwidth optimized", "Trust-driven UI", "Vernacular language support"]}
+            />
+          )}
+          {activeTab === "mockups" && <MockupGallery mockups={mockups} />}
         </div>
-      </div>
-
-      <div key={activeTab} className="animate-fade-in">
-        {activeTab === "overview" && (
-          <>
-            {/* Challenge & Solution */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <div className="rounded-2xl p-5 bg-muted border border-border">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">Challenge</h4>
-                <p className="text-sm text-foreground">Farmers exploited by middlemen, receiving a fraction of market price.</p>
-              </div>
-              <div className="rounded-2xl p-5 bg-muted border border-border">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">Solution</h4>
-                <p className="text-sm text-foreground">Transparent digital marketplace with real-time bidding for direct farmer-to-buyer sales.</p>
-              </div>
-            </div>
-
-            {/* Features */}
-            <div className="mb-6">
-              <h3 className="text-lg font-bold text-foreground mb-3">Features</h3>
-              <div className="flex flex-wrap gap-2">
-                {webFeatures.map((f) => (
-                  <span key={f.label} className="flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-full bg-muted text-foreground border border-border">
-                    {f.icon} {f.label}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Platforms */}
-            <div className="flex gap-3 mb-6">
-              {[{ icon: <Smartphone size={14} />, label: "Mobile" }, { icon: <Monitor size={14} />, label: "Web" }].map((p) => (
-                <span key={p.label} className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-muted text-foreground border border-border">
-                  {p.icon} {p.label}
-                </span>
-              ))}
-            </div>
-
-            {/* Tech stack */}
-            <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">Tech Stack</h4>
-              <div className="flex flex-wrap gap-2">
-                {techStack.map((t) => (
-                  <span key={t} className="text-xs font-medium px-3 py-1.5 rounded-lg bg-background text-foreground border border-border">{t}</span>
-                ))}
-              </div>
-            </div>
-          </>
-        )}
-
-        {activeTab === "mobile" && (
-          <MobileAppDownload
-            headline="Farm-to-buyer trading, right from your phone"
-            features={[
-              { title: "Live Bidding", desc: "Participate in real-time auctions and place bids from anywhere." },
-              { title: "Price Alerts", desc: "Get notified when market prices hit your target range." },
-              { title: "Quality Upload", desc: "Capture and upload produce photos for quality grading." },
-              { title: "Payment Tracking", desc: "Track payments and transaction history on the go." },
-            ]}
-            contributions={[
-              "Mobile-first marketplace design",
-              "Bidding flow UX optimization",
-              "Farmer onboarding experience",
-              "Multilingual interface support",
-            ]}
-            uxFocus={["Simple for rural users", "Low-bandwidth optimized", "Trust-driven UI", "Vernacular language support"]}
-          />
-        )}
-      </div>
+      </ProjectContentWrapper>
     </div>
   );
 }

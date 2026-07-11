@@ -279,7 +279,7 @@ type CertificatePocketCard = {
 
 const CERTIFICATE_POCKET_CARDS: CertificatePocketCard[] = CERTS.slice(0, 3).map((cert, index) => ({
   name: cert.title,
-  meta: `${cert.org ?? cert.issuer ?? ""} · ${cert.year}`,
+  meta: `${cert.org} · ${cert.year}`,
   gradient:
     index === 0
       ? "from-sky-400 via-indigo-500 to-purple-600"

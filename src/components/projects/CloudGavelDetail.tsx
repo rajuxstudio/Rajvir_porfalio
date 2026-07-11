@@ -1,9 +1,4 @@
 import { useState } from "react";
-<<<<<<< HEAD
-import { Monitor, Smartphone, Lock } from "lucide-react";
-import cloudgavelMockup from "@/assets/cloudGavel/cgmockup.png";
-import MobileAppDownload from "@/components/projects/shared/MobileAppDownload";
-=======
 import { Monitor, Smartphone, Image } from "lucide-react";
 import iconCloudgavel from "@/assets/icon-cloudgavel.png";
 import mockupCloudgavel1 from "@/assets/mockup-cloudgavel-1.jpg";
@@ -11,7 +6,6 @@ import {
   ProjectDetailHero, SegmentedTabs, TimelineGrid,
   StatsRow, TechStackSection, MobileAppDownload, ProjectContentWrapper, MockupGallery,
 } from "./projectUI";
->>>>>>> 597d8170d1394f79a3b17149bcd1824bced3f1cf
 
 const tabs = [
   { id: "overview", label: "Overview", icon: <Monitor size={14} /> },

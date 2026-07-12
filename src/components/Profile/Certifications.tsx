@@ -7,70 +7,16 @@ import {
   ExternalLink,
   CheckCircle2,
 } from "lucide-react";
-
-type Certificate = {
-  title: string;
-  issuer: string;
-  issued: string;
-  description: string;
-  skills: string[];
-  verifyUrl: string;
-  accent: string;
-};
-
-export const certificates: Certificate[] = [
-  {
-    title: "Introduction to JavaScript",
-    issuer: "SoloLearn",
-    issued: "May 2024",
-    description:
-      "Learned JavaScript fundamentals including variables, functions, loops, arrays and modern ES6 concepts.",
-    skills: ["JavaScript", "ES6", "Logic"],
-    verifyUrl:
-      "https://www.sololearn.com/en/certificates/CC-CK836PN6",
-    accent: "from-fuchsia-500/20 to-violet-500/10",
-  },
-  {
-    title: "UIUX Design",
-    issuer: "Internshala",
-    issued: "Apr 2022",
-    description:
-      "Covered UI design, UX principles, wireframing, user flows and visual hierarchy.",
-    skills: ["UI", "UX", "Figma"],
-    verifyUrl: "#",
-    accent: "from-sky-500/20 to-cyan-500/10",
-  },
-  {
-    title: "Product Design",
-    issuer: "Google",
-    issued: "Mar 2022",
-    description:
-      "Foundation in product thinking, usability, interaction design and design process.",
-    skills: ["Product", "UX", "Research"],
-    verifyUrl: "#",
-    accent: "from-blue-500/20 to-indigo-500/10",
-  },
-  {
-    title: "User Experience",
-    issuer: "Accenture",
-    issued: "Jan 2022",
-    description:
-      "Focused on user-centered design, accessibility and digital experiences.",
-    skills: ["UX", "Accessibility", "Design"],
-    verifyUrl:
-      "https://www.futurelearn.com/certificates/calbigj",
-    accent: "from-violet-500/20 to-purple-500/10",
-  },
-];
+import { CERTS } from "@/lib/certificates";
 
 export default function Certifications() {
   const [index, setIndex] = useState(0);
 
-  const next = () => setIndex((i) => (i + 1) % certificates.length);
+  const next = () => setIndex((i) => (i + 1) % CERTS.length);
   const prev = () =>
-    setIndex((i) => (i - 1 + certificates.length) % certificates.length);
+    setIndex((i) => (i - 1 + CERTS.length) % CERTS.length);
 
-  const item = certificates[index];
+  const item = CERTS[index];
 
   return (
     <section className="max-w-6xl mx-auto px-6 py-24">
@@ -140,7 +86,7 @@ export default function Certifications() {
             </p>
 
             <div className="flex flex-wrap gap-2 mt-8">
-              {item.skills.map((skill) => (
+              {item.skills.map((skill: string) => (
                 <span
                   key={skill}
                   className="rounded-full border px-3 py-1 text-sm"
@@ -164,7 +110,7 @@ export default function Certifications() {
       </AnimatePresence>
 
       <div className="flex justify-center gap-2 mt-8">
-        {certificates.map((_, i) => (
+        {CERTS.map((_, i: number) => (
           <button
             key={i}
             onClick={() => setIndex(i)}

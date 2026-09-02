@@ -2,12 +2,10 @@ import { useState } from "react";
 import { Search, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import CodeGridBg from "@/components/newUI/CodeGridBg";
-import HowIdesign from "@/components/design/Component/HowIdesign";
-import { getProjectBySlug } from "./projects/index_design";
+import HowIDesign from "@/components/design/components/HowIDesign";
+import { getProjectBySlug, projects, tags } from "./projects/index";
 import ProjectBottomSheet from "./ProjectBottomSheet";
 import RotatingToolsPill from "../newUI/RotatingToolsPill";
-import HowIDesign from "@/components/design/Component/HowIdesign";
-import { projects, tags } from "./projects/index_design";
 
 export default function DesignPageUI() {
   const [search, setSearch] = useState("");
@@ -22,6 +20,8 @@ export default function DesignPageUI() {
       selectedTags.length === 0 || selectedTags.includes(p.tag);
     return matchSearch && matchTag;
   });
+
+  const openProject = (slug: string) => setSelectedSlug(slug);
 
   const toggleTag = (tag: string) => {
     setSelectedTags((prev) =>
@@ -147,7 +147,7 @@ export default function DesignPageUI() {
                 whileHover={{ y: -10 }}
                 whileTap={{ scale: 0.98 }}
                 className="group cursor-pointer"
-                onClick={() => setSelectedSlug(project.slug)}
+                onClick={() => openProject(project.slug)}
               >
                 <div className="rounded-2xl overflow-hidden border border-black/10 dark:border-white/5 bg-white dark:bg-black transition-all duration-300 group-hover:border-primary/40 group-hover:shadow-xl group-hover:shadow-black/10 dark:group-hover:shadow-white/5">
 
@@ -273,7 +273,7 @@ export default function DesignPageUI() {
             : null
         }
         onClose={() => setSelectedSlug(null)}
-        onProjectClick={(slug) => setSelectedSlug(slug)}
+        onProjectClick={openProject}
       />
 
     </div>

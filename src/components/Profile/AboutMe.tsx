@@ -1,4 +1,19 @@
-import { Briefcase, MapPin, Calendar } from "lucide-react";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Briefcase,
+  Calendar,
+  MapPin,
+  ChevronUp,
+  ChevronDown,
+  TrendingUp,
+  Figma,
+  Palette,
+  Image as ImageIcon,
+  PenTool,
+  Layers,
+  Globe,
+} from "lucide-react";
 import { PROFILE } from "./IdCard";
 
 type Experience = {
@@ -64,75 +79,159 @@ const experiences: Experience[] = [
   },
 ];
 
+const TOOL_ICONS = [Figma, Palette, ImageIcon, PenTool, Layers, Globe];
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function parseMonth(raw: string): Date {
+  const s = raw.trim();
+  if (/present/i.test(s)) return new Date();
+  const [mon, year] = s.split(" ");
+  return new Date(Number(year), Math.max(MONTHS.indexOf(mon), 0), 1);
+}
+
+function getDuration(period: string): string {
+  const [startStr, endStr] = period.split("–");
+  const start = parseMonth(startStr);
+  const end = parseMonth(endStr);
+  const totalMonths = Math.max(
+    (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth()),
+    1,
+  );
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+  const parts: string[] = [];
+  if (years) parts.push(`${years} yr${years > 1 ? "s" : ""}`);
+  if (months) parts.push(`${months} mo${months > 1 ? "s" : ""}`);
+  return parts.join(" ") || "1 mo";
+}
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.35 } },
+};
+
+function ExperienceCard({ exp }: { exp: Experience }) {
+  const [open, setOpen] = useState(true);
+
+  return (
+    <motion.li
+      variants={item}
+      className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm"
+    >
+      <div className="flex items-center justify-center gap-2 bg-accent px-4 py-4">
+        {TOOL_ICONS.map((Icon, i) => (
+          <span
+            key={i}
+            className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/15 text-white"
+          >
+            <Icon className="h-4 w-4" strokeWidth={2} />
+          </span>
+        ))}
+      </div>
+
+      <div className="p-5 sm:p-6">
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-start gap-3">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-muted text-foreground">
+              <Briefcase className="h-4 w-4" strokeWidth={2} />
+            </div>
+            <div>
+              <h4 className="text-base font-bold text-foreground sm:text-lg">{exp.title}</h4>
+              <p className="text-sm text-muted-foreground">
+                {exp.company} · {exp.type}
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            className="flex shrink-0 items-center gap-1 text-xs font-medium text-muted-foreground transition hover:text-foreground"
+          >
+            {open ? "Hide" : "Show"}
+            {open ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
+          </button>
+        </div>
+
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-border px-2.5 py-1 text-xs text-muted-foreground">
+            <Calendar className="h-3 w-3" />
+            {exp.period}
+          </span>
+          <span className="inline-flex items-center rounded-full bg-accent/10 px-2.5 py-1 text-xs font-medium text-accent">
+            {getDuration(exp.period)}
+          </span>
+          {exp.location && (
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border px-2.5 py-1 text-xs text-muted-foreground">
+              <MapPin className="h-3 w-3" />
+              {exp.location}
+            </span>
+          )}
+        </div>
+
+        {open && (
+          <>
+            <div className="mt-4 rounded-xl bg-muted/50 p-4">
+              <div className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-foreground">
+                <TrendingUp className="h-3.5 w-3.5 text-accent" />
+                Impact & Responsibilities
+              </div>
+              <ul className="space-y-1.5">
+                {exp.points.map((p) => (
+                  <li key={p} className="flex items-start gap-2 text-sm text-foreground/80">
+                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="mt-4 flex flex-wrap gap-1.5">
+              {exp.skills.map((s) => (
+                <span
+                  key={s}
+                  className="rounded-full border border-border bg-muted px-2 py-[3px] text-[10px] font-medium text-muted-foreground"
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    </motion.li>
+  );
+}
+
 export default function AboutMe() {
   return (
-    <section className="mx-auto max-w-3xl px-6 py-6">
-      <div className="mb-8">
-        <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">About</p>
-        <h2 className="mt-2 text-3xl font-semibold text-neutral-900 sm:text-4xl">
-          Hi, I'm <span className="italic text-blue-600">{PROFILE.name}.</span>
+    <section className="mx-auto max-w-3xl px-6 py-6 sm:py-10">
+      <div className="mb-10">
+        <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">About</p>
+        <h2 className="mt-2 text-3xl font-bold text-foreground sm:text-4xl">
+          Hi, I'm <span className="italic text-primary">{PROFILE.name}.</span>
         </h2>
-        <p className="mt-3 max-w-xl text-sm leading-relaxed text-neutral-600">
+        <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
           {PROFILE.role} based in {PROFILE.location}. Over the last{" "}
           {PROFILE.experience.replace(" years", "")} years I've been designing
           calm, considered product interfaces and shipping the code behind them.
         </p>
       </div>
 
-      <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-neutral-500">
+      <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
         Experience
       </h3>
 
-      <ol className="relative border-l border-neutral-200 pl-6">
+      <motion.ul variants={container} initial="hidden" animate="show" className="space-y-5">
         {experiences.map((exp) => (
-          <li key={exp.period + exp.company} className="mb-8 last:mb-0">
-            <span className="absolute -left-4 flex h-8 w-8 items-center justify-center rounded-full bg-white ring-1 ring-neutral-200">
-              <Briefcase className="h-4 w-4 text-blue-700" strokeWidth={2} />
-            </span>
-
-            <div className="flex flex-wrap items-baseline gap-x-3">
-              <h4 className="text-lg font-semibold text-neutral-900">
-                {exp.title}
-              </h4>
-              <span className="inline-flex items-center rounded-full bg-blue-50 px-2 py-[2px] text-[10px] font-semibold uppercase tracking-wider text-blue-700 ring-1 ring-blue-100">
-                {exp.type}
-              </span>
-            </div>
-
-            <div className="mt-0.5 text-xs text-neutral-500">{exp.company}</div>
-
-            <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-neutral-500">
-              <span className="inline-flex items-center gap-1">
-                <Calendar className="h-3 w-3" />
-                {exp.period}
-              </span>
-              {exp.location && (
-                <span className="inline-flex items-center gap-1">
-                  <MapPin className="h-3 w-3" />
-                  {exp.location}
-                </span>
-              )}
-            </div>
-
-            <ul className="mt-3 list-disc space-y-1 pl-4 text-sm text-neutral-700 marker:text-neutral-300">
-              {exp.points.map((p) => (
-                <li key={p}>{p}</li>
-              ))}
-            </ul>
-
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {exp.skills.map((s) => (
-                <span
-                  key={s}
-                  className="rounded-full bg-neutral-100 px-2 py-[3px] text-[10px] font-medium text-neutral-700"
-                >
-                  {s}
-                </span>
-              ))}
-            </div>
-          </li>
+          <ExperienceCard key={exp.period + exp.company} exp={exp} />
         ))}
-      </ol>
+      </motion.ul>
     </section>
   );
 }

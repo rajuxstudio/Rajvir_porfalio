@@ -22,11 +22,7 @@ const About = () => {
 
       <main className="min-h-screen bg-background text-foreground">
         <Detail />
-        <AboutHero />
-        <AboutExperience />
-        <AboutEducation />
-        <AboutCertifications />
-        <Footer />
+        {/* <Footer /> */}
       </main>
     </>
   );

@@ -1,6 +1,6 @@
-import type { Project } from "./project_design";
-import cgLogo from "@/assets/cloudGavel/cgLogo.svg";
-import cgmockup from "@/assets/cloudGavel/cgmockup.png";
+import type { Project } from "./types";
+import cgLogo from "@/assets/cloud-gavel/logo.svg";
+import cgmockup from "@/assets/cloud-gavel/mockup.png";
 import AngularIcon from "@/assets/buildIcon/angular.svg";
 import FigmaIcon from "@/assets/designIcon/figma.svg";
 import MUIIcon from "@/assets/buildIcon/MUI.png";
@@ -53,10 +53,11 @@ const cloudGavel: Project = {
       { name: "Angular", icon: AngularIcon },
       { name: "MUI", icon: MUIIcon },
     ],
+    platforms: ["web", "mobile"],
     mockups: [
-      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800",
-      "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800",
-      "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800",
+      { src: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800", platform: "web" },
+      { src: "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800", platform: "mobile" },
+      { src: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800", platform: "web" },
     ],
     link: [
       { name: "web", link: "https://cloudgavel.com/" },

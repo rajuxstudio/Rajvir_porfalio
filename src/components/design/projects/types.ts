@@ -1,6 +1,9 @@
 export type TechStackItem = string | { name: string; icon: string };
+/** Device classes the product itself was designed/built for (not the design tools used). */
+export type DevicePlatform = "mobile" | "web" | "tablet";
 
 import type { ComponentType } from "react";
+import type { MockupItem } from "../components/MockupGallery";
 
 export interface ProjectInfo {
   what: string;
@@ -9,7 +12,9 @@ export interface ProjectInfo {
   howToRun: string[];
   howToTry: string[];
   techStack: TechStackItem[];
-  mockups: string[];
+  /** Which device classes this product ships on — rendered as icons in the sticky header. */
+  platforms?: DevicePlatform[];
+  mockups: MockupItem[];
   link: { name: string; link: string }[];
   Reflection: string[];
   floatingStats: { icon: string; label: string; value: string }[];
@@ -28,4 +33,6 @@ export interface Project {
   image: string;
   logo: string;
   info: ProjectInfo;
+  /** When set, renders instead of the generic ProjectContentSections inside the bottom sheet. */
+  customContent?: ComponentType;
 }

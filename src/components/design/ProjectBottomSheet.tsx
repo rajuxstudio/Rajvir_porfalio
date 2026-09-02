@@ -1,12 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import type { Project } from "../design/projects/project_design";
-import { projects } from "../design/projects/index_design";
-import ProjectHero from "./Component/ProjectHero";
-import ProjectStickyHeader from "./Component/ProjectStickyHeader";
-import ProjectContentSections from "./Component/ProjectContentSections";
-import ProjectCarousel from "./Component/ProjectCarousel";
+import type { Project } from "./projects/types";
+import { projects } from "./projects/index";
+import ProjectHero from "./components/ProjectHero";
+import ProjectStickyHeader from "./components/ProjectStickyHeader";
+import ProjectContentSections from "./components/ProjectContentSections";
+import ProjectCarousel from "./components/ProjectCarousel";
 
 interface ProjectBottomSheetProps {
   project: Project | null;
@@ -15,6 +15,11 @@ interface ProjectBottomSheetProps {
 }
 
 const ProjectBottomSheet = ({ project, onClose, onProjectClick }: ProjectBottomSheetProps) => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const [isSticky, setIsSticky] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
   useEffect(() => {
     if (project) {
       document.body.style.overflow = "hidden";
@@ -25,6 +30,31 @@ const ProjectBottomSheet = ({ project, onClose, onProjectClick }: ProjectBottomS
       document.body.style.overflow = "";
     };
   }, [project]);
+
+  // Reset scroll state whenever a different project opens
+  useEffect(() => {
+    setIsSticky(false);
+    setScrollProgress(0);
+    scrollContainerRef.current?.scrollTo({ top: 0 });
+  }, [project?.slug]);
+
+  const handleScroll = () => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const maxScroll = container.scrollHeight - container.clientHeight;
+    setScrollProgress(maxScroll > 0 ? Math.min(container.scrollTop / maxScroll, 1) * 100 : 0);
+
+    if (headerRef.current && container) {
+      // The sheet's scroll container doesn't start at viewport y=0 (there's a
+      // spacer above it for the close button), so compare the header's position
+      // to the container's own top rather than the viewport edge. A couple px
+      // of tolerance absorbs the container's own border-top.
+      const headerTop = headerRef.current.getBoundingClientRect().top;
+      const containerTop = container.getBoundingClientRect().top;
+      setIsSticky(headerTop <= containerTop + 2);
+    }
+  };
 
   const otherProjects = project
     ? projects.filter((p) => p.slug !== project.slug)
@@ -65,6 +95,8 @@ const ProjectBottomSheet = ({ project, onClose, onProjectClick }: ProjectBottomS
 
           {/* Sheet content */}
           <motion.div
+            ref={scrollContainerRef}
+            onScroll={handleScroll}
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
@@ -74,17 +106,25 @@ const ProjectBottomSheet = ({ project, onClose, onProjectClick }: ProjectBottomS
             <ProjectHero image={project.image} title={project.title} />
             <ProjectStickyHeader
               title={project.title}
+              role={project.role}
+              date={project.date}
               logo={project.logo}
               techStack={project.info.techStack}
+              devicePlatforms={project.info.platforms}
               link={project.info.link}
-              isSticky={false}
-              headerRef={{ current: null } as React.RefObject<HTMLDivElement>}
+              isSticky={isSticky}
+              scrollProgress={scrollProgress}
+              headerRef={headerRef}
             />
             <div className="bg-background">
-              <ProjectContentSections
-                tag={project.tag}
-                role={project.role}
-                info={project.info} meta={[]} Reflection={[]} impacts={project.info.impacts} />
+              {project.customContent ? (
+                <project.customContent />
+              ) : (
+                <ProjectContentSections
+                  tag={project.tag}
+                  role={project.role}
+                  info={project.info} meta={[]} Reflection={[]} impacts={project.info.impacts} />
+              )}
               <ProjectCarousel projects={otherProjects} onProjectClick={onProjectClick} />
             </div>
           </motion.div>

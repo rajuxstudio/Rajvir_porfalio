@@ -1,3 +1,5 @@
+export type CertificateCategory = "design" | "dev";
+
 export type Certificate = {
   title: string;
   org: string;
@@ -8,6 +10,7 @@ export type Certificate = {
   skills: string[];
   verifyUrl: string;
   accent: string;
+  category: CertificateCategory;
 };
 
 export const CERTS: Certificate[] = [
@@ -22,6 +25,7 @@ export const CERTS: Certificate[] = [
     skills: ["JavaScript", "ES6", "Logic"],
     verifyUrl: "https://www.sololearn.com/en/certificates/CC-CK836PN6",
     accent: "from-fuchsia-500/20 to-violet-500/10",
+    category: "dev",
   },
   {
     title: "UIUX Design",
@@ -34,6 +38,7 @@ export const CERTS: Certificate[] = [
     skills: ["UI", "UX", "Figma"],
     verifyUrl: "#",
     accent: "from-sky-500/20 to-cyan-500/10",
+    category: "design",
   },
   {
     title: "Product Design",
@@ -46,6 +51,7 @@ export const CERTS: Certificate[] = [
     skills: ["Product", "UX", "Research"],
     verifyUrl: "#",
     accent: "from-blue-500/20 to-indigo-500/10",
+    category: "design",
   },
   {
     title: "User Experience",
@@ -58,5 +64,6 @@ export const CERTS: Certificate[] = [
     skills: ["UX", "Accessibility", "Design"],
     verifyUrl: "https://www.futurelearn.com/certificates/calbigj",
     accent: "from-violet-500/20 to-purple-500/10",
+    category: "design",
   },
 ];

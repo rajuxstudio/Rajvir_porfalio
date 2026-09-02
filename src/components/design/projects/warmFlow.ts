@@ -1,5 +1,5 @@
-import type { Project } from "@/components/design/projects/project_design";
-import cgLogo from "@/assets/cloudGavel/cgLogo.svg";
+import type { Project } from "@/components/design/projects/types";
+import cgLogo from "@/assets/cloud-gavel/logo.svg";
 const warmFlow: Project = {
   slug: "warm-flow",
   title: "Warm Flow Interactive",
@@ -30,10 +30,11 @@ const warmFlow: Project = {
       "Check out the builder at warmflow.io and create your first onboarding flow.",
     ],
     techStack: ["Next.js", "Framer Motion", "Zustand", "Tailwind CSS"],
+    platforms: ["web"],
     mockups: [
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800",
-      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800",
-      "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800",
+      { src: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800", platform: "web" },
+      { src: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800", platform: "web" },
+      { src: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800", platform: "web" },
     ],
   },
 };

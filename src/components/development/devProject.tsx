@@ -55,6 +55,7 @@ export default function DevPageUI() {
         <h1 className="hero-heading mb-6">
           What I <span className="text-gradient text-shimmer">BUILD</span>
         </h1>
+        
 
         <p className="text-muted-foreground max-w-lg mx-auto mb-12">
           Systems, scripts, and tools built with modern technologies.

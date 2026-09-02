@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import type { Project } from "../projects/project_design";
+import type { Project } from "../projects/types";
 
 interface ProjectCarouselProps {
   projects: Project[];

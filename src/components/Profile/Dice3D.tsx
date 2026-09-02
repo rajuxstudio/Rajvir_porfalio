@@ -19,7 +19,7 @@ const FACE_ROT: Record<number, { x: number; y: number }> = {
 function DiceFace({ value, accent }: { value: number; accent?: boolean }) {
   const dots = DICE_FACES[value];
   return (
-    <div className="grid h-full w-full grid-cols-3 grid-rows-3 gap-1 rounded-xl bg-gradient-to-br from-white to-neutral-100 p-2.5 ring-1 ring-neutral-200/80">
+    <div className="grid h-full w-full grid-cols-3 grid-rows-3 gap-1 rounded-xl bg-gradient-to-br from-white to-neutral-100 p-2.5 ring-1 ring-neutral-200/80 dark:from-neutral-800 dark:to-neutral-900 dark:ring-neutral-700/80">
       {Array.from({ length: 9 }).map((_, i) => {
         const r = Math.floor(i / 3);
         const c = i % 3;
@@ -28,8 +28,10 @@ function DiceFace({ value, accent }: { value: number; accent?: boolean }) {
           <div key={i} className="flex items-center justify-center">
             {active && (
               <span
-                className={`h-2 w-2 rounded-full shadow-[inset_0_-1px_1px_rgba(255,255,255,0.4)] ${
-                  accent && value === 1 ? "bg-blue-600" : "bg-neutral-900"
+                className={`h-2 w-2 rounded-full shadow-[inset_0_-1px_1px_rgba(255,255,255,0.4)] dark:shadow-[inset_0_-1px_1px_rgba(255,255,255,0.15)] ${
+                  accent && value === 1
+                    ? "bg-blue-600 dark:bg-blue-400"
+                    : "bg-neutral-900 dark:bg-neutral-100"
                 }`}
               />
             )}

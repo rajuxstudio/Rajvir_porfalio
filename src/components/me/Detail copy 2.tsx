@@ -16,7 +16,7 @@ import BeyondWorkPocket from "@/components/Profile/BeyondWorkPocket";
 import HeroAurora from "@/components/Profile/HeroAurora";
 import AboutMe from "@/components/Profile/AboutMe";
 import Certifications from "@/components/Profile/Certifications";
-import EducationTimeline from "@/components/EducationTimeline";
+import QualificationDetail from "@/components/Profile/QualificationDetail";
 
 type Sheet = "certs" | "qualification" | "about";
 
@@ -174,7 +174,7 @@ export default function Detail() {
           </DrawerHeader>
           <div className="overflow-y-auto px-2 pb-8">
             {sheet === "certs" && <Certifications />}
-            {sheet === "qualification" && <EducationTimeline />}
+            {sheet === "qualification" && <QualificationDetail />}
             {sheet === "about" && <AboutMe />}
           </div>
         </DrawerContent>

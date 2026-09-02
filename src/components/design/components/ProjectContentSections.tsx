@@ -1,9 +1,8 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import type { ProjectInfo } from "../projects/project_design";
+import { motion } from "framer-motion";
+import type { ProjectInfo } from "../projects/types";
 import { Reveal } from "./Reveal";
 import { Sparkles } from "lucide-react";
-import { info } from "console";
+import MockupGallery from "./MockupGallery";
 
 
 interface ProjectContentSectionsProps {
@@ -22,48 +21,6 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
-
-const MockupGallery = ({ mockups }: { mockups: string[] }) => {
-  const [active, setActive] = useState(0);
-
-  return (
-    <div className="pt-4 border-t border-border/50">
-      <h3 className="text-lg font-bold tracking-tight text-foreground mb-4">Mockups</h3>
-
-      {/* Main image */}
-      <div className="rounded-xl overflow-hidden border border-border/50 bg-muted/30 aspect-video relative">
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={active}
-            src={mockups[active]}
-            alt={`Mockup ${active + 1}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="w-full h-full object-cover absolute inset-0"
-          />
-        </AnimatePresence>
-      </div>
-
-      {/* Thumbnails */}
-      <div className="flex gap-2 mt-3 overflow-x-auto pb-1">
-        {mockups.map((src, i) => (
-          <button
-            key={i}
-            onClick={() => setActive(i)}
-            className={`flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all ${i === active
-              ? "border-primary shadow-md"
-              : "border-border/50 opacity-60 hover:opacity-100"
-              }`}
-          >
-            <img src={src} alt={`Thumb ${i + 1}`} className="w-full h-full object-cover" />
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-};
 
 const ProjectContentSections = ({ tag, role, info }: ProjectContentSectionsProps) => (
   <div className="max-w-5xl mx-auto px-6 md:px-10 py-10 space-y-10">

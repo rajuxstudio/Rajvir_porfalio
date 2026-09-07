@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Monitor, Smartphone, Gavel, TrendingUp, CreditCard, Award, Truck, Image } from "lucide-react";
 import iconBumperMandi from "@/assets/project-logos/bumper-mandi.svg";
-import mockupBumper1 from "@/assets/mockup-bumper-1.jpg";
+import mockupBumper1 from "@/assets/bumper-mandi/mockup/bumper-mandi-app-mockup.png";
 import {
   ProjectDetailHero, SegmentedTabs, ChallengeSolution, FeatureGrid,
   TechStackSection, ImpactBanner, MobileAppDownload, ProjectContentWrapper, MockupGallery,

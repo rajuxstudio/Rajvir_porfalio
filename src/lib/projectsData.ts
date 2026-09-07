@@ -1,4 +1,11 @@
-import cloudgavelMockup from "@/assets/pages/cloudgavel-mockup.png";
+import cloudgavelMockup from "@/assets/Pages/cloudgavel-mockup.png";
+import cgLogo from "@/assets/cloud-gavel/logo.svg";
+import iconBumperMandi from "@/assets/project-logos/bumper-mandi.svg";
+import iconEchelonConstructors from "@/assets/project-logos/echelon-constructors.svg";
+import iconUtilityPlus from "@/assets/utility-plus/uts_logo.png";
+import iconCaptable from "@/assets/carastone/carastone_logo_icon.svg";
+
+import { publicUrl } from "@/lib/utils";
 
 export interface Project {
   id: number;
@@ -13,6 +20,9 @@ export interface Project {
   link: string;
   isViewAll?: boolean;
   mockup?: string;
+  /** The project's own logo/icon — shown centered on its carousel card.
+   *  Falls back to the site logo when a project doesn't have one yet. */
+  logo?: string;
   // Extended info for detail pages
   overview?: string;
   techStack?: string[];
@@ -26,10 +36,19 @@ export interface Project {
 
 export const googleColors = [
   "linear-gradient(135deg, #9BCF7A 0%, #F28C28 100%)",
-  "linear-gradient(135deg, #FFA24C 0%, #E56A2E 100%)",
+  // Vivid orange, not the logo's own mid-tone orange (#F68C3C) — same hue
+  // family, brighter/lighter than the original fix but still enough value
+  // gap that the logo's orange + white bars stay legible.
+  "linear-gradient(135deg, #F97316 0%, #C2410C 100%)",
   "linear-gradient(135deg, #6FA8FF 0%, #2E5AAC 100%)",
-  "linear-gradient(135deg, #E7C15A 0%, #9C7A1E 100%)",
-  "linear-gradient(135deg, #0F2A44 0%, #5F87A8 100%)",
+  // Vivid amber, not the logo's own pale gold (#EAC478) — same warm "harvest"
+  // hue family, lighter than the original fix but still distinct enough for
+  // the line-art logo to stay visible.
+  "linear-gradient(135deg, #D97706 0%, #92400E 100%)",
+  // Light slate, not navy — the icon's own dark navy body (#042143) blended
+  // into a navy card almost completely; a light backdrop gives it real
+  // contrast, and matches the real CaraStone product's own light UI panels.
+  "linear-gradient(135deg, #F8FAFC 0%, #64748B 100%)",
   "linear-gradient(135deg, #8B5CF6 0%, #F472B6 100%)",
   "linear-gradient(135deg, #F97316 0%, #DC2626 100%)",
   "linear-gradient(135deg, #06B6D4 0%, #3B82F6 100%)",
@@ -47,7 +66,8 @@ export const projects: Project[] = [
     description: "Help agencies manage billing, track records, and streamline user data efficiently.",
     color: googleColors[2],
     link: "#",
-    mockup: "/placeholder.svg",
+    mockup: publicUrl("placeholder.svg"),
+    logo: iconUtilityPlus,
     overview: "Utility Plus is a comprehensive SaaS platform built for public utility agencies. It digitizes billing workflows, automates record keeping, and provides real-time dashboards for operational insights.",
     techStack: ["React", "Node.js", "PostgreSQL", "Tailwind CSS", "AWS"],
     features: [
@@ -72,6 +92,7 @@ export const projects: Project[] = [
     color: googleColors[1],
     link: "#",
     mockup: cloudgavelMockup,
+    logo: cgLogo,
     overview: "CloudGavel is an eWarrant platform that digitizes the entire warrant lifecycle — from creation and submission to judicial review and approval — reducing turnaround from days to minutes.",
     techStack: ["React", "Python", "Django", "PostgreSQL", "Docker"],
     features: [
@@ -95,7 +116,8 @@ export const projects: Project[] = [
     description: "Construction Project Management Software for planning, scheduling, and resource management.",
     color: googleColors[0],
     link: "#",
-    mockup: "/placeholder.svg",
+    mockup: publicUrl("placeholder.svg"),
+    logo: iconEchelonConstructors,
     overview: "Echelon Constructors is an ERP solution tailored for the construction industry, enabling end-to-end project management from bidding to completion.",
     techStack: ["React", "Node.js", "MongoDB", "Material UI", "Azure"],
     features: [
@@ -117,9 +139,12 @@ export const projects: Project[] = [
     applications: ["web"],
     projectType: ["design", "code"],
     description: "Manage equity, track cap tables, and streamline investment workflows.",
+    // Navy-to-slate gradient — same monochromatic navy family as the real
+    // CaraStone brand mark (#042143 body, light blue-gray accents).
     color: googleColors[4],
+    logo: iconCaptable,
     link: "#",
-    mockup: "/placeholder.svg",
+    mockup: publicUrl("placeholder.svg"),
     overview: "Captable is a fintech platform that simplifies equity management for startups and investors, providing clear visibility into ownership structures and funding rounds.",
     techStack: ["React", "TypeScript", "Supabase", "Tailwind CSS"],
     features: [
@@ -143,7 +168,8 @@ export const projects: Project[] = [
     description: "A digital mandi app that helps farmers sell grain securely and transparently.",
     color: googleColors[3],
     link: "#",
-    mockup: "/placeholder.svg",
+    mockup: publicUrl("placeholder.svg"),
+    logo: iconBumperMandi,
     overview: "Bumper Mandi is an AgriTech marketplace that connects farmers directly with buyers, eliminating middlemen and ensuring fair pricing through transparent bidding.",
     techStack: ["React Native", "Node.js", "Firebase", "Google Maps API"],
     features: [
@@ -167,7 +193,7 @@ export const projects: Project[] = [
     description: "A modern, responsive portfolio website using React with smooth navigation and clean UI.",
     color: googleColors[5],
     link: "#",
-    mockup: "/placeholder.svg",
+    mockup: publicUrl("placeholder.svg"),
     overview: "A beautifully crafted developer portfolio showcasing projects, skills, and experience with smooth animations and an interactive 3D carousel.",
     techStack: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
     features: [
@@ -191,7 +217,7 @@ export const projects: Project[] = [
     description: "A recruitment marketplace connecting employers with top talent through smart matching.",
     color: googleColors[6],
     link: "#",
-    mockup: "/placeholder.svg",
+    mockup: publicUrl("placeholder.svg"),
     overview: "RecruitEase is an e-commerce-style recruitment platform where employers can browse, shortlist, and hire candidates — while job seekers showcase profiles like storefronts.",
     techStack: ["React", "Node.js", "PostgreSQL", "Tailwind CSS", "Stripe"],
     duration: "4 months",
@@ -218,7 +244,7 @@ export const projects: Project[] = [
     description: "Details coming soon — a new project currently in development.",
     color: googleColors[7],
     link: "#",
-    mockup: "/placeholder.svg",
+    mockup: publicUrl("placeholder.svg"),
     overview: "Project details will be updated soon.",
     techStack: ["React", "TypeScript", "Tailwind CSS"],
     duration: "TBD",
@@ -239,7 +265,7 @@ export const projects: Project[] = [
     category: "Projects",
     description: "Explore my complete collection of design and development work.",
     color: "linear-gradient(135deg, hsl(var(--accent)), hsl(280 80% 60%))",
-    link: "/projects",
+    link: "/design",
     isViewAll: true,
   },
 ];

@@ -12,6 +12,10 @@ interface ProjectContentSectionsProps {
   meta: { label: string; value: string }[];
   Reflection: string[];
   impacts: { value: string; label: string; body: string }[];
+  /** Controlled platform for the mockup gallery's device switch — driven by
+   *  the bottom sheet's section nav bar. Omit to let the gallery self-manage. */
+  activePlatform?: import("./MockupGallery").MockupPlatform;
+  onPlatformChange?: (platform: import("./MockupGallery").MockupPlatform) => void;
 }
 /* ---------- Reusable bits ---------- */
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -22,25 +26,28 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-const ProjectContentSections = ({ tag, role, info }: ProjectContentSectionsProps) => (
+const ProjectContentSections = ({ tag, role, info, activePlatform, onPlatformChange }: ProjectContentSectionsProps) => (
   <div className="max-w-5xl mx-auto px-6 md:px-10 py-10 space-y-10">
-    {/* Tags */}
-    <div className="flex items-center gap-3">
-      <span className="text-xs font-medium text-primary px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5">
-        {tag}
-      </span>
-      <span className="text-xs text-muted-foreground px-3 py-1.5 rounded-full border border-border bg-muted/50">
-        {role}
-      </span>
+    {/* Overview */}
+    <div id="overview" data-nav-section data-nav-label="Overview" className="scroll-mt-24 space-y-6">
+      {/* Tags */}
+      <div className="flex items-center gap-3">
+        <span className="text-xs font-medium text-primary px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5">
+          {tag}
+        </span>
+        <span className="text-xs text-muted-foreground px-3 py-1.5 rounded-full border border-border bg-muted/50">
+          {role}
+        </span>
+      </div>
+
+      {/* Description */}
+      <p className="text-sm md:text-base text-muted-foreground leading-relaxed italic">
+        {info.what}
+      </p>
     </div>
 
-    {/* Description */}
-    <p className="text-sm md:text-base text-muted-foreground leading-relaxed italic">
-      {info.what}
-    </p>
-
     {/* How It Works */}
-    <div>
+    <div id="how-it-works" data-nav-section data-nav-label="How It Works" className="scroll-mt-24">
       <h3 className="text-lg font-bold tracking-tight text-foreground mb-4">How It Works</h3>
       <div className="space-y-3">
         {info.howItWorks.map((step, i) => (
@@ -66,33 +73,37 @@ const ProjectContentSections = ({ tag, role, info }: ProjectContentSectionsProps
     </div>
 
     {/* Code Explanation */}
-    <div>
-      <h3 className="text-lg font-bold tracking-tight text-foreground mb-4">Code Highlights</h3>
-      <ul className="space-y-2">
-        {info.codeExplanation.map((point, i) => (
-          <li key={i} className="flex gap-2 text-sm text-muted-foreground">
-            <span className="text-primary mt-0.5 flex-shrink-0">•</span>
-            <span className="leading-relaxed">{point}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+    {info.codeExplanation && info.codeExplanation.length > 0 && (
+      <div id="code-highlights" data-nav-section data-nav-label="Code" className="scroll-mt-24">
+        <h3 className="text-lg font-bold tracking-tight text-foreground mb-4">Code Highlights</h3>
+        <ul className="space-y-2">
+          {info.codeExplanation.map((point, i) => (
+            <li key={i} className="flex gap-2 text-sm text-muted-foreground">
+              <span className="text-primary mt-0.5 flex-shrink-0">•</span>
+              <span className="leading-relaxed">{point}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
 
     {/* How to Run */}
-    <div>
-      <h3 className="text-lg font-bold tracking-tight text-foreground mb-4">How to Run</h3>
-      <div className="bg-muted/50 rounded-xl p-5 border border-border/50 space-y-2">
-        {info.howToRun.map((step, i) => (
-          <p key={i} className="text-sm text-muted-foreground font-mono">
-            <span className="text-primary smr-2">$</span>
-            {step}
-          </p>
-        ))}
+    {info.howToRun && info.howToRun.length > 0 && (
+      <div id="how-to-run" data-nav-section data-nav-label="Run" className="scroll-mt-24">
+        <h3 className="text-lg font-bold tracking-tight text-foreground mb-4">How to Run</h3>
+        <div className="bg-muted/50 rounded-xl p-5 border border-border/50 space-y-2">
+          {info.howToRun.map((step, i) => (
+            <p key={i} className="text-sm text-muted-foreground font-mono">
+              <span className="text-primary smr-2">$</span>
+              {step}
+            </p>
+          ))}
+        </div>
       </div>
-    </div>
+    )}
 
     {/* Tech Stack */}
-    <div className="pt-4 border-t border-border/50">
+    <div id="tech-stack" data-nav-section data-nav-label="Stack" className="scroll-mt-24 pt-4 border-t border-border/50">
       <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-3">
         Tech Stack
       </p>
@@ -116,14 +127,15 @@ const ProjectContentSections = ({ tag, role, info }: ProjectContentSectionsProps
       </div>
     </div>
 
-
-
     {/* Mockups */}
     {info.mockups && info.mockups.length > 0 && (
-      <MockupGallery mockups={info.mockups} />
+      <div id="mockups" data-nav-section data-nav-label="Mockups" className="scroll-mt-24">
+        <MockupGallery mockups={info.mockups} activePlatform={activePlatform} onPlatformChange={onPlatformChange} />
+      </div>
     )}
+
     {/* IMPACT */}
-        <section className="border-b border-border bg-surface-muted px-6 py-24">
+    <section id="impact" data-nav-section data-nav-label="Impact" className="scroll-mt-24 border-b border-border bg-surface-muted px-6 py-24">
       <div className="mx-auto max-w-7xl">
         <Reveal>
           <SectionLabel>Impact</SectionLabel>
@@ -147,7 +159,7 @@ const ProjectContentSections = ({ tag, role, info }: ProjectContentSectionsProps
     </section>
 
     {/* Reflection */}
-    <section className="border-b border-border px-6 py-24">
+    <section id="reflection" data-nav-section data-nav-label="Reflection" className="scroll-mt-24 border-b border-border px-6 py-24">
 
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12">
 

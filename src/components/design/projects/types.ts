@@ -23,6 +23,14 @@ export interface ProjectInfo {
   challenges: { icon: ComponentType<any>; title: string; body: string }[];
 }
 
+/** Optional device-switch wiring passed into a project's customContent, so the
+ *  bottom sheet's section nav can drive that page's mockup gallery the same way
+ *  it drives the generic ProjectContentSections layout. Safe to ignore. */
+export interface CaseStudyContentProps {
+  activePlatform?: DevicePlatform;
+  onPlatformChange?: (platform: DevicePlatform) => void;
+}
+
 export interface Project {
   avatar: string;
   slug: string;
@@ -34,5 +42,5 @@ export interface Project {
   logo: string;
   info: ProjectInfo;
   /** When set, renders instead of the generic ProjectContentSections inside the bottom sheet. */
-  customContent?: ComponentType;
+  customContent?: ComponentType<CaseStudyContentProps>;
 }

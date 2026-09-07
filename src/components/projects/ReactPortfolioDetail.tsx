@@ -1,6 +1,5 @@
 import { Palette, Zap, Moon, Smartphone as Responsive, Mail } from "lucide-react";
-import iconPortfolio from "@/assets/icon-portfolio.png";
-import mockupPortfolio1 from "@/assets/mockup-portfolio-1.jpg";
+import iconPortfolio from "@/assets/Pages/r-logo.png";
 import {
   ProjectDetailHero, FeatureGrid, TechStackSection,
   HighlightBanner, ProjectContentWrapper, MockupGallery,
@@ -17,7 +16,8 @@ const highlights = [
 const techStack = ["React", "TypeScript", "Tailwind CSS", "Framer Motion"];
 
 const mockups = [
-  { src: mockupPortfolio1, alt: "React Portfolio - Homepage" },
+  // No real screenshots for this project yet — MockupGallery renders nothing
+  // when the list is empty, which beats showing an unrelated stand-in image.
 ];
 
 export default function ReactPortfolioDetail() {

@@ -3,7 +3,6 @@ import { ArrowRight, Monitor, Smartphone, Tablet } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import rLogo from "@/assets/Pages/r-logo.png";
 import { projects as allProjects, Project } from "@/lib/projectsData";
-import ProjectDetailDialog from "@/components/ProjectDetailDialog";
 import LogoCarouselSection from "./home/LogoCarouselSection";
 
 const projects = allProjects.filter(p => !p.hideFromCarousel);
@@ -24,7 +23,6 @@ export default function ProjectsCarousel() {
   const [startX, setStartX] = useState(0);
   const [dragRotation, setDragRotation] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
 
   useEffect(() => {
@@ -163,10 +161,12 @@ export default function ProjectsCarousel() {
                       transition: "opacity 0.4s, filter 0.4s, transform 0.6s cubic-bezier(0.25,1,0.5,1)",
                     }}
                     onClick={() => {
-                      if (isActive) {
-                        if (project.isViewAll) navigate(project.link);
-                        else setSelectedProject(project);
-                      } else {
+                      // Only "View all" is clickable through to a page; the
+                      // individual project cards are display-only and just
+                      // rotate themselves to the front.
+                      if (isActive && project.isViewAll) {
+                        navigate(project.link);
+                      } else if (!isActive) {
                         setRotation(-index * anglePerItem);
                       }
                     }}
@@ -217,7 +217,11 @@ export default function ProjectsCarousel() {
                         </div>
                       ) : (
                         <div className="absolute inset-0 flex items-center justify-center z-10">
-                          <img src={rLogo} alt="Logo" className="w-16 h-16 object-contain opacity-40 drop-shadow-lg" />
+                          <img
+                            src={project.logo ?? rLogo}
+                            alt={project.logo ? `${project.title} logo` : "Logo"}
+                            className={`object-contain drop-shadow-lg ${project.logo ? "w-16 h-16" : "w-16 h-16 opacity-40"}`}
+                          />
                         </div>
                       )}
 
@@ -290,12 +294,6 @@ export default function ProjectsCarousel() {
           </p>
         </div>
       </div>
-
-      <ProjectDetailDialog
-        open={!!selectedProject}
-        onClose={() => setSelectedProject(null)}
-        project={selectedProject}
-      />
 
       <style>{`
         @keyframes fadeInUp {

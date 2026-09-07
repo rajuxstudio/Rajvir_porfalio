@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Monitor, Smartphone, Image } from "lucide-react";
-import iconCloudgavel from "@/assets/icon-cloudgavel.png";
-import mockupCloudgavel1 from "@/assets/mockup-cloudgavel-1.jpg";
+import iconCloudgavel from "@/assets/cloud-gavel/logo.svg";
+import mockupCloudgavel1 from "@/assets/Pages/cloudgavel-mockup.png";
 import {
   ProjectDetailHero, SegmentedTabs, TimelineGrid,
   StatsRow, TechStackSection, MobileAppDownload, ProjectContentWrapper, MockupGallery,

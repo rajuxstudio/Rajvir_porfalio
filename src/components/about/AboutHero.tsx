@@ -40,7 +40,7 @@ export default function AboutHero() {
             Designing Scalable Digital Experiences.
           </h1>
           <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-8 max-w-lg">
-            UX/UI Designer with 3+ years of experience designing SaaS and enterprise platforms. Currently pursuing MCA to strengthen technical expertise in cloud, AI, and systems.
+            UX/UI Designer with 4+ years of experience designing SaaS and enterprise platforms. Currently pursuing MCA to strengthen technical expertise in cloud, AI, and systems.
           </p>
 
           {/* Stats row */}

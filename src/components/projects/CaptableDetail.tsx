@@ -1,6 +1,6 @@
 import { PieChart, TrendingUp, FileText, Users, Calculator } from "lucide-react";
-import iconCaptable from "@/assets/icon-captable.png";
-import mockupCaptable1 from "@/assets/mockup-captable-1.jpg";
+import iconCaptable from "@/assets/carastone/carastone_logo_icon.svg";
+import mockupCaptable1 from "@/assets/carastone/mockup/1.1 Administrator Dashboard.png";
 import {
   ProjectDetailHero, FeatureGrid, TechStackSection, ProjectContentWrapper, MockupGallery,
 } from "./projectUI";

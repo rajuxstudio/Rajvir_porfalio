@@ -38,6 +38,7 @@ import webLanding from "@/assets/bumper-mandi/web/login.png";
 import webProcessFlow from "@/assets/bumper-mandi/web/process-flow.png";
 import webGroupByStatus from "@/assets/bumper-mandi/web/process-flow-grouped.png";
 import webLotDetail from "@/assets/bumper-mandi/web/lot-detail.png";
+import type { CaseStudyContentProps } from "@/components/design/projects/types";
 
 const ORANGE = "#F97316";
 const AMBER = "#F59E0B";
@@ -97,10 +98,13 @@ type SectionBg = "cream" | "white" | "navy";
 
 function Section({
   id,
+  label,
   bg = "cream",
   children,
 }: {
   id: string;
+  /** Omit for closing/footer-style sections that shouldn't show up in the bottom nav. */
+  label?: string;
   bg?: SectionBg;
   children: ReactNode;
 }) {
@@ -112,7 +116,7 @@ function Section({
         : { background: CREAM, color: CHARCOAL };
   return (
     <section className="relative overflow-hidden px-6 py-20 sm:px-10 sm:py-28" style={bgStyle}>
-      <div id={id} className="mx-auto max-w-6xl scroll-mt-10">
+      <div id={id} {...(label ? { "data-nav-section": true, "data-nav-label": label } : {})} className="mx-auto max-w-6xl scroll-mt-24">
         {children}
       </div>
     </section>
@@ -228,7 +232,7 @@ const improvements = [
 ];
 
 const socials = [
-  { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com" },
+  { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/rajuxstudio/" },
   { icon: Dribbble, label: "Dribbble", href: "https://dribbble.com" },
   { icon: Twitter, label: "Twitter", href: "https://twitter.com" },
   { icon: Mail, label: "Email", href: "mailto:raju@xstudio.com" },
@@ -238,7 +242,7 @@ const socials = [
 /* Reused by both the standalone case-study page and the project bottom sheet,
    so the two entry points stay in sync automatically. */
 
-export default function BumperMandiCaseStudyContent() {
+export default function BumperMandiCaseStudyContent({ activePlatform, onPlatformChange }: CaseStudyContentProps = {}) {
   return (
     <div style={{ background: CREAM, color: CHARCOAL, fontFamily: "'Inter', sans-serif" }}>
       {/* Condensed intro strip — the outer shell (ProjectHero / page header) already shows icon + title */}
@@ -257,7 +261,7 @@ export default function BumperMandiCaseStudyContent() {
       </div>
 
       {/* 01 — The Product */}
-      <Section id="product" bg="cream">
+      <Section id="product" label="Product" bg="cream">
         <FadedNumber n="01" />
         <div className="mt-2 grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
@@ -296,7 +300,7 @@ export default function BumperMandiCaseStudyContent() {
       </Section>
 
       {/* 02 — The Problem */}
-      <Section id="problem" bg="white">
+      <Section id="problem" label="Problem" bg="white">
         <FadedNumber n="02" />
         <h2 className="mt-2 text-3xl font-black sm:text-4xl">The Problem</h2>
         <div className="mt-10 grid gap-5 sm:grid-cols-2">
@@ -311,7 +315,7 @@ export default function BumperMandiCaseStudyContent() {
       </Section>
 
       {/* 03 — Understanding the Problem */}
-      <Section id="research" bg="cream">
+      <Section id="research" label="Research" bg="cream">
         <FadedNumber n="03" />
         <h2 className="mt-2 text-3xl font-black sm:text-4xl">Understanding the Problem</h2>
         <p className="mt-4 max-w-2xl" style={{ color: GREY }}>
@@ -366,7 +370,7 @@ export default function BumperMandiCaseStudyContent() {
       </Section>
 
       {/* 04 — Defining the Opportunity */}
-      <Section id="opportunity" bg="white">
+      <Section id="opportunity" label="Opportunity" bg="white">
         <FadedNumber n="04" />
         <h2 className="mt-2 text-3xl font-black sm:text-4xl">Defining the Opportunity</h2>
         <div className="mt-10 grid gap-5 sm:grid-cols-3">
@@ -393,7 +397,7 @@ export default function BumperMandiCaseStudyContent() {
       </Section>
 
       {/* 05 — The Existing Experience */}
-      <Section id="legacy" bg="cream">
+      <Section id="legacy" label="Before" bg="cream">
         <FadedNumber n="05" />
         <h2 className="mt-2 text-3xl font-black sm:text-4xl">The Existing Experience — Before</h2>
         <div className="mt-8">
@@ -414,7 +418,7 @@ export default function BumperMandiCaseStudyContent() {
       </Section>
 
       {/* 06 — Design Exploration */}
-      <Section id="exploration" bg="white">
+      <Section id="exploration" label="Exploration" bg="white">
         <FadedNumber n="06" />
         <h2 className="mt-2 text-3xl font-black sm:text-4xl">Design Exploration</h2>
         <p className="mt-3 font-bold" style={{ color: ORANGE }}>Wireframes & Iterations</p>
@@ -440,7 +444,7 @@ export default function BumperMandiCaseStudyContent() {
       </Section>
 
       {/* 07 — The Solution (hero) */}
-      <Section id="solution" bg="cream">
+      <Section id="solution" label="Solution" bg="cream">
         <FadedNumber n="07" />
         <h2 className="mt-2 text-3xl font-black sm:text-4xl">The Solution</h2>
         <p className="mt-3 font-bold" style={{ color: ORANGE }}>Mobile App — Web & Mobile</p>
@@ -460,6 +464,8 @@ export default function BumperMandiCaseStudyContent() {
               { src: webGroupByStatus, alt: "Bumper Mandi web — process flow grouped by status", platform: "web" },
               { src: webLotDetail, alt: "Bumper Mandi web — lot detail & gate pass panel", platform: "web" },
             ]}
+            activePlatform={activePlatform}
+            onPlatformChange={onPlatformChange}
           />
         </div>
 
@@ -482,7 +488,7 @@ export default function BumperMandiCaseStudyContent() {
       </Section>
 
       {/* 08 — Outcome & Impact */}
-      <Section id="impact" bg="cream">
+      <Section id="impact" label="Impact" bg="cream">
         <FadedNumber n="08" />
         <h2 className="mt-2 text-3xl font-black sm:text-4xl">Outcome & Impact</h2>
         <p className="mt-3 font-bold" style={{ color: ORANGE }}>Tangible results from digitization</p>
@@ -513,7 +519,7 @@ export default function BumperMandiCaseStudyContent() {
       </Section>
 
       {/* 09 — Reflection */}
-      <Section id="reflection" bg="white">
+      <Section id="reflection" label="Reflection" bg="white">
         <FadedNumber n="09" />
         <h2 className="mt-2 text-3xl font-black sm:text-4xl">Reflection</h2>
         <p className="mt-3 font-bold" style={{ color: ORANGE }}>Key takeaways and next steps</p>

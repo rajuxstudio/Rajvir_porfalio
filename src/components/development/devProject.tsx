@@ -124,17 +124,17 @@ export default function DevPageUI() {
             </button>
           </div>
 
-          <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-6">
-            {filtered.map((project, i) => (
+          <div className="flex flex-wrap gap-6">
+            {filtered.map((project) => (
               <motion.div
                 key={project.slug}
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -10 }}
+                whileHover={{ y: -8 }}
                 whileTap={{ scale: 0.98 }}
-                className="group cursor-pointer"
+                className="group w-full max-w-[260px] cursor-pointer"
                 onClick={() => setSelectedSlug(project.slug)}
               >
                 <div className="rounded-2xl overflow-hidden border border-border bg-card transition-all duration-300 group-hover:border-primary/40 group-hover:shadow-xl">
@@ -154,14 +154,16 @@ export default function DevPageUI() {
                   </div>
                   <div className="p-4">
                     <div className="flex items-center gap-3">
-                      <img src={project.avatar} className="w-8 h-8 rounded-full border border-border" />
-                      <div className="flex-1">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <project.icon className="h-4 w-4" />
+                      </span>
+                      <div className="flex-1 min-w-0">
                         <h3 className="text-sm font-semibold leading-tight truncate">{project.title}</h3>
                         <p className="text-xs text-muted-foreground">{project.date}</p>
                       </div>
                     </div>
                     <div className="flex items-center justify-between mt-3">
-                      <span className="text-[10px] text-muted-foreground">Project</span>
+                      <span className="text-[10px] text-muted-foreground truncate">{project.role}</span>
                       <span className="px-2 py-0.5 rounded-full text-[10px] uppercase tracking-[0.1em] bg-muted text-muted-foreground">
                         {project.tag}
                       </span>

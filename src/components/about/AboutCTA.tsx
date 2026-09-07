@@ -1,13 +1,14 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Button } from "@/components/ui/button";
 import { Linkedin, Twitter, Github, Instagram, Mail } from "lucide-react";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
 const socials = [
-  { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com" },
+  { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/rajuxstudio/" },
   { icon: Twitter, label: "Twitter / X", href: "https://twitter.com" },
-  { icon: Github, label: "GitHub", href: "https://github.com" },
+  { icon: Github, label: "GitHub", href: "https://github.com/rajuxstudio" },
   { icon: Instagram, label: "Instagram", href: "https://instagram.com" },
-  { icon: Mail, label: "Email", href: "mailto:hello@example.com" },
+  { icon: Mail, label: "Email", href: `mailto:${CONTACT_EMAIL}` },
 ];
 
 export default function AboutCTA() {

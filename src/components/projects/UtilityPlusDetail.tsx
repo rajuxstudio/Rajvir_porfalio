@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Monitor, Shield, Smartphone, Search, Workflow, Layers, Map, Image } from "lucide-react";
-import iconUtilityPlus from "@/assets/icon-utility-plus.png";
-import mockupUtility1 from "@/assets/mockup-utility-1.jpg";
+import iconUtilityPlus from "@/assets/utility-plus/uts_logo.png";
+import mockupUtility1 from "@/assets/Pages/utility-mobile-mockup-1.png";
 import {
   ProjectDetailHero, SegmentedTabs, DesignProcessGrid,
   OutcomeSection, ConfidentialityNote, ProjectContentWrapper, MockupGallery,

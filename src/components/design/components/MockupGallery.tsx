@@ -23,6 +23,14 @@ interface MockupGalleryProps {
   mockups: MockupItem[];
   /** Override the section heading. Defaults to "Product UI Showcase". */
   title?: string;
+  /** Controlled active platform — pass together with onPlatformChange to drive
+   *  the gallery from an external switch (e.g. the bottom sheet's nav bar).
+   *  Omit both to let the gallery manage its own tab state. */
+  activePlatform?: MockupPlatform;
+  onPlatformChange?: (platform: MockupPlatform) => void;
+  /** Hide the gallery's own Mobile/Web/Tablet tab buttons — use when an external
+   *  switch already controls `activePlatform` (the gallery still filters by it). */
+  hidePlatformSwitch?: boolean;
 }
 
 /**
@@ -30,17 +38,19 @@ interface MockupGalleryProps {
  * switch (Mobile / Web / Tablet). The switch only shows tabs for platforms
  * that actually have mockups — pass whichever platforms the project has.
  */
-const MockupGallery = ({ mockups, title = "Product UI Showcase" }: MockupGalleryProps) => {
+const MockupGallery = ({ mockups, title = "Product UI Showcase", activePlatform: controlledPlatform, onPlatformChange, hidePlatformSwitch = false }: MockupGalleryProps) => {
   const platforms = PLATFORM_ORDER.filter((p) => mockups.some((m) => m.platform === p));
-  const [activePlatform, setActivePlatform] = useState<MockupPlatform>(platforms[0]);
+  const [internalPlatform, setInternalPlatform] = useState<MockupPlatform>(platforms[0]);
   const [active, setActive] = useState(0);
 
   if (!mockups || mockups.length === 0) return null;
 
+  const activePlatform = controlledPlatform ?? internalPlatform;
   const filtered = mockups.filter((m) => m.platform === activePlatform);
 
   const handlePlatformChange = (platform: MockupPlatform) => {
-    setActivePlatform(platform);
+    if (onPlatformChange) onPlatformChange(platform);
+    else setInternalPlatform(platform);
     setActive(0);
   };
 
@@ -49,7 +59,7 @@ const MockupGallery = ({ mockups, title = "Product UI Showcase" }: MockupGallery
       <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
         <h3 className="text-lg font-bold tracking-tight text-foreground">{title}</h3>
 
-        {platforms.length > 1 && (
+        {!hidePlatformSwitch && platforms.length > 1 && (
           <div className="inline-flex items-center gap-1 rounded-full border border-border bg-muted/40 p-1">
             {platforms.map((platform) => {
               const { label, icon: Icon } = PLATFORM_META[platform];

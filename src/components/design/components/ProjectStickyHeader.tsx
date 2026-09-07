@@ -1,4 +1,4 @@
-import { ChevronDown, ExternalLink, Github, Globe, Link2, Monitor, Smartphone, Tablet, type LucideIcon } from "lucide-react";
+import { ChevronDown, ExternalLink, Github, Globe, Link2, Monitor, Smartphone, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -17,7 +17,7 @@ import {
   DrawerDescription,
 } from "@/components/ui/drawer";
 import { useIsMobile } from "@/hooks/use-mobile";
-import type { DevicePlatform, TechStackItem } from "../projects/types";
+import type { TechStackItem } from "../projects/types";
 
 interface ProjectStickyHeaderProps {
   title: string;
@@ -25,20 +25,11 @@ interface ProjectStickyHeaderProps {
   date?: string;
   logo: string;
   techStack: TechStackItem[];
-  /** Device classes the product ships on — rendered as a small icon cluster. */
-  devicePlatforms?: DevicePlatform[];
   link: { name: string; link: string }[];
   isSticky: boolean;
   scrollProgress?: number;
   headerRef: React.RefObject<HTMLDivElement>;
 }
-
-const DEVICE_ICONS: Record<DevicePlatform, { icon: LucideIcon; label: string }> = {
-  mobile: { icon: Smartphone, label: "Mobile" },
-  tablet: { icon: Tablet, label: "Tablet" },
-  web: { icon: Monitor, label: "Web" },
-};
-const DEVICE_ORDER: DevicePlatform[] = ["mobile", "tablet", "web"];
 
 type PlatformSlot = {
   key: string;
@@ -73,7 +64,6 @@ const ProjectStickyHeader = ({
   date,
   logo,
   techStack,
-  devicePlatforms = [],
   link,
   isSticky,
   scrollProgress = 0,
@@ -81,7 +71,6 @@ const ProjectStickyHeader = ({
 }: ProjectStickyHeaderProps) => {
   const isMobile = useIsMobile();
   const subtitle = [role, date].filter(Boolean).join(" · ");
-  const orderedDevicePlatforms = DEVICE_ORDER.filter((d) => devicePlatforms.includes(d));
 
   const matchedNames = new Set<string>();
   const platforms = PLATFORM_SLOTS.map((slot) => {
@@ -124,28 +113,6 @@ const ProjectStickyHeader = ({
         </div>
 
         <div className="flex flex-wrap items-center justify-end gap-2">
-          {/* Devices this product ships on */}
-          {orderedDevicePlatforms.length > 0 && (
-            <div className="flex items-center gap-1.5">
-              {orderedDevicePlatforms.map((d) => {
-                const { icon: Icon, label } = DEVICE_ICONS[d];
-                return (
-                  <span
-                    key={d}
-                    title={`Built for ${label}`}
-                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary"
-                  >
-                    <Icon className="h-4 w-4" />
-                  </span>
-                );
-              })}
-            </div>
-          )}
-
-          {orderedDevicePlatforms.length > 0 && techStack.length > 0 && (
-            <span className="h-6 w-px bg-border" aria-hidden="true" />
-          )}
-
           {/* Tools used to build */}
           {techStack.length > 0 && (
             <div className="flex items-center gap-1.5">

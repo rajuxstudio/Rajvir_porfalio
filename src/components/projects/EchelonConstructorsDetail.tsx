@@ -1,6 +1,6 @@
 import { Calendar, DollarSign, Users, FileText, TrendingUp } from "lucide-react";
-import iconEchelon from "@/assets/icon-echelon.png";
-import mockupEchelon1 from "@/assets/mockup-echelon-1.jpg";
+import iconEchelon from "@/assets/project-logos/echelon-constructors.svg";
+import mockupEchelon1 from "@/assets/echelon-constructors/mockup/dashboard.png";
 import {
   ProjectDetailHero, ChallengeSolution, FeatureGrid,
   TechStackSection, ProjectContentWrapper, MockupGallery,

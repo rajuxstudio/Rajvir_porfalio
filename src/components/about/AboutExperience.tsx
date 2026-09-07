@@ -24,6 +24,20 @@ const experiences: Experience[] = [
     skills: ["Figma", "Design Systems", "User Flows", "Prototyping"],
   },
   {
+    period: "Mar 2026 – Apr 2026",
+    title: "Full Stack Developer Intern",
+    company: "HeyreplAI Advanced Intelligence Tech Labs",
+    type: "Internship",
+    location: "Bangalore",
+    points: [
+      "Redesigned and enhanced web applications, improving responsiveness and resolving UI inconsistencies",
+      "Built reusable React and Tailwind CSS components, refining layouts for a consistent cross-device experience",
+      "Developed CRUD operations, API endpoints, and data validation on the Python backend",
+      "Supported frontend–backend integration, contributed unit tests, and documented workflows",
+    ],
+    skills: ["React", "Tailwind CSS", "Python", "REST APIs", "Unit Testing"],
+  },
+  {
     period: "Aug 2025 – Sep 2025",
     title: "UX/UI Designer",
     company: "HummingWave Technologies Pvt. Ltd.",

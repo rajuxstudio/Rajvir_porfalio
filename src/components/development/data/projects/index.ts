@@ -1,10 +1,8 @@
 import type { Project } from "@/components/development/data/projects/project";
-import fintechNarrative from "./fintechNarrative";
-import warmFlow from "./warm-flow";
+import snakeWaterGun from "./snakeWaterGun";
 
 export const projects: Project[] = [
-  fintechNarrative,
-  warmFlow,
+  snakeWaterGun,
 ];
 
 export const tags = [...new Set(projects.map((p) => p.tag))];

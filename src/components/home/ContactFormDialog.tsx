@@ -1,9 +1,18 @@
 import { useState } from "react";
-import { X, Send, Phone, Mail } from "lucide-react";
+import { X, Send, Phone, Mail, Github, Linkedin, Instagram, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { toast } from "sonner";
+import { CONTACT_EMAIL, buildMailto } from "@/lib/contact";
+import { publicUrl } from "@/lib/utils";
+
+const quickLinks = [
+  { icon: Github, href: "https://github.com/rajuxstudio", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/rajuxstudio/", label: "LinkedIn" },
+  { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
+];
 
 type ContactFormDialogProps = {
   open: boolean;
@@ -27,6 +36,25 @@ export default function ContactFormDialog({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    window.location.href = buildMailto({
+      subject: formData.service
+        ? `Project enquiry — ${formData.service}`
+        : "Project enquiry",
+      body: [
+        `Name: ${formData.name}`,
+        `Email: ${formData.email}`,
+        `Service: ${formData.service || "—"}`,
+        "",
+        "Details:",
+        formData.details || "—",
+      ].join("\n"),
+    });
+
+    toast("Opening your email app…", {
+      description: `Your enquiry to ${CONTACT_EMAIL} is drafted and ready to send.`,
+    });
+
     onClose();
   };
 
@@ -83,6 +111,31 @@ export default function ContactFormDialog({
     </>
   );
 
+  const quickLinksRow = (
+    <div className="mt-2 flex items-center justify-center gap-3 border-t border-border pt-5">
+      {quickLinks.map((link) => (
+        <a
+          key={link.label}
+          href={link.href}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={link.label}
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition hover:bg-muted hover:text-foreground"
+        >
+          <link.icon size={16} />
+        </a>
+      ))}
+      <a
+        href={publicUrl("resume.pdf")}
+        download
+        aria-label="Download Resume"
+        className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition hover:bg-muted hover:text-foreground"
+      >
+        <Download size={16} />
+      </a>
+    </div>
+  );
+
   // ── MOBILE ──
   if (isMobile) {
     return (
@@ -135,12 +188,14 @@ export default function ContactFormDialog({
               </Button>
 
               <Button asChild variant="outline" className="w-full">
-                <a href="mailto:rajuxstudio@gmail.com">
+                <a href={`mailto:${CONTACT_EMAIL}`}>
                   <Mail size={16} /> Email
                 </a>
               </Button>
             </div>
           </form>
+
+          {quickLinksRow}
         </div>
       </div>
     );
@@ -195,6 +250,8 @@ export default function ContactFormDialog({
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             {formFields}
           </form>
+
+          {quickLinksRow}
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import iconNewProject from "@/assets/icon-new-project.png";
+import iconNewProject from "@/assets/Pages/r-logo.png";
 import {
   ProjectDetailHero, TechStackSection, ConfidentialityNote, ProjectContentWrapper,
 } from "./projectUI";

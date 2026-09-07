@@ -20,7 +20,9 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        {/* Pages serves the app from /Rajvir_porfalio/, so the router has to
+            strip that prefix before matching routes. */}
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />

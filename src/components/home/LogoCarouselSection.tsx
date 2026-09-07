@@ -1,7 +1,7 @@
-import logoCilcx from "@/assets/pages/logo-cilcx.svg";
-import logoName from "@/assets/pages/logo-name.svg";
-import logoFrame1 from "@/assets/pages/logo-frame1.svg";
-import logoRecruitEase from "@/assets/pages/logo-recruit-ease.svg";
+import logoCilcx from "@/assets/Pages/logo-cilcx.svg";
+import logoName from "@/assets/Pages/logo-name.svg";
+import logoFrame1 from "@/assets/Pages/logo-frame1.svg";
+import logoRecruitEase from "@/assets/Pages/logo-recruit-ease.svg";
 
 const logos = [
   { src: logoCilcx, alt: "Cilcx" },

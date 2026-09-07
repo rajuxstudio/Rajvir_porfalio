@@ -11,42 +11,42 @@ import {
   ShieldCheck,
   Layers,
 } from "lucide-react";
+import CloudGavelCaseStudyContent from "@/components/design/case-studies/CloudGavelCaseStudyContent";
 
 const cloudGavel: Project = {
   slug: "Modernizing operational UX for a digital warrant platform.",
   title: "Cloud Gavel",
   date: "GovTech · Enterprise SaaS",
   tag: "UX",
-  role: "UX Designer",
+  role: "Lead Product Designer",
   image: cgmockup,
   logo: cgLogo,
-  // hoverHeadline: "Modernizing operational UX for a digital warrant platform.",
+  customContent: CloudGavelCaseStudyContent,
   info: {
-    what: "A financial storytelling platform that transforms complex market data into engaging, visual narratives for investors and analysts.",
+    what: "CloudGavel is an enterprise-grade criminal justice management platform used by law enforcement agencies, courts, and legal professionals across multiple jurisdictions — digitizing the full lifecycle of warrants, case management, inter-agency coordination, and court documents.",
     floatingStats: [
-        { icon: "building", label: "Agencies", value: "500+" },
-        { icon: "users", label: "Roles", value: "Multi-role workflows" },
+        { icon: "layers", label: "Production Screens", value: "900+" },
+        { icon: "workflow", label: "Integrated Modules", value: "15+" },
         { icon: "shield", label: "Compliance", value: "CJIS compliant" },
-        { icon: "zap", label: "Approvals", value: "Real-time" },
+        { icon: "monitor", label: "Platforms", value: "Web + Mobile" },
       ],
     howItWorks: [
-      "Connect financial data sources via API",
-      "AI generates narrative summaries",
-      "Interactive charts visualize trends",
-      "Share reports with stakeholders",
+      "Submit or review a warrant through a role-based portal (judge, detective, or operator)",
+      "Digital signature and CJIS-compliant audit trail capture at every step",
+      "Warrants route automatically across agencies via the workflow engine",
+      "Real-time status tracking and notifications keep every party in sync",
     ],
     codeExplanation: [
-      "React with D3.js for data visualization",
-      "OpenAI API for narrative generation",
-      "Express.js backend for data aggregation",
+      "Angular + MUI component system shared across web and mobile",
+      "264+ shared components supporting a consistent design language",
+      "Role-based access control and CJIS security layer enforced end-to-end",
     ],
     howToRun: [
-      "git clone https://github.com/example/cloud-gavel",
-      "npm install",
-      "npm run dev",
+      "This is a UI/UX case study for an enterprise GovTech platform — there's no public codebase to run.",
+      "The full design system and prototypes live in Figma (available on request).",
     ],
     howToTry: [
-      "Visit cloud-gavel.app and connect a demo data source to see AI-generated market stories.",
+      "Walk through the warrant lifecycle — submission, judicial review, and multi-agency routing — in the Figma prototype.",
     ],
     techStack: [
       { name: "Figma", icon: FigmaIcon },
@@ -61,7 +61,8 @@ const cloudGavel: Project = {
     ],
     link: [
       { name: "web", link: "https://cloudgavel.com/" },
-      { name: "mobile", link: "https://apps.apple.com/us/app/cloudgavel-365/id1517564015" },
+      { name: "iOS App (App Store)", link: "https://apps.apple.com/us/app/cloudgavel-365/id1517564015" },
+      { name: "Android App (Google Play)", link: "https://play.google.com/store/apps/details?id=com.fusionstak.CloudGavel365&hl=en_IN" },
     ],
     Reflection: [
       "Designing for enterprise systems means earning trust before chasing novelty.",
@@ -73,7 +74,7 @@ const cloudGavel: Project = {
     meta: [
       {
         label: "Role",
-        value: "Lead UX/UI Designer",
+        value: "Lead Product Designer",
       },
       {
         label: "Timeline",
@@ -87,26 +88,26 @@ const cloudGavel: Project = {
     impacts: [
       {
         value: "62%",
-        label: "Faster workflow completion",
+        label: "Faster warrant processing",
         body: "Avg. warrant cycle dropped from 38m to 14m.",
       },
 
       {
-        value: "−47%",
-        label: "Fewer support tickets",
-        body: "Reduced confusion-driven tickets.",
+        value: "3x",
+        label: "Reduction in paper documents",
+        body: "Replaced fragmented, paper-heavy agency workflows.",
       },
 
       {
         value: "94%",
-        label: "Task success rate",
+        label: "User task completion rate",
         body: "Up from 71% in usability testing.",
       },
 
       {
         value: "4.7/5",
-        label: "Operator satisfaction",
-        body: "Across officers and prosecutors.",
+        label: "Satisfaction from field officers",
+        body: "Across judges, detectives, and operators.",
       },
     ],
     challenges: [

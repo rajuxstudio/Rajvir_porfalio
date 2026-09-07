@@ -29,6 +29,7 @@ import screenLookup from "@/assets/echelon-constructors/mockup/lookup.png";
 import screenUserManagement from "@/assets/echelon-constructors/mockup/user-management.png";
 import screenRoleManagement from "@/assets/echelon-constructors/mockup/role-management.png";
 import screenProfile from "@/assets/echelon-constructors/mockup/profile.png";
+import type { CaseStudyContentProps } from "@/components/design/projects/types";
 
 /* ---------- Palette ---------- */
 const NAVY = "#071329";
@@ -69,7 +70,7 @@ function Eyebrow({ children, dark = false }: { children: ReactNode; dark?: boole
 
 type SectionBg = "white" | "gray" | "navy" | "lightblue";
 
-function Section({ id, bg = "white", children }: { id: string; bg?: SectionBg; children: ReactNode }) {
+function Section({ id, label, bg = "white", children }: { id: string; label?: string; bg?: SectionBg; children: ReactNode }) {
   const bgStyle =
     bg === "navy" ? { background: NAVY, color: WHITE }
       : bg === "gray" ? { background: GRAY_BG, color: TEXT }
@@ -77,7 +78,7 @@ function Section({ id, bg = "white", children }: { id: string; bg?: SectionBg; c
           : { background: WHITE, color: TEXT };
   return (
     <section className="px-6 py-20 sm:px-10 sm:py-28" style={bgStyle}>
-      <div id={id} className="mx-auto max-w-6xl scroll-mt-10">
+      <div id={id} {...(label ? { "data-nav-section": true, "data-nav-label": label } : {})} className="mx-auto max-w-6xl scroll-mt-24">
         {children}
       </div>
     </section>
@@ -275,7 +276,7 @@ const reflections = [
 /* Reused by both the standalone case-study page and the project bottom sheet,
    so the two entry points stay in sync automatically. */
 
-export default function EchelonConstructorsCaseStudyContent() {
+export default function EchelonConstructorsCaseStudyContent({ activePlatform, onPlatformChange }: CaseStudyContentProps = {}) {
   return (
     <div style={{ background: WHITE, color: TEXT, fontFamily: "'Inter', sans-serif" }}>
       {/* 01 — Hero */}
@@ -308,7 +309,7 @@ export default function EchelonConstructorsCaseStudyContent() {
       </section>
 
       {/* 02 — Project Overview */}
-      <Section id="overview" bg="gray">
+      <Section id="overview" label="Overview" bg="gray">
         <SectionNumber n="02" />
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: TEXT }}>Project Overview</h2>
         <div className="mt-10 grid gap-5 sm:grid-cols-2">
@@ -323,7 +324,7 @@ export default function EchelonConstructorsCaseStudyContent() {
       </Section>
 
       {/* 03 — Research & Discovery */}
-      <Section id="research" bg="white">
+      <Section id="research" label="Research" bg="white">
         <SectionNumber n="03" />
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Research &amp; Discovery</h2>
 
@@ -346,7 +347,7 @@ export default function EchelonConstructorsCaseStudyContent() {
       </Section>
 
       {/* 04 — User Personas */}
-      <Section id="personas" bg="gray">
+      <Section id="personas" label="Personas" bg="gray">
         <SectionNumber n="04" />
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">User Personas</h2>
         <div className="mt-10 grid gap-5 lg:grid-cols-2">
@@ -389,7 +390,7 @@ export default function EchelonConstructorsCaseStudyContent() {
       </Section>
 
       {/* 05 — Design Process */}
-      <Section id="process" bg="white">
+      <Section id="process" label="Process" bg="white">
         <SectionNumber n="05" />
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Design Process</h2>
 
@@ -415,7 +416,7 @@ export default function EchelonConstructorsCaseStudyContent() {
       </Section>
 
       {/* 06 — Key Features & Solutions */}
-      <Section id="features" bg="gray">
+      <Section id="features" label="Features" bg="gray">
         <SectionNumber n="06" />
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Key Features &amp; Solutions</h2>
 
@@ -467,12 +468,12 @@ export default function EchelonConstructorsCaseStudyContent() {
 
         {/* Product UI showcase — every screen, browsable */}
         <div className="mt-16">
-          <MockupGallery mockups={allScreens} />
+          <MockupGallery mockups={allScreens} activePlatform={activePlatform} onPlatformChange={onPlatformChange} />
         </div>
       </Section>
 
       {/* 07 — Approval Workflow */}
-      <Section id="workflow" bg="navy">
+      <Section id="workflow" label="Workflow" bg="navy">
         <SectionNumber n="07" />
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Approval Workflow</h2>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed sm:text-base" style={{ color: "rgba(255,255,255,0.6)" }}>
@@ -502,7 +503,7 @@ export default function EchelonConstructorsCaseStudyContent() {
       </Section>
 
       {/* 08 — Results & Impact */}
-      <Section id="impact" bg="gray">
+      <Section id="impact" label="Impact" bg="gray">
         <SectionNumber n="08" />
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Results &amp; Impact</h2>
 
@@ -528,7 +529,7 @@ export default function EchelonConstructorsCaseStudyContent() {
       </Section>
 
       {/* 09 — Reflections & Learnings */}
-      <Section id="reflections" bg="white">
+      <Section id="reflections" label="Reflections" bg="white">
         <SectionNumber n="09" />
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Reflections &amp; Learnings</h2>
 
@@ -561,7 +562,7 @@ export default function EchelonConstructorsCaseStudyContent() {
               Back to Design Projects
             </Link>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/rajuxstudio/"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"

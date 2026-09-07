@@ -7,11 +7,61 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { useState, useEffect } from "react";
-import rupaAvatar from "@/assets/pages/rupa-avatar.png";
-import vsSibiAvatar from "@/assets/pages/vs-sibi-avatar.png";
+import rupaAvatar from "@/assets/Pages/rupa-avatar.png";
+import vsSibiAvatar from "@/assets/Pages/vs-sibi-avatar.png";
 import Footer from "@/components/newUI/footer"
 
+/** Tints are picked deterministically from the name so a person always
+ *  gets the same colour, while different people stay visually distinct. */
+const AVATAR_TINTS = [
+  "bg-sky-500/15 text-sky-700 dark:text-sky-300",
+  "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300",
+  "bg-violet-500/15 text-violet-700 dark:text-violet-300",
+  "bg-amber-500/15 text-amber-700 dark:text-amber-300",
+  "bg-rose-500/15 text-rose-700 dark:text-rose-300",
+  "bg-teal-500/15 text-teal-700 dark:text-teal-300",
+  "bg-indigo-500/15 text-indigo-700 dark:text-indigo-300",
+  "bg-orange-500/15 text-orange-700 dark:text-orange-300",
+];
+
+function initialsOf(name: string) {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part.charAt(0))
+    .join("")
+    .toUpperCase();
+}
+
+function tintFor(name: string) {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = (hash * 31 + name.charCodeAt(i)) >>> 0;
+  return AVATAR_TINTS[hash % AVATAR_TINTS.length];
+}
+
+/** Fallback avatar for people without a photo. */
+const LetterAvatar = ({ name, className = "" }: { name: string; className?: string }) => (
+  <div
+    aria-label={name}
+    className={`flex h-full w-full items-center justify-center font-semibold tracking-tight ${tintFor(
+      name
+    )} ${className}`}
+  >
+    {initialsOf(name)}
+  </div>
+);
+
 const testimonials = [
+  {
+    quote:
+      "Rajvir worked closely with me on a mobile application, focusing on UX design and the overall structure. He demonstrated strong user-centered thinking, clear workflow design, and a collaborative approach that greatly improved the product's usability and coherence.",
+    author: "Ashish Singh",
+    role: "Mobile Developer | Flutter Enthusiast | Crafting Seamless Experiences",
+    date: "January 31, 2026",
+    rating: 5.0,
+    avatar: null,
+  },
   {
     quote:
       "I highly recommend Rajvir for his exceptional label and logo design skills. His designs not only captivate visually but also enhance product presentation and user interaction. His creativity, professionalism, and deep understanding of design make him a valuable asset to any team.",
@@ -119,10 +169,14 @@ export const TestimonialsSection = () => {
                     {testimonial.avatar ? (
                       <img
                         src={testimonial.avatar}
+                        alt={testimonial.author}
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      testimonial.author.charAt(0)
+                      <LetterAvatar
+                        name={testimonial.author}
+                        className={isActive ? "text-base" : "text-xs"}
+                      />
                     )}
                   </div>
                 </div>
@@ -234,10 +288,14 @@ export const TestimonialsSection = () => {
                       {testimonial.avatar ? (
                         <img
                           src={testimonial.avatar}
+                          alt={testimonial.author}
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        testimonial.author.charAt(0)
+                        <LetterAvatar
+                          name={testimonial.author}
+                          className={isActive ? "text-lg" : "text-sm"}
+                        />
                       )}
                     </div>
                   </div>

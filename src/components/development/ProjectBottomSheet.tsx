@@ -83,6 +83,8 @@ const ProjectBottomSheet = ({ project, onClose, onProjectClick }: ProjectBottomS
                 tag={project.tag}
                 role={project.role}
                 info={project.info}
+                customContent={project.customContent}
+                customIntro={project.customIntro}
               />
               <ProjectCarousel projects={otherProjects} onProjectClick={onProjectClick} />
             </div>

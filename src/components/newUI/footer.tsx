@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Github,
   Linkedin,
@@ -7,15 +8,18 @@ import {
   Download,
   LucideIcon,
 } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { CONTACT_EMAIL, buildMailto } from "@/lib/contact";
+import { publicUrl } from "@/lib/utils";
 
 /* =========================
    📦 DATA
 ========================= */
 
 const socialLinks = [
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Github, href: "https://github.com/rajuxstudio", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/rajuxstudio/", label: "LinkedIn" },
   { icon: Twitter, href: "#", label: "Twitter" },
   { icon: Youtube, href: "#", label: "YouTube" },
   { icon: Instagram, href: "#", label: "Instagram" },
@@ -62,6 +66,36 @@ function SocialIcon({
 ========================= */
 
 export default function Footer() {
+  const [topic, setTopic] = useState("");
+
+  /** Hands the visitor off to their own email client with the request drafted. */
+  const requestMeeting = (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmed = topic.trim();
+
+    window.location.href = buildMailto({
+      subject: trimmed ? `1:1 Meeting — ${trimmed}` : "1:1 Meeting Request",
+      body: [
+        "Hi Rajveer,",
+        "",
+        "I'd like to set up a 1:1 meeting.",
+        "",
+        `Topic: ${trimmed || "(happy to discuss)"}`,
+        "",
+        "Times that work for me:",
+        "1. ",
+        "2. ",
+        "3. ",
+        "",
+        "Thanks,",
+      ].join("\n"),
+    });
+
+    toast("Opening your email app…", {
+      description: `Your meeting request to ${CONTACT_EMAIL} is drafted and ready to send.`,
+    });
+  };
+
   return (
     <footer className="relative mt-32 overflow-hidden pt-20 pb-16">
 
@@ -117,19 +151,26 @@ export default function Footer() {
             <div className="flex flex-col justify-between gap-10">
 
               {/* 🔥 MEETING (FIXED SPACING) */}
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 border border-border bg-muted/60 backdrop-blur-md rounded-xl px-3 py-2">
+              <form
+                onSubmit={requestMeeting}
+                className="flex flex-col sm:flex-row sm:items-center gap-2 border border-border bg-muted/60 backdrop-blur-md rounded-xl px-3 py-2 focus-within:border-primary/50 transition-colors"
+              >
 
                 <input
                   type="text"
+                  name="topic"
+                  value={topic}
+                  onChange={(e) => setTopic(e.target.value)}
                   placeholder="Meeting topic..."
+                  aria-label="Meeting topic"
                   className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground/60"
                 />
 
-                <Button className="w-full sm:w-auto h-8 px-4 text-sm rounded-lg">
+                <Button type="submit" className="w-full sm:w-auto h-8 px-4 text-sm rounded-lg">
                   1:1 Meeting
                 </Button>
 
-              </div>
+              </form>
 
               {/* SOCIAL + RESUME */}
               <div className="flex flex-wrap gap-3">
@@ -140,7 +181,7 @@ export default function Footer() {
 
                 {/* RESUME ICON */}
                 <a
-                  href="/resume.pdf"
+                  href={publicUrl("resume.pdf")}
                   className="group relative p-2 rounded-lg bg-muted/40 transition-all duration-300 hover:bg-primary/10 hover:-translate-y-1"
                 >
                   <Download

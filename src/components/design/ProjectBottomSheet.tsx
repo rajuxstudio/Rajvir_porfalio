@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import type { Project } from "./projects/types";
+import type { DevicePlatform, Project } from "./projects/types";
 import { projects } from "./projects/index";
 import ProjectHero from "./components/ProjectHero";
 import ProjectStickyHeader from "./components/ProjectStickyHeader";
 import ProjectContentSections from "./components/ProjectContentSections";
+import ProjectSectionNav from "./components/ProjectSectionNav";
 import ProjectCarousel from "./components/ProjectCarousel";
 
 interface ProjectBottomSheetProps {
@@ -16,9 +17,11 @@ interface ProjectBottomSheetProps {
 
 const ProjectBottomSheet = ({ project, onClose, onProjectClick }: ProjectBottomSheetProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [activePlatform, setActivePlatform] = useState<DevicePlatform | undefined>(undefined);
 
   useEffect(() => {
     if (project) {
@@ -35,6 +38,7 @@ const ProjectBottomSheet = ({ project, onClose, onProjectClick }: ProjectBottomS
   useEffect(() => {
     setIsSticky(false);
     setScrollProgress(0);
+    setActivePlatform(project?.info.platforms?.[0]);
     scrollContainerRef.current?.scrollTo({ top: 0 });
   }, [project?.slug]);
 
@@ -110,24 +114,38 @@ const ProjectBottomSheet = ({ project, onClose, onProjectClick }: ProjectBottomS
               date={project.date}
               logo={project.logo}
               techStack={project.info.techStack}
-              devicePlatforms={project.info.platforms}
               link={project.info.link}
               isSticky={isSticky}
               scrollProgress={scrollProgress}
               headerRef={headerRef}
             />
-            <div className="bg-background">
+            <div ref={contentRef} className="bg-background pb-16">
               {project.customContent ? (
-                <project.customContent />
+                <project.customContent activePlatform={activePlatform} onPlatformChange={setActivePlatform} />
               ) : (
                 <ProjectContentSections
                   tag={project.tag}
                   role={project.role}
-                  info={project.info} meta={[]} Reflection={[]} impacts={project.info.impacts} />
+                  info={project.info}
+                  meta={[]}
+                  Reflection={[]}
+                  impacts={project.info.impacts}
+                  activePlatform={activePlatform}
+                  onPlatformChange={setActivePlatform}
+                />
               )}
               <ProjectCarousel projects={otherProjects} onProjectClick={onProjectClick} />
             </div>
           </motion.div>
+
+          <ProjectSectionNav
+            scrollRef={scrollContainerRef}
+            contentRef={contentRef}
+            watchKey={project.slug}
+            devicePlatforms={project.info.platforms}
+            activePlatform={activePlatform}
+            onPlatformChange={setActivePlatform}
+          />
         </motion.div>
       )}
     </AnimatePresence>

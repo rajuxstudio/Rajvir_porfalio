@@ -3,8 +3,7 @@ import {
   Monitor, Smartphone, Users, Search, Calendar, CreditCard, BarChart3,
   Layers, Target, Zap, Image,
 } from "lucide-react";
-import iconRecruitease from "@/assets/icon-recruitease.png";
-import mockupRecruitease1 from "@/assets/mockup-recruitease-1.jpg";
+import iconRecruitease from "@/assets/Pages/logo-recruit-ease.svg";
 import {
   ProjectDetailHero, SegmentedTabs, ChallengeSolution, StatsRow,
   FeatureGrid, DesignProcessGrid, OutcomeSection, TechStackSection,
@@ -48,7 +47,8 @@ const stats = [
 const techStack = ["React", "Node.js", "PostgreSQL", "Tailwind CSS", "Stripe"];
 
 const mockups = [
-  { src: mockupRecruitease1, alt: "RecruitEase - Recruitment Dashboard" },
+  // No real screenshots for this project yet — MockupGallery renders nothing
+  // when the list is empty, which beats showing an unrelated stand-in image.
 ];
 
 export default function RecruitEaseDetail() {

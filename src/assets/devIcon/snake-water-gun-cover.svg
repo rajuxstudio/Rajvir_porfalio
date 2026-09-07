@@ -1,0 +1,69 @@
+<svg width="1200" height="1200" viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#1E1B2E"/>
+    </linearGradient>
+    <radialGradient id="glowGreen" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(600 430) rotate(90) scale(210)">
+      <stop stop-color="#10B981" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#10B981" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowBlue" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(430 700) rotate(90) scale(210)">
+      <stop stop-color="#3B82F6" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#3B82F6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowRed" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(770 700) rotate(90) scale(210)">
+      <stop stop-color="#F43F5E" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#F43F5E" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="1200" fill="url(#bg)"/>
+  <rect width="1200" height="1200" fill="url(#grid)"/>
+
+  <!-- Glows behind each choice -->
+  <circle cx="600" cy="430" r="210" fill="url(#glowGreen)"/>
+  <circle cx="430" cy="700" r="210" fill="url(#glowBlue)"/>
+  <circle cx="770" cy="700" r="210" fill="url(#glowRed)"/>
+
+  <!-- Connecting triangle -->
+  <path d="M600 460 L455 690 M600 460 L745 690 M470 705 L730 705"
+        stroke="#FFFFFF" stroke-opacity="0.14" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
+
+  <!-- Snake -->
+  <circle cx="600" cy="430" r="95" fill="#10B981" fill-opacity="0.12" stroke="#10B981" stroke-opacity="0.35" stroke-width="2"/>
+  <g transform="translate(600 430)">
+    <path d="M-42,-30 C-16,-30 -16,-4 6,-4 C30,-4 30,20 6,20 C-14,20 -18,38 -2,44"
+          stroke="#10B981" stroke-width="20" stroke-linecap="round" fill="none"/>
+    <circle cx="-2" cy="44" r="13" fill="#10B981"/>
+    <circle cx="2" cy="40" r="2.6" fill="#0F172A"/>
+    <path d="M12,44 L24,44 M12,48 L20,52" stroke="#10B981" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Water -->
+  <circle cx="430" cy="700" r="95" fill="#3B82F6" fill-opacity="0.12" stroke="#3B82F6" stroke-opacity="0.35" stroke-width="2"/>
+  <g transform="translate(430 700)">
+    <path d="M0,-50 C24,-14 40,10 40,30 C40,52 22,68 0,68 C-22,68 -40,52 -40,30 C-40,10 -24,-14 0,-50 Z" fill="#3B82F6"/>
+    <ellipse cx="-11" cy="18" rx="7" ry="11" fill="#FFFFFF" fill-opacity="0.35"/>
+  </g>
+
+  <!-- Gun (toy water-gun silhouette) -->
+  <circle cx="770" cy="700" r="95" fill="#F43F5E" fill-opacity="0.12" stroke="#F43F5E" stroke-opacity="0.35" stroke-width="2"/>
+  <g transform="translate(770 700)">
+    <path d="M-52,-6 L14,-6 L14,-20 Q14,-26 20,-26 L46,-26 Q52,-26 52,-20 L52,-4 Q52,2 46,2 L14,2 L14,10 L-6,10 L-6,34 Q-6,40 -12,40 L-24,40 Q-30,40 -30,34 L-30,10 L-52,10 Q-58,10 -58,4 L-58,0 Q-58,-6 -52,-6 Z"
+          fill="#F43F5E"/>
+    <rect x="-2" y="-2" width="12" height="8" rx="2" fill="#0F172A" fill-opacity="0.25"/>
+  </g>
+
+  <!-- Title -->
+  <text x="600" y="900" font-family="'Courier New', monospace" font-size="46" font-weight="700" fill="#E2E8F0" text-anchor="middle" letter-spacing="4">
+    SNAKE_WATER_GUN.PY
+  </text>
+  <text x="600" y="945" font-family="'Courier New', monospace" font-size="24" fill="#64748B" text-anchor="middle" letter-spacing="2">
+    &gt; python game — a classic playable in the browser
+  </text>
+</svg>

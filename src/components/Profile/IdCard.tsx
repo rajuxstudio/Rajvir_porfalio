@@ -11,8 +11,8 @@ export const PROFILE = {
 };
 
 const SOCIALS = [
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: Github, href: "https://github.com", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/rajuxstudio/", label: "LinkedIn" },
+  { icon: Github, href: "https://github.com/rajuxstudio", label: "GitHub" },
   { icon: Dribbble, href: "https://dribbble.com", label: "Dribbble" },
   { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
   { icon: Mail, href: `mailto:${PROFILE.email}`, label: "Email" },

@@ -60,7 +60,9 @@ const ProjectCarousel = ({ projects, onProjectClick }: ProjectCarouselProps) => 
                 </div>
                 <div className="p-4">
                   <div className="flex items-center gap-3">
-                    <img src={p.avatar} className="w-7 h-7 rounded-full border border-border" alt="" />
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border bg-muted text-foreground">
+                      <p.icon className="h-3.5 w-3.5" />
+                    </span>
                     <div className="flex-1 min-w-0">
                       <h4 className="text-sm font-semibold truncate">{p.title}</h4>
                       <p className="text-[10px] text-muted-foreground">{p.tag}</p>

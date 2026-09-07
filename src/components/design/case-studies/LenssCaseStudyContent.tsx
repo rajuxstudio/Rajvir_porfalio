@@ -1,4 +1,3 @@
-import type { ElementType, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft,
@@ -19,78 +18,24 @@ import {
 } from "lucide-react";
 import iconLenss from "@/assets/lenss/lenss_logo_icon_badge.svg";
 import MockupGallery from "@/components/design/components/MockupGallery";
+import { Section, SectionNumber, Badge, Card, Pill, IconBadge, StatBlock, type Accent } from "@/components/design/components/CaseStudyKit";
 import screenLogin from "@/assets/lenss/mockup/lenss_landing.png";
 import screenHome from "@/assets/lenss/mockup/lenss_dashboard.png";
 import screenActivityLog from "@/assets/lenss/mockup/lenss_activity.png";
 import screenInvestigation from "@/assets/lenss/mockup/lenss_Investigation.png";
 import screenDispatch from "@/assets/lenss/mockup/lenss_Dispatch.png";
 import userFlowDiagram from "@/assets/lenss/mockup/user-flow.svg";
+import type { CaseStudyContentProps } from "@/components/design/projects/types";
 
-/* ---------- Shared building blocks ----------
-   Uses the site's own light/dark theme tokens (bg-background, text-foreground,
-   bg-card, border-border, text-muted-foreground) so this case study follows
-   the user's theme toggle instead of a fixed palette. Cyan is LENSS's own
-   brand accent, paired with a dark: variant so it stays legible in both modes. */
-
-function SectionNumber({ n }: { n: string }) {
-  return (
-    <div className="mb-4 flex items-center gap-3">
-      <span className="font-mono text-sm font-bold text-cyan-600 dark:text-cyan-400">{n}</span>
-      <span className="h-px flex-1 max-w-[48px] bg-border" />
-    </div>
-  );
-}
-
-function Badge({ children }: { children: ReactNode }) {
-  return (
-    <span className="inline-flex items-center rounded-full bg-cyan-500/10 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
-      {children}
-    </span>
-  );
-}
-
-function Section({ id, children }: { id: string; children: ReactNode }) {
-  return (
-    <section className="bg-background px-6 py-20 text-foreground sm:px-10 sm:py-28">
-      <div id={id} className="mx-auto max-w-6xl scroll-mt-10">
-        {children}
-      </div>
-    </section>
-  );
-}
-
-function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return (
-    <div className={`rounded-xl border border-border bg-card p-6 sm:p-7 ${className}`}>
-      {children}
-    </div>
-  );
-}
-
-function Pill({ children }: { children: ReactNode }) {
-  return (
-    <span className="inline-flex items-center gap-2 rounded-full bg-cyan-500/10 px-4 py-2 text-xs font-semibold text-cyan-600 dark:text-cyan-400">
-      {children}
-    </span>
-  );
-}
-
-function IconBadge({ icon: Icon }: { icon: ElementType }) {
-  return (
-    <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
-      <Icon className="h-5 w-5" strokeWidth={2} />
-    </div>
-  );
-}
-
-function StatBlock({ value, label }: { value: string; label: string }) {
-  return (
-    <div>
-      <div className="text-[40px] font-bold leading-none text-cyan-600 dark:text-cyan-400 sm:text-[48px]">{value}</div>
-      <div className="mt-3 text-sm leading-relaxed text-muted-foreground">{label}</div>
-    </div>
-  );
-}
+/* LENSS's brand accent — cyan, paired with a dark: variant so it stays legible
+   in both themes. Structure (Section/Card/Pill/...) comes from the shared kit,
+   so every case study shares the same layout and is light/dark aware. */
+const ACCENT: Accent = {
+  text: "text-cyan-600 dark:text-cyan-400",
+  bg: "bg-cyan-500",
+  softBg: "bg-cyan-500/10",
+  border: "border-cyan-500",
+};
 
 /* ---------- Data (sourced directly from the LENSS case-study deck) ---------- */
 
@@ -174,13 +119,13 @@ const lessons = [
 /* Reused by both the standalone case-study page and the project bottom sheet,
    so the two entry points stay in sync automatically. */
 
-export default function LenssCaseStudyContent() {
+export default function LenssCaseStudyContent({ activePlatform, onPlatformChange }: CaseStudyContentProps = {}) {
   return (
     <div className="bg-background font-['Inter',sans-serif] text-foreground">
       {/* Hero */}
       <section className="bg-background px-6 pb-16 pt-16 text-foreground sm:px-10 sm:pt-20">
         <div className="mx-auto max-w-6xl">
-          <Badge>Case Study</Badge>
+          <Badge accent={ACCENT}>Case Study</Badge>
           <h1 className="mt-5 max-w-2xl text-4xl font-bold leading-tight tracking-tight sm:text-6xl">
             LENSS
           </h1>
@@ -203,8 +148,8 @@ export default function LenssCaseStudyContent() {
       </section>
 
       {/* 01 — The Problem */}
-      <Section id="problem">
-        <SectionNumber n="01" />
+      <Section id="problem" label="Problem">
+        <SectionNumber n="01" accent={ACCENT} />
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">The Problem</h2>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
           Law enforcement officers traditionally rely on radio dispatchers to run vehicle plates, driver's licenses,
@@ -213,7 +158,7 @@ export default function LenssCaseStudyContent() {
         <div className="mt-10 grid gap-5 sm:grid-cols-3">
           {problems.map((p) => (
             <Card key={p.title}>
-              <IconBadge icon={p.icon} />
+              <IconBadge icon={p.icon} accent={ACCENT} />
               <h3 className="text-base font-bold">{p.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
             </Card>
@@ -222,13 +167,13 @@ export default function LenssCaseStudyContent() {
       </Section>
 
       {/* 02 — Design Goals */}
-      <Section id="goals">
-        <SectionNumber n="02" />
+      <Section id="goals" label="Goals">
+        <SectionNumber n="02" accent={ACCENT} />
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Design Goals</h2>
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {designGoals.map((g) => (
             <Card key={g.n}>
-              <IconBadge icon={g.icon} />
+              <IconBadge icon={g.icon} accent={ACCENT} />
               <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">{g.n} · {g.title}</p>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{g.body}</p>
             </Card>
@@ -237,14 +182,14 @@ export default function LenssCaseStudyContent() {
       </Section>
 
       {/* 03 — Target User Profiles */}
-      <Section id="personas">
-        <SectionNumber n="03" />
+      <Section id="personas" label="Personas">
+        <SectionNumber n="03" accent={ACCENT} />
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Target User Profiles</h2>
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {personas.map((p) => (
             <Card key={p.role}>
-              <IconBadge icon={p.icon} />
-              <Pill>{p.role}</Pill>
+              <IconBadge icon={p.icon} accent={ACCENT} />
+              <Pill accent={ACCENT}>{p.role}</Pill>
               <h3 className="mt-3 text-base font-bold">{p.name}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
             </Card>
@@ -253,8 +198,8 @@ export default function LenssCaseStudyContent() {
       </Section>
 
       {/* 04 — User Flow */}
-      <Section id="flow">
-        <SectionNumber n="04" />
+      <Section id="flow" label="User Flow">
+        <SectionNumber n="04" accent={ACCENT} />
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">User Flow</h2>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
           Five stages, from first login to the final intelligence return — the real screen-to-screen path an
@@ -267,15 +212,15 @@ export default function LenssCaseStudyContent() {
       </Section>
 
       {/* 05 — Key Design Decisions */}
-      <Section id="decisions">
-        <SectionNumber n="05" />
+      <Section id="decisions" label="Decisions">
+        <SectionNumber n="05" accent={ACCENT} />
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Key Design Decisions</h2>
 
         <div className="mt-10 space-y-5">
           {decisions.map((d) => (
             <Card key={d.n} className="grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center">
               <div>
-                <IconBadge icon={d.icon} />
+                <IconBadge icon={d.icon} accent={ACCENT} />
                 <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Decision {d.n}</p>
                 <h3 className="mt-1 text-lg font-bold">{d.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">{d.body}</p>
@@ -291,18 +236,18 @@ export default function LenssCaseStudyContent() {
 
         {/* Product UI showcase — every screen, browsable */}
         <div className="mt-16">
-          <MockupGallery mockups={allScreens} />
+          <MockupGallery mockups={allScreens} activePlatform={activePlatform} onPlatformChange={onPlatformChange} />
         </div>
       </Section>
 
       {/* 06 — Outcomes & Impact */}
-      <Section id="impact">
-        <SectionNumber n="06" />
+      <Section id="impact" label="Impact">
+        <SectionNumber n="06" accent={ACCENT} />
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Outcomes &amp; Impact</h2>
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {outcomes.map((o) => (
             <Card key={o.label}>
-              <StatBlock value={o.value} label={o.label} />
+              <StatBlock value={o.value} label={o.label} accent={ACCENT} />
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{o.body}</p>
             </Card>
           ))}
@@ -310,8 +255,8 @@ export default function LenssCaseStudyContent() {
       </Section>
 
       {/* 07 — Lessons Learned */}
-      <Section id="lessons">
-        <SectionNumber n="07" />
+      <Section id="lessons" label="Lessons">
+        <SectionNumber n="07" accent={ACCENT} />
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Lessons Learned</h2>
         <div className="mt-10 grid gap-5 lg:grid-cols-2">
           {lessons.map((l) => (
@@ -343,7 +288,7 @@ export default function LenssCaseStudyContent() {
               Back to Design Projects
             </Link>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/rajuxstudio/"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"

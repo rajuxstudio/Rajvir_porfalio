@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Monitor, Smartphone, Tablet, ExternalLink } from "lucide-react";
 import { projects, Project } from "@/lib/projectsData";
+import { Button } from "@/components/ui/button";
 
 const platformLabel = { web: "Web App", mobile: "Mobile App", tablet: "Tablet App" };
 const platformIcon = {

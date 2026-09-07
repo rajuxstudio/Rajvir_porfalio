@@ -9,6 +9,8 @@ import {
 import { useState, useEffect } from "react";
 import rupaAvatar from "@/assets/Pages/rupa-avatar.png";
 import vsSibiAvatar from "@/assets/Pages/vs-sibi-avatar.png";
+import ashishAvatar from "@/assets/Pages/ashish-avatar.jpeg";
+import syedAvatar from "@/assets/Pages/Syed-avatar.jpeg";
 import Footer from "@/components/newUI/footer"
 
 /** Tints are picked deterministically from the name so a person always
@@ -60,7 +62,7 @@ const testimonials = [
     role: "Mobile Developer | Flutter Enthusiast | Crafting Seamless Experiences",
     date: "January 31, 2026",
     rating: 5.0,
-    avatar: null,
+    avatar: ashishAvatar,
   },
   {
     quote:
@@ -87,7 +89,7 @@ const testimonials = [
     role: "AI Product Leader (Robotics & EdTech)",
     date: "Feb 28, 2022",
     rating: 5.0,
-    avatar: null,
+    avatar: syedAvatar,
   },
 ];
 

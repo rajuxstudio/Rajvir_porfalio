@@ -1,69 +1,161 @@
 <svg width="1200" height="1200" viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    Snake · Water · Gun cover. Everything important sits in the middle band (≈ x 200–1000,
+    y 330–870) because the dev cards (4:5, 16:10) and the wide project header crop the rest.
+    Three glossy tokens in a triangle; curved arrows show who beats whom:
+    snake → drinks water, water → soaks gun, gun → shoots snake.
+  -->
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="1200" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0F172A"/>
-      <stop offset="1" stop-color="#1E1B2E"/>
+      <stop stop-color="#0B1020"/>
+      <stop offset="1" stop-color="#1B1638"/>
     </linearGradient>
-    <radialGradient id="glowGreen" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(600 430) rotate(90) scale(210)">
-      <stop stop-color="#10B981" stop-opacity="0.35"/>
-      <stop offset="1" stop-color="#10B981" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="glowBlue" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(430 700) rotate(90) scale(210)">
-      <stop stop-color="#3B82F6" stop-opacity="0.35"/>
-      <stop offset="1" stop-color="#3B82F6" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="glowRed" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(770 700) rotate(90) scale(210)">
-      <stop stop-color="#F43F5E" stop-opacity="0.35"/>
-      <stop offset="1" stop-color="#F43F5E" stop-opacity="0"/>
+    <radialGradient id="vignette" cx="600" cy="600" r="760" gradientUnits="userSpaceOnUse">
+      <stop offset="0.45" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.55"/>
     </radialGradient>
     <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-      <path d="M60 0H0V60" fill="none" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="1"/>
+      <path d="M60 0H0V60" fill="none" stroke="#FFFFFF" stroke-opacity="0.035" stroke-width="1"/>
     </pattern>
+
+    <!-- glows -->
+    <radialGradient id="glowG" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(600 430) scale(240)">
+      <stop stop-color="#10B981" stop-opacity="0.45"/><stop offset="1" stop-color="#10B981" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(455 690) scale(240)">
+      <stop stop-color="#3B82F6" stop-opacity="0.45"/><stop offset="1" stop-color="#3B82F6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowR" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(745 690) scale(240)">
+      <stop stop-color="#F43F5E" stop-opacity="0.45"/><stop offset="1" stop-color="#F43F5E" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- token rims + discs -->
+    <linearGradient id="rimG" x1="0" y1="-88" x2="0" y2="88" gradientUnits="userSpaceOnUse"><stop stop-color="#6EE7B7"/><stop offset="1" stop-color="#065F46"/></linearGradient>
+    <linearGradient id="rimB" x1="0" y1="-88" x2="0" y2="88" gradientUnits="userSpaceOnUse"><stop stop-color="#93C5FD"/><stop offset="1" stop-color="#1E3A8A"/></linearGradient>
+    <linearGradient id="rimR" x1="0" y1="-88" x2="0" y2="88" gradientUnits="userSpaceOnUse"><stop stop-color="#FDA4AF"/><stop offset="1" stop-color="#881337"/></linearGradient>
+    <radialGradient id="discG" cx="0" cy="-20" r="90" gradientUnits="userSpaceOnUse"><stop stop-color="#0F3B30"/><stop offset="1" stop-color="#06201A"/></radialGradient>
+    <radialGradient id="discB" cx="0" cy="-20" r="90" gradientUnits="userSpaceOnUse"><stop stop-color="#14264D"/><stop offset="1" stop-color="#0A1530"/></radialGradient>
+    <radialGradient id="discR" cx="0" cy="-20" r="90" gradientUnits="userSpaceOnUse"><stop stop-color="#45162A"/><stop offset="1" stop-color="#260B17"/></radialGradient>
+
+    <!-- icon fills -->
+    <linearGradient id="snakeFill" x1="-40" y1="-40" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#6EE7B7"/><stop offset="1" stop-color="#10B981"/></linearGradient>
+    <linearGradient id="dropFill" x1="0" y1="-52" x2="0" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#BFDBFE"/><stop offset="0.45" stop-color="#60A5FA"/><stop offset="1" stop-color="#2563EB"/></linearGradient>
+    <linearGradient id="gunFill" x1="-60" y1="-40" x2="40" y2="50" gradientUnits="userSpaceOnUse"><stop stop-color="#FDA4AF"/><stop offset="1" stop-color="#E11D48"/></linearGradient>
+
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000" flood-opacity="0.55"/>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+
+    <!-- arrowheads -->
+    <marker id="headG" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#34D399"/></marker>
+    <marker id="headB" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#60A5FA"/></marker>
+    <marker id="headR" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#FB7185"/></marker>
   </defs>
 
-  <!-- Background -->
+  <!-- background -->
   <rect width="1200" height="1200" fill="url(#bg)"/>
   <rect width="1200" height="1200" fill="url(#grid)"/>
+  <g fill="#FFFFFF">
+    <circle cx="300" cy="380" r="2" fill-opacity="0.35"/><circle cx="905" cy="360" r="1.6" fill-opacity="0.3"/>
+    <circle cx="250" cy="760" r="1.4" fill-opacity="0.25"/><circle cx="960" cy="820" r="2" fill-opacity="0.3"/>
+    <circle cx="840" cy="430" r="1.2" fill-opacity="0.4"/><circle cx="360" cy="560" r="1.2" fill-opacity="0.3"/>
+  </g>
 
-  <!-- Glows behind each choice -->
-  <circle cx="600" cy="430" r="210" fill="url(#glowGreen)"/>
-  <circle cx="430" cy="700" r="210" fill="url(#glowBlue)"/>
-  <circle cx="770" cy="700" r="210" fill="url(#glowRed)"/>
+  <rect width="1200" height="1200" fill="url(#vignette)"/>
 
-  <!-- Connecting triangle -->
-  <path d="M600 460 L455 690 M600 460 L745 690 M470 705 L730 705"
-        stroke="#FFFFFF" stroke-opacity="0.14" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
+  <!-- the composition is scaled a touch around its centre so it fits the project header's crop
+       (top edge) and stays mostly clear of its bottom fade -->
+  <g transform="translate(600 588) scale(0.88) translate(-600 -603)">
+  <!-- glows -->
+  <circle cx="600" cy="430" r="240" fill="url(#glowG)"/>
+  <circle cx="455" cy="690" r="240" fill="url(#glowB)"/>
+  <circle cx="745" cy="690" r="240" fill="url(#glowR)"/>
 
-  <!-- Snake -->
-  <circle cx="600" cy="430" r="95" fill="#10B981" fill-opacity="0.12" stroke="#10B981" stroke-opacity="0.35" stroke-width="2"/>
+  <!-- rules: curved arrows around the triangle (centre 600,603; r 170) -->
+  <g stroke-width="6" stroke-linecap="round" fill="none">
+    <path d="M500 465.5 A170 170 0 0 0 430.7 588.2" stroke="#34D399" stroke-opacity="0.85" marker-end="url(#headG)"/>
+    <path d="M533.6 759.5 A170 170 0 0 0 666.4 759.5" stroke="#60A5FA" stroke-opacity="0.85" marker-end="url(#headB)"/>
+    <path d="M769.3 588.2 A170 170 0 0 0 700 465.5" stroke="#FB7185" stroke-opacity="0.85" marker-end="url(#headR)"/>
+  </g>
+  <g font-family="'Segoe UI', Inter, Arial, sans-serif" font-size="21" font-weight="700" text-anchor="middle" letter-spacing="1">
+    <rect x="364" y="484" width="104" height="34" rx="17" fill="#10B981" fill-opacity="0.16" stroke="#34D399" stroke-opacity="0.45"/>
+    <text x="416" y="508" fill="#6EE7B7">drinks</text>
+    <rect x="552" y="794" width="96" height="34" rx="17" fill="#3B82F6" fill-opacity="0.16" stroke="#60A5FA" stroke-opacity="0.45"/>
+    <text x="600" y="818" fill="#93C5FD">soaks</text>
+    <rect x="732" y="484" width="104" height="34" rx="17" fill="#F43F5E" fill-opacity="0.16" stroke="#FB7185" stroke-opacity="0.45"/>
+    <text x="784" y="508" fill="#FDA4AF">shoots</text>
+  </g>
+
+  <!-- VS -->
+  <circle cx="600" cy="612" r="34" fill="#0B1020" stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="2"/>
+  <text x="600" y="621" font-family="'Segoe UI', Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#E2E8F0" text-anchor="middle" letter-spacing="1">VS</text>
+
+  <!-- ── Snake token ── -->
   <g transform="translate(600 430)">
-    <path d="M-42,-30 C-16,-30 -16,-4 6,-4 C30,-4 30,20 6,20 C-14,20 -18,38 -2,44"
-          stroke="#10B981" stroke-width="20" stroke-linecap="round" fill="none"/>
-    <circle cx="-2" cy="44" r="13" fill="#10B981"/>
-    <circle cx="2" cy="40" r="2.6" fill="#0F172A"/>
-    <path d="M12,44 L24,44 M12,48 L20,52" stroke="#10B981" stroke-width="3" stroke-linecap="round"/>
+    <g filter="url(#shadow)">
+      <circle r="88" fill="url(#rimG)"/>
+      <circle r="78" fill="url(#discG)"/>
+    </g>
+    <ellipse cy="-46" rx="50" ry="20" fill="#FFFFFF" fill-opacity="0.08"/>
+    <g filter="url(#soft)">
+      <!-- body -->
+      <path d="M-40 -36 C-12 -50 24 -38 20 -16 C16 4 -22 -2 -24 18 C-26 36 4 42 22 32"
+            stroke="url(#snakeFill)" stroke-width="19" stroke-linecap="round" fill="none"/>
+      <!-- scale pattern -->
+      <path d="M-30 -40 C-8 -48 22 -36 18 -16 C14 4 -22 -2 -24 18 C-26 34 2 40 16 34"
+            stroke="#065F46" stroke-opacity="0.45" stroke-width="5" stroke-dasharray="1 10" stroke-linecap="round" fill="none"/>
+      <!-- head -->
+      <ellipse cx="30" cy="30" rx="16" ry="12" transform="rotate(-18 30 30)" fill="#34D399"/>
+      <circle cx="34" cy="25" r="3.2" fill="#06201A"/><circle cx="35" cy="24" r="1" fill="#FFFFFF"/>
+      <!-- tongue -->
+      <path d="M45 33 L56 36 M56 36 L62 32 M56 36 L61 41" stroke="#FB7185" stroke-width="2.6" stroke-linecap="round"/>
+    </g>
   </g>
 
-  <!-- Water -->
-  <circle cx="430" cy="700" r="95" fill="#3B82F6" fill-opacity="0.12" stroke="#3B82F6" stroke-opacity="0.35" stroke-width="2"/>
-  <g transform="translate(430 700)">
-    <path d="M0,-50 C24,-14 40,10 40,30 C40,52 22,68 0,68 C-22,68 -40,52 -40,30 C-40,10 -24,-14 0,-50 Z" fill="#3B82F6"/>
-    <ellipse cx="-11" cy="18" rx="7" ry="11" fill="#FFFFFF" fill-opacity="0.35"/>
+  <!-- ── Water token ── -->
+  <g transform="translate(455 690)">
+    <g filter="url(#shadow)">
+      <circle r="88" fill="url(#rimB)"/>
+      <circle r="78" fill="url(#discB)"/>
+    </g>
+    <ellipse cy="-46" rx="50" ry="20" fill="#FFFFFF" fill-opacity="0.08"/>
+    <ellipse cy="58" rx="34" ry="6" fill="none" stroke="#93C5FD" stroke-opacity="0.45" stroke-width="2.5"/>
+    <ellipse cy="58" rx="20" ry="3.5" fill="none" stroke="#93C5FD" stroke-opacity="0.3" stroke-width="2"/>
+    <g filter="url(#soft)">
+      <path d="M0 -50 C22 -18 38 4 38 24 C38 46 21 58 0 58 C-21 58 -38 46 -38 24 C-38 4 -22 -18 0 -50 Z" fill="url(#dropFill)"/>
+      <path d="M-14 4 C-22 16 -24 28 -18 38" stroke="#FFFFFF" stroke-opacity="0.6" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="-8" cy="-10" r="4" fill="#FFFFFF" fill-opacity="0.55"/>
+    </g>
   </g>
 
-  <!-- Gun (toy water-gun silhouette) -->
-  <circle cx="770" cy="700" r="95" fill="#F43F5E" fill-opacity="0.12" stroke="#F43F5E" stroke-opacity="0.35" stroke-width="2"/>
-  <g transform="translate(770 700)">
-    <path d="M-52,-6 L14,-6 L14,-20 Q14,-26 20,-26 L46,-26 Q52,-26 52,-20 L52,-4 Q52,2 46,2 L14,2 L14,10 L-6,10 L-6,34 Q-6,40 -12,40 L-24,40 Q-30,40 -30,34 L-30,10 L-52,10 Q-58,10 -58,4 L-58,0 Q-58,-6 -52,-6 Z"
-          fill="#F43F5E"/>
-    <rect x="-2" y="-2" width="12" height="8" rx="2" fill="#0F172A" fill-opacity="0.25"/>
+  <!-- ── Gun token (toy water pistol, squirting) ── -->
+  <g transform="translate(745 690)">
+    <g filter="url(#shadow)">
+      <circle r="88" fill="url(#rimR)"/>
+      <circle r="78" fill="url(#discR)"/>
+    </g>
+    <ellipse cy="-46" rx="50" ry="20" fill="#FFFFFF" fill-opacity="0.08"/>
+    <g filter="url(#soft)" transform="translate(8 2)">
+      <!-- water tank -->
+      <circle cx="14" cy="-24" r="15" fill="#FECDD3"/>
+      <rect x="10" y="-44" width="8" height="7" rx="2" fill="#FDA4AF"/>
+      <!-- handle -->
+      <rect x="2" y="2" width="21" height="40" rx="8" transform="rotate(14 12 22)" fill="#BE123C"/>
+      <!-- trigger -->
+      <path d="M-8 6 Q-10 20 -2 22" stroke="#FDA4AF" stroke-width="4" stroke-linecap="round" fill="none"/>
+      <!-- body -->
+      <rect x="-40" y="-12" width="76" height="24" rx="12" fill="url(#gunFill)"/>
+      <rect x="-34" y="-8" width="40" height="5" rx="2.5" fill="#FFFFFF" fill-opacity="0.35"/>
+      <!-- nozzle -->
+      <rect x="-58" y="-6" width="22" height="12" rx="4" fill="#FB7185"/>
+    </g>
+    <!-- squirt -->
+    <g fill="#93C5FD">
+      <circle cx="-62" cy="0" r="4.5"/><circle cx="-72" cy="-7" r="3.2" fill-opacity="0.85"/><circle cx="-70" cy="8" r="2.6" fill-opacity="0.7"/>
+    </g>
   </g>
-
-  <!-- Title -->
-  <text x="600" y="900" font-family="'Courier New', monospace" font-size="46" font-weight="700" fill="#E2E8F0" text-anchor="middle" letter-spacing="4">
-    SNAKE_WATER_GUN.PY
-  </text>
-  <text x="600" y="945" font-family="'Courier New', monospace" font-size="24" fill="#64748B" text-anchor="middle" letter-spacing="2">
-    &gt; python game — a classic playable in the browser
-  </text>
+  </g>
 </svg>

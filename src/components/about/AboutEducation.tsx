@@ -1,6 +1,7 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
-const education = [
+// eslint-disable-next-line react-refresh/only-export-components -- also read by the 3D room's certificate wall
+export const education = [
   {
     degree: "Master of Computer Applications (MCA)",
     institution: "Modi Institute of Management & Technology, Kota",

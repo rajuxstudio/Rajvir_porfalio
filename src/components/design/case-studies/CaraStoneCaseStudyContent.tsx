@@ -24,6 +24,7 @@ import edgarSearch from "@/assets/carastone/mockup/Edgar Search.png";
 import loginScreen from "@/assets/carastone/mockup/Login (1).png";
 import marketSummary from "@/assets/carastone/mockup/Sumarry.png";
 import accountSelect from "@/assets/carastone/mockup/User Account SCreen.png";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
 /* CaraStone's brand color is a deep navy (#1B2B4B, matching the real logo and
    UI) — Tailwind's indigo family is the closest named match, and the Hero /
@@ -253,7 +254,7 @@ export default function CaraStoneCaseStudyContent(_props: CaseStudyContentProps 
               <Linkedin className="h-4 w-4" strokeWidth={2} />
             </a>
             <a
-              href="mailto:raju@xstudio.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               aria-label="Email"
               className="flex h-10 w-10 items-center justify-center rounded-full border border-border transition hover:bg-muted"
             >

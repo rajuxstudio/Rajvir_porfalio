@@ -1,7 +1,8 @@
 import { GraduationCap, BookOpen, School, Award } from "lucide-react";
 import TimelineCard, { type TimelineCardProps } from "@/components/TimelineCard";
 
-const educationData: Omit<TimelineCardProps, "index" | "isLeft">[] = [
+// eslint-disable-next-line react-refresh/only-export-components -- also read by the Profile education sheet
+export const educationData: Omit<TimelineCardProps, "index" | "isLeft">[] = [
   {
     year: "Jul 2024 – Present",
     title: "MCA (Master of Computer Application)",

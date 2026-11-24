@@ -26,6 +26,7 @@ import screenInvestigation from "@/assets/lenss/mockup/lenss_Investigation.png";
 import screenDispatch from "@/assets/lenss/mockup/lenss_Dispatch.png";
 import userFlowDiagram from "@/assets/lenss/mockup/user-flow.svg";
 import type { CaseStudyContentProps } from "@/components/design/projects/types";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
 /* LENSS's brand accent — cyan, paired with a dark: variant so it stays legible
    in both themes. Structure (Section/Card/Pill/...) comes from the shared kit,
@@ -297,7 +298,7 @@ export default function LenssCaseStudyContent({ activePlatform, onPlatformChange
               <Linkedin className="h-4 w-4" strokeWidth={2} />
             </a>
             <a
-              href="mailto:raju@xstudio.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               aria-label="Email"
               className="flex h-10 w-10 items-center justify-center rounded-full border border-border transition hover:bg-muted"
             >

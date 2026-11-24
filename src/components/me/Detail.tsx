@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { Calendar } from "lucide-react";
+import { Calendar, X } from "lucide-react";
 import {
   Drawer,
+  DrawerClose,
   DrawerContent,
-  DrawerHeader,
   DrawerTitle,
   DrawerDescription,
 } from "@/components/ui/drawer";
@@ -14,16 +14,16 @@ import CertificatesPocket from "@/components/Profile/CertificatesPocket";
 import QualificationCard from "@/components/Profile/QualificationCard";
 import BeyondWorkPocket from "@/components/Profile/BeyondWorkPocket";
 import HeroAurora from "@/components/Profile/HeroAurora";
-import AboutMe from "@/components/Profile/AboutMe";
-import Certifications from "@/components/Profile/Certifications";
-import EducationTimeline from "@/components/EducationTimeline";
+import AboutSheet from "@/components/Profile/sheets/AboutSheet";
+import EducationSheet from "@/components/Profile/sheets/EducationSheet";
+import CertificatesSheet from "@/components/Profile/sheets/CertificatesSheet";
 
 type Sheet = "certs" | "qualification" | "about";
 
-const SHEET_META: Record<Sheet, { title: string; description: string }> = {
-  certs: { title: "Certifications", description: "Full list of certifications and credentials." },
-  qualification: { title: "Education", description: "Complete academic history and qualifications." },
-  about: { title: "About Me", description: "Background, experience and work history." },
+const SHEET_META: Record<Sheet, { eyebrow: string; title: string; description: string }> = {
+  certs: { eyebrow: "Certifications", title: "Always learning", description: "Courses and credentials in design and development." },
+  qualification: { eyebrow: "Education", title: "Academic history", description: "Degrees and qualifications, newest first." },
+  about: { eyebrow: "About", title: "Background & experience", description: "Who I am and where I've worked." },
 };
 
 export default function Detail() {
@@ -168,14 +168,31 @@ export default function Detail() {
 
       <Drawer open={sheet !== null} onOpenChange={(o) => !o && setSheet(null)}>
         <DrawerContent className="max-h-[92vh] dark:border-neutral-800 dark:bg-neutral-950">
-          <DrawerHeader className="sr-only">
-            <DrawerTitle>{sheet ? SHEET_META[sheet].title : ""}</DrawerTitle>
-            <DrawerDescription>{sheet ? SHEET_META[sheet].description : ""}</DrawerDescription>
-          </DrawerHeader>
-          <div className="overflow-y-auto px-2 pb-8">
-            {sheet === "certs" && <Certifications />}
-            {sheet === "qualification" && <EducationTimeline />}
-            {sheet === "about" && <AboutMe />}
+          {/* shared header: stays put while the content scrolls */}
+          <div className="border-b border-border/60">
+            <div className="mx-auto flex w-full max-w-3xl items-start justify-between gap-4 px-6 pb-4 pt-3">
+              <div className="min-w-0">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-primary">{sheet ? SHEET_META[sheet].eyebrow : ""}</p>
+                <DrawerTitle className="mt-1 text-2xl font-bold tracking-tight text-foreground">{sheet ? SHEET_META[sheet].title : ""}</DrawerTitle>
+                <DrawerDescription className="mt-1 text-sm text-muted-foreground">{sheet ? SHEET_META[sheet].description : ""}</DrawerDescription>
+              </div>
+              <DrawerClose asChild>
+                <button
+                  type="button"
+                  aria-label="Close"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-muted/50 text-muted-foreground transition hover:bg-muted hover:text-foreground"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </DrawerClose>
+            </div>
+          </div>
+          <div className="min-h-0 flex-1 overflow-y-auto">
+            <div className="mx-auto w-full max-w-3xl px-6 pb-12 pt-6">
+              {sheet === "certs" && <CertificatesSheet />}
+              {sheet === "qualification" && <EducationSheet />}
+              {sheet === "about" && <AboutSheet />}
+            </div>
           </div>
         </DrawerContent>
       </Drawer>

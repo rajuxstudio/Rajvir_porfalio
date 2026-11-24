@@ -39,6 +39,7 @@ import webProcessFlow from "@/assets/bumper-mandi/web/process-flow.png";
 import webGroupByStatus from "@/assets/bumper-mandi/web/process-flow-grouped.png";
 import webLotDetail from "@/assets/bumper-mandi/web/lot-detail.png";
 import type { CaseStudyContentProps } from "@/components/design/projects/types";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
 const ORANGE = "#F97316";
 const AMBER = "#F59E0B";
@@ -235,7 +236,7 @@ const socials = [
   { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/rajuxstudio/" },
   { icon: Dribbble, label: "Dribbble", href: "https://dribbble.com" },
   { icon: Twitter, label: "Twitter", href: "https://twitter.com" },
-  { icon: Mail, label: "Email", href: "mailto:raju@xstudio.com" },
+  { icon: Mail, label: "Email", href: `mailto:${CONTACT_EMAIL}` },
 ];
 
 /* ---------- Content (sections 01-10 + closing) ---------- */

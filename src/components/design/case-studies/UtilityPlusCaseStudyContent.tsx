@@ -33,6 +33,7 @@ import cpServiceType from "@/assets/utility-plus/mockup/uts_cp_type.png";
 import cpDashboard from "@/assets/utility-plus/mockup/uts_cp_landingpage_dashboard.png";
 import cpLicenseList from "@/assets/utility-plus/mockup/uts_cp_landingpage_occupational_license.png";
 import cpLicenseDetail from "@/assets/utility-plus/mockup/uts_cp_create_license.png";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
 /* UtilityPlus's brand accent — the blue used across its real wordmark and UI.
    Structure comes from the shared kit, so this matches every other case study's
@@ -542,7 +543,7 @@ export default function UtilityPlusCaseStudyContent({ activePlatform, onPlatform
               <Linkedin className="h-4 w-4" strokeWidth={2} />
             </a>
             <a
-              href="mailto:raju@xstudio.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               aria-label="Email"
               className="flex h-10 w-10 items-center justify-center rounded-full border border-border transition hover:bg-muted"
             >

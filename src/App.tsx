@@ -10,6 +10,10 @@ import ProjectDetail from "./pages/ProjectDetail";
 import NotFound from "./pages/NotFound";
 import DevPage from "./pages/DevPage"; // your main page
 import DesignPage from "./pages/DesignPage";
+import { lazy, Suspense } from "react";
+
+// The 3D room is heavy (three.js + postprocessing), so load it only when visited.
+const RoomPage = lazy(() => import("./pages/RoomPage"));
 
 
 const queryClient = new QueryClient();
@@ -28,6 +32,14 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/dev" element={<DevPage />} />   
             <Route path="/design" element={<DesignPage />} />
+            <Route
+              path="/room"
+              element={
+                <Suspense fallback={<div className="fixed inset-0 bg-[#1f1d1b]" />}>
+                  <RoomPage />
+                </Suspense>
+              }
+            />
 
             <Route path="/project/:slug" element={<ProjectDetail />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

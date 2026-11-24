@@ -1,0 +1,3 @@
+kira.glb      Character "Kira" by Aki, scene by abernier; CC0. From three.js examples/models/gltf/kira.glb
+ToyCar.glb    "Toy Car" from KhronosGroup/glTF-Sample-Assets; CC0 1.0.
+earth.jpg     NASA Blue Marble Earth texture as shipped in three.js examples/textures/planets/earth_atmos_2048.jpg

@@ -1,11 +1,14 @@
 import QuickActionPanel from "@/components/newUI/QuickActionPanel";
 import Header from "@/components/newUI/header";
+import ProfileViewSwitch from "@/components/newUI/ProfileViewSwitch";
 import AboutHero from "@/components/about/AboutHero";
 import AboutEducation from "@/components/about/AboutEducation";
 import AboutExperience from "@/components/about/AboutExperience";
 import AboutCertifications from "@/components/about/AboutCertifications";
 import Footer from "@/components/newUI/footer";
-import Detail from "@/components/me/Detail";
+// The Profile page now uses the new 6-card design. The previous layout (components/me/Detail.tsx)
+// is kept in the repo for reference but is no longer rendered.
+import NewProfileUIDetail from "@/components/newProfileUI/NewProfileUIDetail";
 
 
 const SectionDivider = () => (
@@ -19,9 +22,10 @@ const About = () => {
     <>
       <Header />
       <QuickActionPanel />
+      <ProfileViewSwitch current="page" />
 
       <main className="min-h-screen bg-background text-foreground">
-        <Detail />
+        <NewProfileUIDetail />
         {/* <Footer /> */}
       </main>
     </>

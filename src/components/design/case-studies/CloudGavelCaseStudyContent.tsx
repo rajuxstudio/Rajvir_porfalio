@@ -40,6 +40,7 @@ import mobileAssigned from "@/assets/cloud-gavel/mockup/cg_mobile_assigned.png";
 import mobileType from "@/assets/cloud-gavel/mockup/cg_mobile_type.png";
 import mobileEmpty from "@/assets/cloud-gavel/mockup/ch_mobile_empty.png";
 import mobileProfile from "@/assets/cloud-gavel/mockup/cg_mobile_profile.png";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
 /* CloudGavel's brand accent — orange, its primary brand color, plus the two
    secondary badge colors used on the hero pills. Structure (Section/Card/
@@ -422,7 +423,7 @@ export default function CloudGavelCaseStudyContent({ activePlatform, onPlatformC
                 </p>
               </div>
               <a
-                href="mailto:raju@xstudio.com?subject=CloudGavel%20Web%20UI%20Design%20Request"
+                href={`mailto:${CONTACT_EMAIL}?subject=CloudGavel%20Web%20UI%20Design%20Request`}
                 className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 ${ACCENT.bg}`}
               >
                 <Mail className="h-3.5 w-3.5" />
@@ -627,7 +628,7 @@ export default function CloudGavelCaseStudyContent({ activePlatform, onPlatformC
               <Linkedin className="h-4 w-4" strokeWidth={2} />
             </a>
             <a
-              href="mailto:raju@xstudio.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               aria-label="Email"
               className="flex h-10 w-10 items-center justify-center rounded-full border border-border transition hover:bg-muted"
             >

@@ -139,7 +139,7 @@ export default function ContactFormDialog({
   // ── MOBILE ──
   if (isMobile) {
     return (
-      <div className="fixed inset-0 z-[100] flex flex-col justify-end">
+      <div className="fixed inset-0 z-[100] flex flex-col justify-end" role="dialog" aria-modal="true">
         <div
           className="absolute inset-0 bg-black/60 backdrop-blur-sm"
           onClick={onClose}
@@ -203,7 +203,7 @@ export default function ContactFormDialog({
 
   // ── DESKTOP ──
   return (
-    <div className="fixed inset-0 z-[100] flex justify-end">
+    <div className="fixed inset-0 z-[100] flex justify-end" role="dialog" aria-modal="true">
       <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}

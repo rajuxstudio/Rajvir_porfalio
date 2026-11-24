@@ -10,7 +10,8 @@ interface Experience {
   skills: string[];
 }
 
-const experiences: Experience[] = [
+// eslint-disable-next-line react-refresh/only-export-components -- also read by the 3D room's ID-card holder
+export const experiences: Experience[] = [
   {
     period: "Mar 2025 – Present",
     title: "Freelance UX/UI Designer",

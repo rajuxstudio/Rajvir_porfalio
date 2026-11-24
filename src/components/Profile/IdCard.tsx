@@ -1,4 +1,5 @@
 import { MapPin, Linkedin, Mail, Github, Twitter, Dribbble } from "lucide-react";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
 const avatar = "https://api.dicebear.com/9.x/avataaars/svg?seed=Rajveer";
 
@@ -7,7 +8,7 @@ export const PROFILE = {
   role: "UX/UI Designer | Python Developer",
   location: "India",
   experience: "4+ years",
-  email: "raju@xstudio.com",
+  email: CONTACT_EMAIL, // single source of truth in lib/contact.ts
 };
 
 const SOCIALS = [

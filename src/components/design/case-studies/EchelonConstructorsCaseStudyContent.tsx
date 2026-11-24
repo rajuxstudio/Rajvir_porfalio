@@ -30,6 +30,7 @@ import screenUserManagement from "@/assets/echelon-constructors/mockup/user-mana
 import screenRoleManagement from "@/assets/echelon-constructors/mockup/role-management.png";
 import screenProfile from "@/assets/echelon-constructors/mockup/profile.png";
 import type { CaseStudyContentProps } from "@/components/design/projects/types";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
 /* ---------- Palette ---------- */
 const NAVY = "#071329";
@@ -572,7 +573,7 @@ export default function EchelonConstructorsCaseStudyContent({ activePlatform, on
               <Linkedin className="h-4 w-4" strokeWidth={2} />
             </a>
             <a
-              href="mailto:raju@xstudio.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               aria-label="Email"
               className="flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-white/10"
               style={{ border: "1px solid rgba(255,255,255,0.15)" }}
